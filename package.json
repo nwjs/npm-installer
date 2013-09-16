@@ -1,0 +1,20 @@
+{
+  "name": "nodewebkit",
+  "version": "0.7.3",
+  "description": "A installer for node-webkit",
+  "bin": {
+    "nodewebkit": "bin/nodewebkit"
+  },
+  "scripts": {
+    "postinstall": "scripts/install.js"
+  },
+  "author": "Kyle Robinson Young",
+  "license": "MIT",
+  "dependencies": {
+    "adm-zip": "~0.4.3",
+    "rimraf": "~2.2.2"
+  },
+  "keywords": [
+    "node-webkit", "webkit", "installer", "desktop", "application"
+  ]
+}
