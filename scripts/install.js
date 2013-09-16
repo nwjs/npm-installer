@@ -3,8 +3,9 @@
 var http = require('http');
 var fs = require('fs');
 var path = require('path');
-var AdmZip = require('adm-zip');
 var rimraf = require('rimraf');
+var ZIP = require('zip');
+var mkdirp = require('mkdirp');
 
 var version = require('../package.json').version;
 var url = false;
@@ -34,10 +35,23 @@ rimraf.sync(download);
 
 // Where to download and extract
 var zipfile = fs.createWriteStream(download);
+var dest = path.resolve(__dirname, '..', 'nodewebkit');
 zipfile.on('finish', function() {
   console.log('Finish downloading. Extracting...');
-  var zip = new AdmZip(download);
-  zip.extractAllTo(path.resolve(__dirname, '..', 'nodewebkit'), true);
+
+  var reader = ZIP.Reader(fs.readFileSync(download));
+  reader.forEach(function(entry) {
+    var mode = entry.getMode();
+    var filename = path.resolve(dest, entry.getName());
+    if (entry.isDirectory()) {
+      mkdirp.sync(filename, mode);
+    } else {
+      mkdirp.sync(path.dirname(filename));
+      fs.writeFileSync(filename, entry.getData());
+    }
+    if (mode) fs.chmodSync(filename, mode);
+  });
+
   rimraf.sync(download);
 });
 

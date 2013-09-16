@@ -11,10 +11,15 @@
   "author": "Kyle Robinson Young",
   "license": "MIT",
   "dependencies": {
-    "adm-zip": "~0.4.3",
-    "rimraf": "~2.2.2"
+    "rimraf": "~2.2.2",
+    "zip": "~1.1.1",
+    "mkdirp": "~0.3.5"
   },
   "keywords": [
-    "node-webkit", "webkit", "installer", "desktop", "application"
+    "node-webkit",
+    "webkit",
+    "installer",
+    "desktop",
+    "application"
   ]
 }
