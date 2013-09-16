@@ -15,13 +15,23 @@ Install locally to your project with: `npm install nodewebkit` and then in your 
 }
 ```
 
-Now it will run your local project when you type `npm start`. If your project is in another folder do `"start": "nodewebkit path/to/app"`.
+Now it will run your local project when you type `npm start`.
 
-You could also just do `./node_modules/.bin/nodewebkit` if you didn't want to add the script to your `package.json`.
+If your project is in another folder, add the path to the project `"start": "nodewebkit path/to/app"`.
+
+You could also call the binary directly with `node_modules/.bin/nodewebkit` instead of adding to your `package.json`.
 
 ### global
 You can also install globally with `npm install nodewebkit -g` and then in any project type `nodewebkit` to run the project. Installing locally is recommended though as each project can have it's own dependent version of node-webkit.
 
+## example
+If you want a really quick example try this:
+
+1. `git clone https://github.com/zcbenz/nw-sample-apps && cd nw-sample-apps`
+2. `npm install nodewebkit`
+3. `node_modules/.bin/nodewebkit file-explorer`
+
+and now you should see a file explorer demo app.
 
 ## license
 [node-webkit](https://github.com/rogerwang/node-webkit)'s code and this installer use the MIT license.
