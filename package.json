@@ -1,6 +1,6 @@
 {
   "name": "nodewebkit",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "A installer for node-webkit",
   "bin": {
     "nodewebkit": "bin/nodewebkit"
