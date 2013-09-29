@@ -36,7 +36,11 @@ rimraf.sync(download);
 // Where to download and extract
 var zipfile = fs.createWriteStream(download);
 var dest = path.resolve(__dirname, '..', 'nodewebkit');
+var finished = false;
 zipfile.on('finish', function() {
+  if (finished) return;
+  finished = true;
+
   console.log('Finish downloading. Extracting...');
 
   var reader = ZIP.Reader(fs.readFileSync(download));
@@ -53,6 +57,9 @@ zipfile.on('finish', function() {
   });
 
   rimraf.sync(download);
+});
+zipfile.on('close', function() {
+  zipfile.emit('finish');
 });
 
 // Download!
