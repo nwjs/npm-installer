@@ -7,7 +7,7 @@ var rimraf = require('rimraf');
 var ZIP = require('zip');
 var mkdirp = require('mkdirp');
 
-var version = require('../package.json').version;
+var version = require('../package.json').version.slice(0, 5);
 var url = false;
 
 // Determine download url
