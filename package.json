@@ -1,12 +1,12 @@
 {
   "name": "nodewebkit",
-  "version": "0.7.5-2",
+  "version": "0.7.5-3",
   "description": "A installer for node-webkit",
   "bin": {
     "nodewebkit": "bin/nodewebkit"
   },
   "scripts": {
-    "postinstall": "scripts/install.js"
+    "postinstall": "node scripts/install.js"
   },
   "author": "Kyle Robinson Young",
   "license": "MIT",
