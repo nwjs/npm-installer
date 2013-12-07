@@ -6,6 +6,8 @@ var path = require('path');
 var rimraf = require('rimraf');
 var ZIP = require('zip');
 var mkdirp = require('mkdirp');
+var zlib = require('zlib');
+var tar = require('tar');
 
 var version = require('../package.json').version.slice(0, 5);
 var url = false;
@@ -32,38 +34,68 @@ var ext = path.extname(url);
 var download = path.resolve(__dirname, '..', 'nodewebkit' + ext);
 
 rimraf.sync(download);
-
-// Where to download and extract
-var zipfile = fs.createWriteStream(download);
 var dest = path.resolve(__dirname, '..', 'nodewebkit');
-var finished = false;
-zipfile.on('finish', function() {
-  if (finished) return;
-  finished = true;
 
-  console.log('Finish downloading. Extracting...');
+var isZip = url.match(/\.zip/)
+if (isZip) {
+  // Where to download and extract
+  var zipfile = fs.createWriteStream(download);
+  var finished = false;
+  zipfile.on('finish', function() {
+    if (finished) return;
+    finished = true;
 
-  var reader = ZIP.Reader(fs.readFileSync(download));
-  reader.forEach(function(entry) {
-    var mode = entry.getMode();
-    var filename = path.resolve(dest, entry.getName());
-    if (entry.isDirectory()) {
-      mkdirp.sync(filename, mode);
-    } else {
-      mkdirp.sync(path.dirname(filename));
-      fs.writeFileSync(filename, entry.getData());
-    }
-    if (mode) fs.chmodSync(filename, mode);
+    console.log('Finish downloading. Extracting...');
+
+    var reader = ZIP.Reader(fs.readFileSync(download));
+    reader.forEach(function(entry) {
+      var mode = entry.getMode();
+      var filename = path.resolve(dest, entry.getName());
+      if (entry.isDirectory()) {
+        mkdirp.sync(filename, mode);
+      } else {
+        mkdirp.sync(path.dirname(filename));
+        fs.writeFileSync(filename, entry.getData());
+      }
+      if (mode) fs.chmodSync(filename, mode);
+    });
+    rimraf.sync(download);
   });
-
-  rimraf.sync(download);
-});
-zipfile.on('close', function() {
-  zipfile.emit('finish');
-});
+  zipfile.on('close', function() {
+    zipfile.emit('finish');
+  });
+} else {
+  var unpackStream = unpack(dest);
+  var gunzipper = zlib.createGunzip();
+  gunzipper.pipe(unpackStream);
+}
 
 // Download!
 console.log('Downloading ' + url + '...');
 var request = http.get(url, function(response) {
-  response.pipe(zipfile);
+  response.pipe(isZip ? zipfile : gunzipper);
 }).on('error', error);
+
+function unpack(target, cb) {
+  if (typeof target === 'function') {
+    cb = target
+    target = undefined
+  }
+  if (!cb) cb = function noop(){}
+  if (!target) target = process.cwd()
+
+  var untarStream = tar.Extract({ path: target, strip: 1 })
+  var untarError = false
+
+  untarStream.on('error', function(e) {
+    untarError = true
+    cb(e)
+  })
+
+  untarStream.on('end', function() {
+    if (untarError) return
+    cb()
+  })
+
+  return untarStream
+}
