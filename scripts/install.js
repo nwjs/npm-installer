@@ -36,7 +36,7 @@ var download = path.resolve(__dirname, '..', 'nodewebkit' + ext);
 rimraf.sync(download);
 var dest = path.resolve(__dirname, '..', 'nodewebkit');
 
-var isZip = url.match(/\.zip/)
+var isZip = url.match(/\.zip/);
 if (isZip) {
   // Where to download and extract
   var zipfile = fs.createWriteStream(download);
@@ -78,24 +78,24 @@ var request = http.get(url, function(response) {
 
 function unpack(target, cb) {
   if (typeof target === 'function') {
-    cb = target
-    target = undefined
+    cb = target;
+    target = undefined;
   }
-  if (!cb) cb = function noop(){}
-  if (!target) target = process.cwd()
+  if (!cb) cb = function noop(){};
+  if (!target) target = process.cwd();
 
-  var untarStream = tar.Extract({ path: target, strip: 1 })
-  var untarError = false
+  var untarStream = tar.Extract({ path: target, strip: 1 });
+  var untarError = false;
 
   untarStream.on('error', function(e) {
-    untarError = true
-    cb(e)
-  })
+    untarError = true;
+    cb(e);
+  });
 
   untarStream.on('end', function() {
-    if (untarError) return
-    cb()
-  })
+    if (untarError) return;
+    cb();
+  });
 
-  return untarStream
+  return untarStream;
 }
