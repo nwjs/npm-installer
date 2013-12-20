@@ -2,6 +2,10 @@
   "name": "nodewebkit",
   "version": "0.8.2-1",
   "description": "A installer for node-webkit",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shama/nodewebkit.git"
+  },
   "bin": {
     "nodewebkit": "bin/nodewebkit"
   },
