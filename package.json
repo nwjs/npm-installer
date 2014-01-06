@@ -12,6 +12,10 @@
   "scripts": {
     "postinstall": "node scripts/install.js"
   },
+  "files": [
+    "bin/nodewebkit",
+    "scripts/install.js"
+  ],
   "author": "Kyle Robinson Young",
   "license": "MIT",
   "dependencies": {
