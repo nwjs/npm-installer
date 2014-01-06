@@ -28,7 +28,7 @@ readme.on('end', function() {
     fs.writeFileSync(pkgpath, JSON.stringify(pkg, null, 2));
 
     console.log('PUBLISHING NEW VERSION ' + version);
-    exec('npm2 publish', { cwd: path.resolve(__dirname, '..') }, function(err, stdout, stderr) {
+    exec('npm publish', { cwd: path.resolve(__dirname, '..') }, function(err, stdout, stderr) {
       if (err || stderr) {
         // Revert package.json change and try again next time
         console.error('FAILED');
