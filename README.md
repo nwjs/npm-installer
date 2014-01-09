@@ -33,5 +33,22 @@ If you want a really quick example try this:
 
 and now you should see a file explorer demo app.
 
+## command line options
+There are a few (platform-specific) arguments you can pass to the `nodewebkit` executable to
+customize your node-webkit application:
+
+* `--mac_plist <path-to-plist-file>`: (OS X only) Copies the given file to Info.plist in the app
+  bundle. This lets you do things like change your app's name and point to a different icon.
+
+* `--mac_icon <path-to-icns-file>`: (OS X only) Copies the given .icns file to the Resources/ dir
+  in the app bundle. You will need to point to the file with a custom plist file as well (see
+  `--mac_list`)
+
+**NOTE**: These options will keep the copied files in the app bundle for as long as the bundle is
+on the filesystem (they're not deleted between app invocations). As a result, they're not
+recommended if you installed nodewebkit globally using `-g`.  Also note that
+[OS X caches icons](https://bugzilla.mozilla.org/show_bug.cgi?id=493503), so you may need to
+manually clear this cache during development.
+
 ## license
 [node-webkit](https://github.com/rogerwang/node-webkit)'s code and this installer use the MIT license.
