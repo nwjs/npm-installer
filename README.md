@@ -47,8 +47,8 @@ customize your node-webkit application:
 **NOTE**: These options will keep the copied files in the app bundle for as long as the bundle is
 on the filesystem (they're not deleted between app invocations). As a result, they're not
 recommended if you installed nodewebkit globally using `-g`.  Also note that
-[OS X caches icons](https://bugzilla.mozilla.org/show_bug.cgi?id=493503), so you may need to
-manually clear this cache during development.
+[OS X caches these files](http://proteo.me.uk/2011/08/mac-application-bundle-caching/),
+so you may need to manually clear these cached files during development.
 
 ## license
 [node-webkit](https://github.com/rogerwang/node-webkit)'s code and this installer use the MIT license.
