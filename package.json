@@ -13,6 +13,7 @@
     "postinstall": "node scripts/install.js"
   },
   "files": [
+    "lib",
     "bin/nodewebkit",
     "scripts/install.js"
   ],
