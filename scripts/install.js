@@ -11,16 +11,17 @@ var tar = require('tar');
 
 var version = require('../package.json').version.slice(0, 5);
 var url = false;
+var urlBase = 'http://dl.node-webkit.org/v';
 
 // Determine download url
 if (process.platform === 'darwin') {
-  url = 'http://s3.amazonaws.com/node-webkit/v' + version + '/node-webkit-v' + version + '-osx-ia32.zip';
+  url = urlBase + version + '/node-webkit-v' + version + '-osx-ia32.zip';
 } else if (process.platform === 'win32') {
-  url = 'http://s3.amazonaws.com/node-webkit/v' + version + '/node-webkit-v' + version + '-win-ia32.zip';
+  url = urlBase + version + '/node-webkit-v' + version + '-win-ia32.zip';
 } else if (process.arch === 'ia32') {
-  url = 'http://s3.amazonaws.com/node-webkit/v' + version + '/node-webkit-v' + version + '-linux-ia32.tar.gz';
+  url = urlBase + version + '/node-webkit-v' + version + '-linux-ia32.tar.gz';
 } else if (process.arch === 'x64') {
-  url = 'http://s3.amazonaws.com/node-webkit/v' + version + '/node-webkit-v' + version + '-linux-x64.tar.gz';
+  url = urlBase + version + '/node-webkit-v' + version + '-linux-x64.tar.gz';
 }
 
 function error(e) {
