@@ -3,7 +3,6 @@
 var fs = require('fs');
 var path = require('path');
 var spawn = require('child_process').spawn;
-var argv = require('optimist').argv;
 
 var bindir = path.resolve(__dirname, '..', 'nodewebkit');
 
@@ -20,8 +19,16 @@ function run() {
   // copy over any asset files (icons, etc) specified via CLI args:
   require('../lib/app_assets').copyAssets(process.platform, bin);
 
-  var args = argv._;
-  if (args.length < 1) args = ['.'];
+  // Normalize cli args
+  var args = process.argv.slice(2);
+  var cwd = (args.length < 1) ? '.' : args[0];
+  if (!fs.existsSync(path.resolve(cwd))) {
+    args = ['.'].concat(args);
+  } else {
+    args = [cwd].concat(args.slice(1));
+  }
+
+  // Spawn node-webkit
   var nw = spawn(bin, args, { stdio: 'inherit' });
   nw.on('close', function() {
     process.nextTick(function() {
