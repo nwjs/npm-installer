@@ -1,13 +1,10 @@
 #!/usr/bin/env node
 
-var http = require('http');
-var fs = require('fs');
-var path = require('path');
+var download = require('download');
 var rimraf = require('rimraf');
-var ZIP = require('zip');
-var mkdirp = require('mkdirp');
-var zlib = require('zlib');
-var tar = require('tar');
+var createBar = require('multimeter')(process);
+var path = require('path');
+var fs = require('fs');
 
 var version = require('../package.json').version.slice(0, 5);
 var url = false;
@@ -31,72 +28,54 @@ function error(e) {
 
 if (!url) error('Could not find a compatible version of node-webkit to download for your platform.');
 
-var ext = path.extname(url);
-var download = path.resolve(__dirname, '..', 'nodewebkit' + ext);
-
-rimraf.sync(download);
 var dest = path.resolve(__dirname, '..', 'nodewebkit');
+rimraf.sync(dest);
 
-var isZip = url.match(/\.zip/);
-if (isZip) {
-  // Where to download and extract
-  var zipfile = fs.createWriteStream(download);
-  var finished = false;
-  zipfile.on('finish', function() {
-    if (finished) return;
-    finished = true;
+var bar = createBar({ before: url + ' [' });
 
-    console.log('Finish downloading. Extracting...');
-
-    var reader = ZIP.Reader(fs.readFileSync(download));
-    reader.forEach(function(entry) {
-      var mode = entry.getMode();
-      var filename = path.resolve(dest, entry.getName());
-      if (entry.isDirectory()) {
-        mkdirp.sync(filename, mode);
-      } else {
-        mkdirp.sync(path.dirname(filename));
-        fs.writeFileSync(filename, entry.getData());
-      }
-      if (mode) fs.chmodSync(filename, mode);
-    });
-    rimraf.sync(download);
-  });
-  zipfile.on('close', function() {
-    zipfile.emit('finish');
-  });
-} else {
-  var unpackStream = unpack(dest);
-  var gunzipper = zlib.createGunzip();
-  gunzipper.pipe(unpackStream);
-}
-
-// Download!
-console.log('Downloading ' + url + '...');
-var request = http.get(url, function(response) {
-  response.pipe(isZip ? zipfile : gunzipper);
-}).on('error', error);
-
-function unpack(target, cb) {
-  if (typeof target === 'function') {
-    cb = target;
-    target = undefined;
+var total = 0;
+var progress = 0;
+var d = download(url, dest, { extract: true, strip: 1 });
+d.on('response', function(res) {
+  total = parseInt(res.headers['content-length']);
+});
+d.on('data', function(data) {
+  progress += data.length;
+  if (total > 0) {
+    var percent = progress / total * 100;
+    bar.percent(percent);
+    if (percent >= 100) {
+      console.log('');
+      console.log('Extracting...');
+    }
   }
-  if (!cb) cb = function noop(){};
-  if (!target) target = process.cwd();
-
-  var untarStream = tar.Extract({ path: target, strip: 1 });
-  var untarError = false;
-
-  untarStream.on('error', function(e) {
-    untarError = true;
-    cb(e);
+});
+d.on('error', error);
+d.on('close', function() {
+  // If OSX, manually set file permissions (until adm-zip supports getting the file mode from zips)
+  if (process.platform === 'darwin') {
+    [
+      'Contents/MacOS/node-webkit',
+      'Contents/Frameworks/node-webkit Helper.app/Contents/Resources/crash_report_sender.app/Contents/MacOS/crash_report_sender',
+      'Contents/Frameworks/node-webkit Helper.app/Contents/Resources/crash_report_sender',
+      'Contents/Frameworks/node-webkit Helper.app/Contents/MacOS/node-webkit Helper',
+      'Contents/Frameworks/node-webkit Helper.app/Contents/Libraries/libclang_rt.asan_osx_dynamic.dylib',
+      'Contents/Frameworks/node-webkit Helper NP.app/Contents/Resources/crash_report_sender.app/Contents/MacOS/crash_report_sender',
+      'Contents/Frameworks/node-webkit Helper NP.app/Contents/Resources/crash_inspector',
+      'Contents/Frameworks/node-webkit Helper NP.app/Contents/MacOS/node-webkit Helper NP',
+      'Contents/Frameworks/node-webkit Helper NP.app/Contents/Libraries/libclang_rt.asan_osx_dynamic.dylib',
+      'Contents/Frameworks/node-webkit Helper EH.app/Contents/Resources/crash_report_sender.app/Contents/MacOS/crash_report_sender',
+      'Contents/Frameworks/node-webkit Helper EH.app/Contents/Resources/crash_inspector',
+      'Contents/Frameworks/node-webkit Helper EH.app/Contents/MacOS/node-webkit Helper EH',
+      'Contents/Frameworks/node-webkit Helper EH.app/Contents/Libraries/libclang_rt.asan_osx_dynamic.dylib'
+    ].forEach(function(filepath) {
+      filepath = path.resolve(dest, filepath);
+      if (fs.existsSync(filepath)) {
+        fs.chmodSync(filepath, '0755');
+      }
+    });
+  }
+  process.nextTick(function() {
+    process.exit();
   });
-
-  untarStream.on('end', function() {
-    if (untarError) return;
-    cb();
-  });
-
-  return untarStream;
-}
+});

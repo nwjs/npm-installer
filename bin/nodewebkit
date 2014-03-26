@@ -10,7 +10,7 @@ var bindir = path.resolve(__dirname, '..', 'nodewebkit');
 function run() {
   var bin = bindir;
   if (process.platform === 'darwin') {
-    bin = path.join(bin, 'node-webkit.app', 'Contents', 'MacOS', 'node-webkit');
+    bin = path.join(bin, 'Contents', 'MacOS', 'node-webkit');
   } else if (process.platform === 'win32') {
     bin = path.join(bin, 'nw.exe');
   } else {
