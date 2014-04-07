@@ -50,5 +50,9 @@ recommended if you installed nodewebkit globally using `-g`.  Also note that
 [OS X caches these files](http://proteo.me.uk/2011/08/mac-application-bundle-caching/),
 so you may need to manually clear these cached files during development.
 
+## install a specific version of node-webkit
+
+To install a spcific version of node-webkit use npm with the specific version: `npm install nodewebkit@0.9.2`
+
 ## license
 [node-webkit](https://github.com/rogerwang/node-webkit)'s code and this installer use the MIT license.
