@@ -24,9 +24,9 @@
   },
   "dependencies": {
     "rimraf": "^2.2.2",
-    "optimist": "^0.6.0",
     "download": "^0.1.10",
-    "multimeter": "^0.1.1"
+    "multimeter": "^0.1.1",
+    "yargs": "^1.2.1"
   },
   "keywords": [
     "node-webkit",
