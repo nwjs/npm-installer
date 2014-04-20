@@ -4,6 +4,8 @@ An installer for [node-webkit](https://github.com/rogerwang/node-webkit).
 
 > node-webkit is an app runtime based on Chromium and node.js. For building desktop applications that will run on OSX, Windows and Linux.
 
+[![NPM](https://nodei.co/npm/nodewebkit.png?downloads=true)](https://nodei.co/npm/nodewebkit/)
+
 ## usage
 Install locally to your project with: `npm install nodewebkit` and then in your `package.json` add a script:
 
