@@ -10,7 +10,8 @@
     "nodewebkit": "bin/nodewebkit"
   },
   "scripts": {
-    "postinstall": "node scripts/install.js"
+    "postinstall": "node scripts/install.js",
+    "test": "node test/index.js"
   },
   "files": [
     "lib",
@@ -28,15 +29,16 @@
     "multimeter": "^0.1.1",
     "yargs": "^1.2.1"
   },
+  "devDependencies": {
+    "semver": "^2.2.1",
+    "request": "^2.30.0",
+    "tape": "^2.12.3"
+  },
   "keywords": [
     "node-webkit",
     "webkit",
     "installer",
     "desktop",
     "application"
-  ],
-  "devDependencies": {
-    "semver": "~2.2.1",
-    "request": "~2.30.0"
-  }
+  ]
 }
