@@ -1,4 +1,4 @@
-# nodewebkit
+# nodewebkit [![Build Status](http://img.shields.io/travis/shama/nodewebkit.svg)](https://travis-ci.org/shama/nodewebkit)
 
 An installer for [node-webkit](https://github.com/rogerwang/node-webkit).
 
