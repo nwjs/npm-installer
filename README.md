@@ -56,5 +56,7 @@ so you may need to manually clear these cached files during development.
 
 To install a spcific version of node-webkit use npm with the specific version: `npm install nodewebkit@0.9.2`
 
+> *Please note:* This npm package version tracks the version of node-webkit that will be installed, with an additional build number that is used for revisions to the installer. As such `0.9.2-1` and `0.9.2-2` will both install `node-webkit@0.9.2` but the latter has newer changes to the installer.
+
 ## license
 [node-webkit](https://github.com/rogerwang/node-webkit)'s code and this installer use the MIT license.
