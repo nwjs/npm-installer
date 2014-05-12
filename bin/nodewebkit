@@ -7,6 +7,13 @@ var spawn = require('child_process').spawn;
 var bindir = path.resolve(__dirname, '..', 'nodewebkit');
 
 function run() {
+  // Rename nodewebkit's own package.json as workaround for https://github.com/rogerwang/node-webkit/issues/1503
+  var packagejson = path.resolve(__dirname, '..', 'package.json');
+  var packagejsonBackup = path.resolve(__dirname, '..', 'package_backup.json');
+  if (!fs.existsSync(packagejsonBackup)) {
+    fs.renameSync(packagejson, packagejsonBackup);
+  }
+
   var bin = bindir;
   if (process.platform === 'darwin') {
     bin = path.join(bin, 'Contents', 'MacOS', 'node-webkit');
@@ -35,6 +42,13 @@ function run() {
       process.exit(0);
     });
   });
+
+  // Restore package.json shortly after nw is spawned
+  setTimeout(function() {
+    if (fs.existsSync(packagejsonBackup)) {
+      fs.renameSync(packagejsonBackup, packagejson);
+    }
+  }, 1000);
 }
 
 if (!fs.existsSync(bindir)) {
