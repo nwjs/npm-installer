@@ -11,7 +11,9 @@ function run() {
   var packagejson = path.resolve(__dirname, '..', 'package.json');
   var packagejsonBackup = path.resolve(__dirname, '..', 'package_backup.json');
   if (!fs.existsSync(packagejsonBackup)) {
-    fs.renameSync(packagejson, packagejsonBackup);
+    try {
+      fs.renameSync(packagejson, packagejsonBackup);
+    } catch (err) {}
   }
 
   var bin = bindir;
@@ -45,9 +47,11 @@ function run() {
 
   // Restore package.json shortly after nw is spawned
   setTimeout(function() {
-    if (fs.existsSync(packagejsonBackup)) {
-      fs.renameSync(packagejsonBackup, packagejson);
-    }
+    try {
+      if (fs.existsSync(packagejsonBackup)) {
+        fs.renameSync(packagejsonBackup, packagejson);
+      }
+    } catch (err) {}
   }, 1000);
 }
 
