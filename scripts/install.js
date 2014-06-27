@@ -2,11 +2,16 @@
 
 var download = require('download');
 var rimraf = require('rimraf');
+var semver = require('semver');
 var createBar = require('multimeter')(process);
 var path = require('path');
 var fs = require('fs');
 
-var version = require('../package.json').version.slice(0, 5);
+var v = semver.parse(require('../package.json').version);
+var version = [v.major, v.minor, v.patch].join('.');
+if (v.prerelease && typeof v.prerelease[0] === 'string') {
+  version += '-' + v.prerelease[0];
+}
 var url = false;
 var urlBase = 'http://dl.node-webkit.org/v';
 
