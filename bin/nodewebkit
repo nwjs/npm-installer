@@ -45,9 +45,9 @@ function run() {
   }, 1000);
 }
 
-if (!fs.existsSync(bindir)) {
+if (!fs.existsSync(bin)) {
   console.log('node-webkit appears to have failed to download and extract. Attempting to download and extract again...');
-  var child = spawn(process.argv[0], [path.resolve(__dirname, '..', 'scripts', 'install.js')], { stdio: 'inherit' });
+  var child = spawn(process.execPath, [path.resolve(__dirname, '..', 'scripts', 'install.js')], { stdio: 'inherit' });
   child.on('close', run);
 } else {
   run();
