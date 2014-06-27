@@ -31,7 +31,6 @@
     "semver": "^2.3.1"
   },
   "devDependencies": {
-    "semver": "^2.2.1",
     "request": "^2.30.0",
     "tape": "^2.12.3"
   },
