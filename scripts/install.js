@@ -59,6 +59,9 @@ d.on('error', error);
 d.on('close', function() {
   // If OSX, manually set file permissions (until adm-zip supports getting the file mode from zips)
   if (process.platform === 'darwin') {
+    if (!fs.existsSync(path.join(dest, 'Contents'))) {
+      dest = path.join(dest, 'node-webkit.app');
+    }
     [
       'Contents/MacOS/node-webkit',
       'Contents/Frameworks/node-webkit Helper.app/Contents/Resources/crash_report_sender.app/Contents/MacOS/crash_report_sender',
