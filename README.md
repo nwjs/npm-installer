@@ -58,5 +58,15 @@ To install a spcific version of node-webkit use npm with the specific version: `
 
 > *Please note:* This npm package version tracks the version of node-webkit that will be installed, with an additional build number that is used for revisions to the installer. As such `0.9.2-1` and `0.9.2-2` will both install `node-webkit@0.9.2` but the latter has newer changes to the installer.
 
+## finding the path to the node-webkit binary
+
+If you would like to programmatically retrieve the path to the node-webkit binary us:
+
+``` js
+var findpath = require('nodewebkit').findpath;
+var nwpath = findpath();
+// nwpath will equal the path to the binary depending on your environment
+```
+
 ## license
 [node-webkit](https://github.com/rogerwang/node-webkit)'s code and this installer use the MIT license.
