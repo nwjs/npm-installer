@@ -10,7 +10,11 @@ var fs = require('fs');
 var v = semver.parse(require('../package.json').version);
 var version = [v.major, v.minor, v.patch].join('.');
 if (v.prerelease && typeof v.prerelease[0] === 'string') {
-  version += '-' + v.prerelease[0];
+  var prerelease = v.prerelease[0].split('-');
+  if (prerelease.length > 1) {
+    prerelease = prerelease.slice(0, -1);
+  }
+  version += '-' + prerelease.join('-');
 }
 var url = false;
 var urlBase = 'http://dl.node-webkit.org/v';
