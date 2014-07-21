@@ -68,5 +68,19 @@ var nwpath = findpath();
 // nwpath will equal the path to the binary depending on your environment
 ```
 
+## using a proxy with or without authentication
+
+If you are behind a proxy server you have to set an environment variable ```http_proxy``` with proxy servers url:
+
+```
+export http_proxy="http://username:password@myproxy.com:8080"
+```
+
+or
+
+```
+export http_proxy="http://myproxy.com:8080"
+```
+
 ## license
 [node-webkit](https://github.com/rogerwang/node-webkit)'s code and this installer use the MIT license.
