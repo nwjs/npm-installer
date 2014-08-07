@@ -20,16 +20,16 @@ var url = false;
 var urlBase = 'http://dl.node-webkit.org/v';
 
 // Determine download url
-if (process.platform === 'darwin' && process.arch === 'ia32') {
-  url = urlBase + version + '/node-webkit-v' + version + '-osx-ia32.zip';
-} else if (process.platform === 'darwin' && process.arch === 'x64') {
-  url = urlBase + version + '/node-webkit-v' + version + '-osx-x64.zip';
-} else if (process.platform === 'win32') {
-  url = urlBase + version + '/node-webkit-v' + version + '-win-ia32.zip';
-} else if (process.arch === 'ia32') {
-  url = urlBase + version + '/node-webkit-v' + version + '-linux-ia32.tar.gz';
-} else if (process.arch === 'x64') {
-  url = urlBase + version + '/node-webkit-v' + version + '-linux-x64.tar.gz';
+switch (process.platform) {
+  case 'win32':
+    url = urlBase + version + '/node-webkit-v' + version + '-win-ia32.zip';
+    break;
+  case 'darwin':
+    url = urlBase + version + '/node-webkit-v' + version + '-osx-' + process.arch + '.zip';
+    break;
+  case 'linux':
+    url = urlBase + version + '/node-webkit-v' + version + '-linux-' + process.arch + '.tar.gz';
+    break;
 }
 
 function error(e) {
