@@ -20,8 +20,10 @@ var url = false;
 var urlBase = 'http://dl.node-webkit.org/v';
 
 // Determine download url
-if (process.platform === 'darwin') {
+if (process.platform === 'darwin' && process.arch === 'ia32') {
   url = urlBase + version + '/node-webkit-v' + version + '-osx-ia32.zip';
+} else if (process.platform === 'darwin' && process.arch === 'x64') {
+  url = urlBase + version + '/node-webkit-v' + version + '-osx-x64.zip';
 } else if (process.platform === 'win32') {
   url = urlBase + version + '/node-webkit-v' + version + '-win-ia32.zip';
 } else if (process.arch === 'ia32') {
