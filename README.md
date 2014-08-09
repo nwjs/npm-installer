@@ -24,7 +24,7 @@ If your project is in another folder, add the path to the project `"start": "nod
 You could also call the binary directly with `node_modules/.bin/nodewebkit` instead of adding to your `package.json`.
 
 ### global
-You can also install globally with `npm install nodewebkit -g` and then in any project type `nodewebkit` to run the project. Installing locally is recommended though as each project can have it's own dependent version of node-webkit.
+You can also install globally with `npm install nodewebkit -g` and then in any project type `nodewebkit` to run the project. Installing locally is recommended though as each project can have its own dependent version of node-webkit.
 
 ## example
 If you want a really quick example try this:
@@ -60,7 +60,7 @@ To install a spcific version of node-webkit use npm with the specific version: `
 
 ## finding the path to the node-webkit binary
 
-If you would like to programmatically retrieve the path to the node-webkit binary us:
+If you would like to programmatically retrieve the path to the node-webkit binary use:
 
 ``` js
 var findpath = require('nodewebkit').findpath;
