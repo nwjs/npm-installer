@@ -22,9 +22,6 @@
   ],
   "author": "Kyle Robinson Young",
   "license": "MIT",
-  "engines": {
-    "node": ">= 0.11.0"
-  },
   "dependencies": {
     "rimraf": "^2.2.2",
     "download": "^0.1.10",
