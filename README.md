@@ -31,7 +31,7 @@ If you want a really quick example try this:
 
 1. `git clone https://github.com/zcbenz/nw-sample-apps && cd nw-sample-apps`
 2. `npm install nodewebkit`
-3. `node_modules/.bin/nodewebkit file-explorer`
+3. `"node_modules/.bin/nodewebkit" file-explorer`
 
 and now you should see a file explorer demo app.
 
