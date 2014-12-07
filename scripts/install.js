@@ -22,7 +22,7 @@ var urlBase = 'http://dl.node-webkit.org/v';
 // Determine download url
 switch (process.platform) {
   case 'win32':
-    url = urlBase + version + '/node-webkit-v' + version + '-win-ia32.zip';
+    url = urlBase + version + '/node-webkit-v' + version + '-win-' + process.arch +'.zip';
     break;
   case 'darwin':
     url = urlBase + version + '/node-webkit-v' + version + '-osx-' + process.arch + '.zip';
