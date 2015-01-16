@@ -1,43 +1,43 @@
-# nodewebkit [![Build Status](http://img.shields.io/travis/shama/nodewebkit.svg)](https://travis-ci.org/shama/nodewebkit)
+# nwjs [![Build Status](http://img.shields.io/travis/nwjs/npm-installer.svg)](https://travis-ci.org/nwjs/npm-installer)
 
-An installer for [node-webkit](https://github.com/rogerwang/node-webkit).
+An installer for [nw.js](https://github.com/nwjs/nw.js).
 
-> node-webkit is an app runtime based on Chromium and node.js. For building desktop applications that will run on OSX, Windows and Linux.
+> nw.js is an app runtime based on Chromium and io.js. For building desktop applications that will run on OSX, Windows and Linux.
 
-[![NPM](https://nodei.co/npm/nodewebkit.png?downloads=true)](https://nodei.co/npm/nodewebkit/)
+[![NPM](https://nodei.co/npm/nwjs.png?downloads=true)](https://nodei.co/npm/nwjs/)
 
 ## usage
-Install locally to your project with: `npm install nodewebkit` and then in your `package.json` add a script:
+Install locally to your project with: `npm install nwjs` and then in your `package.json` add a script:
 
 ```json
 {
   "scripts": {
-    "start": "nodewebkit"
+    "start": "nwjs"
   }
 }
 ```
 
 Now it will run your local project when you type `npm start`.
 
-If your project is in another folder, add the path to the project `"start": "nodewebkit path/to/app"`.
+If your project is in another folder, add the path to the project `"start": "nwjs path/to/app"`.
 
-You could also call the binary directly with `node_modules/.bin/nodewebkit` instead of adding to your `package.json`.
+You could also call the binary directly with `node_modules/.bin/nwjs` instead of adding to your `package.json`.
 
 ### global
-You can also install globally with `npm install nodewebkit -g` and then in any project type `nodewebkit` to run the project. Installing locally is recommended though as each project can have its own dependent version of node-webkit.
+You can also install globally with `npm install nwjs -g` and then in any project type `nwjs` to run the project. Installing locally is recommended though as each project can have its own dependent version of nw.js.
 
 ## example
 If you want a really quick example try this:
 
 1. `git clone https://github.com/zcbenz/nw-sample-apps && cd nw-sample-apps`
-2. `npm install nodewebkit`
-3. `"node_modules/.bin/nodewebkit" file-explorer`
+2. `npm install nwjs`
+3. `"node_modules/.bin/nwjs" file-explorer`
 
 and now you should see a file explorer demo app.
 
 ## command line options
-There are a few (platform-specific) arguments you can pass to the `nodewebkit` executable to
-customize your node-webkit application:
+There are a few (platform-specific) arguments you can pass to the `nwjs` executable to
+customize your nw.js application:
 
 * `--mac_plist <path-to-plist-file>`: (OS X only) Copies the given file to Info.plist in the app
   bundle. This lets you do things like change your app's name and point to a different icon.
@@ -48,22 +48,22 @@ customize your node-webkit application:
 
 **NOTE**: These options will keep the copied files in the app bundle for as long as the bundle is
 on the filesystem (they're not deleted between app invocations). As a result, they're not
-recommended if you installed nodewebkit globally using `-g`.  Also note that
+recommended if you installed nwjs globally using `-g`.  Also note that
 [OS X caches these files](http://proteo.me.uk/2011/08/mac-application-bundle-caching/),
 so you may need to manually clear these cached files during development.
 
-## install a specific version of node-webkit
+## install a specific version of nw.js
 
-To install a spcific version of node-webkit use npm with the specific version: `npm install nodewebkit@0.9.2`
+To install a spcific version of nw.js use npm with the specific version: `npm install nwjs@0.12.0`
 
-> *Please note:* This npm package version tracks the version of node-webkit that will be installed, with an additional build number that is used for revisions to the installer. As such `0.9.2-1` and `0.9.2-2` will both install `node-webkit@0.9.2` but the latter has newer changes to the installer.
+> *Please note:* This npm package version tracks the version of nw.js that will be installed, with an additional build number that is used for revisions to the installer. As such `0.12.0-1` and `0.12.0-2` will both install `nw.js@0.12.0` but the latter has newer changes to the installer.
 
-## finding the path to the node-webkit binary
+## finding the path to the nw.js binary
 
-If you would like to programmatically retrieve the path to the node-webkit binary use:
+If you would like to programmatically retrieve the path to the nw.js binary use:
 
 ``` js
-var findpath = require('nodewebkit').findpath;
+var findpath = require('nwjs').findpath;
 var nwpath = findpath();
 // nwpath will equal the path to the binary depending on your environment
 ```
@@ -83,4 +83,4 @@ export http_proxy="http://myproxy.com:8080"
 ```
 
 ## license
-[node-webkit](https://github.com/rogerwang/node-webkit)'s code and this installer use the MIT license.
+[nw.js](https://github.com/rogerwang/nw.js)'s code and this installer use the MIT license.

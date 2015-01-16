@@ -1,14 +1,14 @@
 {
-  "name": "nodewebkit",
-  "version": "0.11.5",
-  "description": "A installer for node-webkit",
+  "name": "nwjs",
+  "version": "0.12.0-alpha1",
+  "description": "A installer for nw.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/shama/nodewebkit.git"
+    "url": "git://github.com/nwjs/npm-installer.git"
   },
   "main": "index.js",
   "bin": {
-    "nodewebkit": "bin/nodewebkit"
+    "nwjs": "bin/nwjs"
   },
   "scripts": {
     "postinstall": "node scripts/install.js",
@@ -34,6 +34,11 @@
     "tape": "^2.12.3"
   },
   "keywords": [
+    "nw",
+    "nw.js",
+    "nwjs",
+    "chromium",
+    "io.js",
     "node-webkit",
     "webkit",
     "installer",

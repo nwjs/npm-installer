@@ -17,18 +17,18 @@ if (v.prerelease && typeof v.prerelease[0] === 'string') {
   version += '-' + prerelease.join('-');
 }
 var url = false;
-var urlBase = 'http://dl.node-webkit.org/v';
+var urlBase = 'http://dl.nwjs.io/v';
 
 // Determine download url
 switch (process.platform) {
   case 'win32':
-    url = urlBase + version + '/node-webkit-v' + version + '-win-' + process.arch +'.zip';
+    url = urlBase + version + '/nwjs-v' + version + '-win-' + process.arch +'.zip';
     break;
   case 'darwin':
-    url = urlBase + version + '/node-webkit-v' + version + '-osx-' + process.arch + '.zip';
+    url = urlBase + version + '/nwjs-v' + version + '-osx-' + process.arch + '.zip';
     break;
   case 'linux':
-    url = urlBase + version + '/node-webkit-v' + version + '-linux-' + process.arch + '.tar.gz';
+    url = urlBase + version + '/nwjs-v' + version + '-linux-' + process.arch + '.tar.gz';
     break;
 }
 
@@ -37,9 +37,9 @@ function error(e) {
   process.exit(0);
 }
 
-if (!url) error('Could not find a compatible version of node-webkit to download for your platform.');
+if (!url) error('Could not find a compatible version of nw.js to download for your platform.');
 
-var dest = path.resolve(__dirname, '..', 'nodewebkit');
+var dest = path.resolve(__dirname, '..', 'nwjs');
 rimraf.sync(dest);
 
 var bar = createBar({ before: url + ' [' });
@@ -66,22 +66,22 @@ d.on('close', function() {
   // If OSX, manually set file permissions (until adm-zip supports getting the file mode from zips)
   if (process.platform === 'darwin') {
     if (!fs.existsSync(path.join(dest, 'Contents'))) {
-      dest = path.join(dest, 'node-webkit.app');
+      dest = path.join(dest, 'nwjs.app');
     }
     [
-      'Contents/MacOS/node-webkit',
-      'Contents/Frameworks/node-webkit Helper.app/Contents/Resources/crash_report_sender.app/Contents/MacOS/crash_report_sender',
-      'Contents/Frameworks/node-webkit Helper.app/Contents/Resources/crash_report_sender',
-      'Contents/Frameworks/node-webkit Helper.app/Contents/MacOS/node-webkit Helper',
-      'Contents/Frameworks/node-webkit Helper.app/Contents/Libraries/libclang_rt.asan_osx_dynamic.dylib',
-      'Contents/Frameworks/node-webkit Helper NP.app/Contents/Resources/crash_report_sender.app/Contents/MacOS/crash_report_sender',
-      'Contents/Frameworks/node-webkit Helper NP.app/Contents/Resources/crash_inspector',
-      'Contents/Frameworks/node-webkit Helper NP.app/Contents/MacOS/node-webkit Helper NP',
-      'Contents/Frameworks/node-webkit Helper NP.app/Contents/Libraries/libclang_rt.asan_osx_dynamic.dylib',
-      'Contents/Frameworks/node-webkit Helper EH.app/Contents/Resources/crash_report_sender.app/Contents/MacOS/crash_report_sender',
-      'Contents/Frameworks/node-webkit Helper EH.app/Contents/Resources/crash_inspector',
-      'Contents/Frameworks/node-webkit Helper EH.app/Contents/MacOS/node-webkit Helper EH',
-      'Contents/Frameworks/node-webkit Helper EH.app/Contents/Libraries/libclang_rt.asan_osx_dynamic.dylib'
+      'Contents/MacOS/nwjs',
+      'Contents/Frameworks/nwjs Helper.app/Contents/Resources/crash_report_sender.app/Contents/MacOS/crash_report_sender',
+      'Contents/Frameworks/nwjs Helper.app/Contents/Resources/crash_report_sender',
+      'Contents/Frameworks/nwjs Helper.app/Contents/MacOS/nwjs Helper',
+      'Contents/Frameworks/nwjs Helper.app/Contents/Libraries/libclang_rt.asan_osx_dynamic.dylib',
+      'Contents/Frameworks/nwjs Helper NP.app/Contents/Resources/crash_report_sender.app/Contents/MacOS/crash_report_sender',
+      'Contents/Frameworks/nwjs Helper NP.app/Contents/Resources/crash_inspector',
+      'Contents/Frameworks/nwjs Helper NP.app/Contents/MacOS/nwjs Helper NP',
+      'Contents/Frameworks/nwjs Helper NP.app/Contents/Libraries/libclang_rt.asan_osx_dynamic.dylib',
+      'Contents/Frameworks/nwjs Helper EH.app/Contents/Resources/crash_report_sender.app/Contents/MacOS/crash_report_sender',
+      'Contents/Frameworks/nwjs Helper EH.app/Contents/Resources/crash_inspector',
+      'Contents/Frameworks/nwjs Helper EH.app/Contents/MacOS/nwjs Helper EH',
+      'Contents/Frameworks/nwjs Helper EH.app/Contents/Libraries/libclang_rt.asan_osx_dynamic.dylib'
     ].forEach(function(filepath) {
       filepath = path.resolve(dest, filepath);
       if (fs.existsSync(filepath)) {
