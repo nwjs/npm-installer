@@ -1,42 +1,42 @@
-# nwjs [![Build Status](http://img.shields.io/travis/nwjs/npm-installer.svg)](https://travis-ci.org/nwjs/npm-installer)
+# nw [![Build Status](http://img.shields.io/travis/nwjs/npm-installer.svg)](https://travis-ci.org/nwjs/npm-installer)
 
 An installer for [nw.js](https://github.com/nwjs/nw.js).
 
 > nw.js is an app runtime based on Chromium and io.js. For building desktop applications that will run on OSX, Windows and Linux.
 
-[![NPM](https://nodei.co/npm/nwjs.png?downloads=true)](https://nodei.co/npm/nwjs/)
+[![NPM](https://nodei.co/npm/nw.png?downloads=true)](https://nodei.co/npm/nw/)
 
 ## usage
-Install locally to your project with: `npm install nwjs` and then in your `package.json` add a script:
+Install locally to your project with: `npm install nw` and then in your `package.json` add a script:
 
 ```json
 {
   "scripts": {
-    "start": "nwjs"
+    "start": "nw"
   }
 }
 ```
 
 Now it will run your local project when you type `npm start`.
 
-If your project is in another folder, add the path to the project `"start": "nwjs path/to/app"`.
+If your project is in another folder, add the path to the project `"start": "nw path/to/app"`.
 
-You could also call the binary directly with `node_modules/.bin/nwjs` instead of adding to your `package.json`.
+You could also call the binary directly with `node_modules/.bin/nw` instead of adding to your `package.json`.
 
 ### global
-You can also install globally with `npm install nwjs -g` and then in any project type `nwjs` to run the project. Installing locally is recommended though as each project can have its own dependent version of nw.js.
+You can also install globally with `npm install nw -g` and then in any project type `nw` to run the project. Installing locally is recommended though as each project can have its own dependent version of nw.js.
 
 ## example
 If you want a really quick example try this:
 
 1. `git clone https://github.com/zcbenz/nw-sample-apps && cd nw-sample-apps`
-2. `npm install nwjs`
-3. `"node_modules/.bin/nwjs" file-explorer`
+2. `npm install nw`
+3. `"node_modules/.bin/nw" file-explorer`
 
 and now you should see a file explorer demo app.
 
 ## command line options
-There are a few (platform-specific) arguments you can pass to the `nwjs` executable to
+There are a few (platform-specific) arguments you can pass to the `nw` executable to
 customize your nw.js application:
 
 * `--mac_plist <path-to-plist-file>`: (OS X only) Copies the given file to Info.plist in the app
@@ -54,7 +54,7 @@ so you may need to manually clear these cached files during development.
 
 ## install a specific version of nw.js
 
-To install a spcific version of nw.js use npm with the specific version: `npm install nwjs@0.12.0`
+To install a spcific version of nw.js use npm with the specific version: `npm install nw@0.12.0`
 
 > *Please note:* This npm package version tracks the version of nw.js that will be installed, with an additional build number that is used for revisions to the installer. As such `0.12.0-1` and `0.12.0-2` will both install `nw.js@0.12.0` but the latter has newer changes to the installer.
 
@@ -63,7 +63,7 @@ To install a spcific version of nw.js use npm with the specific version: `npm in
 If you would like to programmatically retrieve the path to the nw.js binary use:
 
 ``` js
-var findpath = require('nwjs').findpath;
+var findpath = require('nw').findpath;
 var nwpath = findpath();
 // nwpath will equal the path to the binary depending on your environment
 ```

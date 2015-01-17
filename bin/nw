@@ -1,0 +1,54 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var path = require('path');
+var spawn = require('child_process').spawn;
+var bin = require('../lib/findpath.js')();
+
+function run() {
+  // Rename nw.js's own package.json as workaround for https://github.com/nwjs/nw.js/issues/1503
+  var packagejson = path.resolve(__dirname, '..', 'package.json');
+  var packagejsonBackup = path.resolve(__dirname, '..', 'package_backup.json');
+  if (!fs.existsSync(packagejsonBackup)) {
+    try {
+      fs.renameSync(packagejson, packagejsonBackup);
+    } catch (err) {}
+  }
+
+  // copy over any asset files (icons, etc) specified via CLI args:
+  require('../lib/app_assets').copyAssets(process.platform, bin);
+
+  // Normalize cli args
+  var args = process.argv.slice(2);
+  var cwd = (args.length < 1) ? '.' : args[0];
+  if (!fs.existsSync(path.resolve(cwd))) {
+    args = ['.'].concat(args);
+  } else {
+    args = [cwd].concat(args.slice(1));
+  }
+
+  // Spawn node-webkit
+  var nw = spawn(bin, args, { stdio: 'inherit' });
+  nw.on('close', function() {
+    process.nextTick(function() {
+      process.exit(0);
+    });
+  });
+
+  // Restore package.json shortly after nw is spawned
+  setTimeout(function() {
+    try {
+      if (fs.existsSync(packagejsonBackup)) {
+        fs.renameSync(packagejsonBackup, packagejson);
+      }
+    } catch (err) {}
+  }, 1000);
+}
+
+if (!fs.existsSync(bin)) {
+  console.log('nw.js appears to have failed to download and extract. Attempting to download and extract again...');
+  var child = spawn(process.execPath, [path.resolve(__dirname, '..', 'scripts', 'install.js')], { stdio: 'inherit' });
+  child.on('close', run);
+} else {
+  run();
+}
