@@ -54,9 +54,11 @@ so you may need to manually clear these cached files during development.
 
 ## install a specific version of nw.js
 
-To install a spcific version of nw.js use npm with the specific version: `npm install nw@0.12.0`
+To install a specific version of nw.js use npm with the specific version: `npm install nw@0.12.0`
 
 > *Please note:* This npm package version tracks the version of nw.js that will be installed, with an additional build number that is used for revisions to the installer. As such `0.12.0-1` and `0.12.0-2` will both install `nw.js@0.12.0` but the latter has newer changes to the installer.
+
+You may use `npm view nw versions` to view the list of available versions.
 
 ## finding the path to the nw.js binary
 
