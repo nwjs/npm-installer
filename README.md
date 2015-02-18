@@ -30,8 +30,9 @@ You can also install globally with `npm install nw -g` and then in any project t
 If you want a really quick example try this:
 
 1. `git clone https://github.com/zcbenz/nw-sample-apps && cd nw-sample-apps`
-2. `npm install nw`
-3. `"node_modules/.bin/nw" file-explorer`
+2. `npm init`
+3. `npm install nw`
+4. `"node_modules/.bin/nw" file-explorer`
 
 and now you should see a file explorer demo app.
 
