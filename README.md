@@ -71,6 +71,26 @@ var nwpath = findpath();
 // nwpath will equal the path to the binary depending on your environment
 ```
 
+## download binaries from custom location
+
+The installer attempts to download binaries from the default location of `http://dl.nwjs.io/v`. You can override this by setting the npm config property `nwjs_urlbase` on the command line by passing the `--nwjs_urlbase` option:
+
+``` shell
+npm install nwjs --nwjs_urlbase=http://my.own.location/somewhere
+```
+
+or adding it to your `.npmrc` file (https://www.npmjs.org/doc/files/npmrc.html):
+
+```
+nwjs_urlbase=http://my.own.location/somewhere
+```
+
+You can alternatively set an environment variable `NWJS_URLBASE`:
+
+``` shell
+export NWJS_URLBASE=http://my.own.location/somewhere
+```
+
 ## using a proxy with or without authentication
 
 If you are behind a proxy server you have to set an environment variable ```http_proxy``` with proxy servers url:
