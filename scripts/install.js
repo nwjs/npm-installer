@@ -17,7 +17,7 @@ if (v.prerelease && typeof v.prerelease[0] === 'string') {
   version += '-' + prerelease.join('-');
 }
 var url = false;
-var urlBase = 'http://dl.nwjs.io/v';
+var urlBase = process.env.npm_config_nwjs_urlbase || process.env.NWJS_URLBASE ||  'http://dl.nwjs.io/v';
 
 // Determine download url
 switch (process.platform) {
