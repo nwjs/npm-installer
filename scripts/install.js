@@ -47,8 +47,6 @@ var bar = createBar({ before: url + ' [' });
 var total = 0;
 var progress = 0;
 
-console.log( 'GET', url )
-
 var download = new Download({ extract: true, strip: 1, mode: '755' })
   .get( url, dest )
   .run( function( error, files ) {
