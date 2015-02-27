@@ -23,15 +23,15 @@
   "author": "Kyle Robinson Young",
   "license": "MIT",
   "dependencies": {
-    "rimraf": "^2.2.2",
-    "download": "^0.1.10",
+    "download": "^4.0.0",
     "multimeter": "^0.1.1",
-    "yargs": "^1.2.1",
-    "semver": "^2.3.1"
+    "rimraf": "^2.2.8",
+    "semver": "^4.3.0",
+    "yargs": "^3.2.1"
   },
   "devDependencies": {
-    "request": "^2.30.0",
-    "tape": "^2.12.3"
+    "request": "^2.53.0",
+    "tape": "^3.5.0"
   },
   "keywords": [
     "nw",
