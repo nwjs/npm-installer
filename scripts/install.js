@@ -6,6 +6,10 @@ var semver = require('semver');
 var createBar = require('multimeter')(process);
 var path = require('path');
 var fs = require('fs');
+var merge = require('merge');
+var urlModule = require('url');
+var Decompress = require('decompress');
+var fileExists = require('file-exists');
 
 var v = semver.parse(require('../package.json').version);
 var version = [v.major, v.minor, v.patch].join('.');
@@ -34,7 +38,17 @@ switch (process.platform) {
 
 function logError(e) {
   console.error((typeof e === 'string') ? e : e.message);
-  process.exit(0);
+  process.exit(1);
+}
+
+function cb(error) {
+  if( error != null ) {
+    return logError( error )
+  }
+
+  process.nextTick(function() {
+    process.exit();
+  });
 }
 
 if (!url) logError('Could not find a compatible version of nw.js to download for your platform.');
@@ -47,16 +61,20 @@ var bar = createBar({ before: url + ' [' });
 var total = 0;
 var progress = 0;
 
-var download = new Download({ extract: true, strip: 1, mode: '755' })
-  .get( url, dest )
-  .run( function( error, files ) {
-    
-    if( error != null ) {
-      return logError( error )
-    }
-    
-    process.nextTick(function() {
-      process.exit();
-    });
-    
-  })
+var parsedUrl = urlModule.parse(url);
+var decompressOptions = { strip: 1, mode: '755' };
+if( parsedUrl.protocol == 'file:' ) {
+  if ( !fileExists(parsedUrl.path) ) {
+    logError('Could not find ' + parsedUrl.path);
+  }
+  new Decompress()
+    .src( parsedUrl.path )
+    .dest( dest )
+    .use( Decompress.zip(decompressOptions) )
+    .use( Decompress.targz(decompressOptions) )
+    .run( cb );
+} else {
+  new Download(merge({ extract: true }, decompressOptions))
+    .get( url, dest )
+    .run( cb );
+}

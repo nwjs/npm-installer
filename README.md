@@ -71,7 +71,7 @@ var nwpath = findpath();
 // nwpath will equal the path to the binary depending on your environment
 ```
 
-## download binaries from custom location
+## retrieve binaries from custom download location or file path
 
 The installer attempts to download binaries from the default location of `http://dl.nwjs.io/v`. You can override this by setting the npm config property `nwjs_urlbase` on the command line by passing the `--nwjs_urlbase` option:
 
@@ -89,6 +89,12 @@ You can alternatively set an environment variable `NWJS_URLBASE`:
 
 ``` shell
 export NWJS_URLBASE=http://my.own.location/somewhere
+```
+
+The installer supports `file://` URLs to retrieve files from the local filesystem:
+
+``` shell
+export NWJS_URLBASE=file:///home/bilbo/my/own/mirror
 ```
 
 ## using a proxy with or without authentication
