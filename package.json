@@ -30,7 +30,8 @@
     "multimeter": "^0.1.1",
     "rimraf": "^2.2.8",
     "semver": "^4.3.0",
-    "yargs": "^3.2.1"
+    "yargs": "^3.2.1",
+    "chalk": "~1.0.0"
   },
   "devDependencies": {
     "request": "^2.53.0",

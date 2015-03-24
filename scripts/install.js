@@ -10,6 +10,7 @@ var merge = require('merge');
 var urlModule = require('url');
 var Decompress = require('decompress');
 var fileExists = require('file-exists');
+var chalk = require('chalk');
 
 var v = semver.parse(require('../package.json').version);
 var version = [v.major, v.minor, v.patch].join('.');
@@ -37,7 +38,7 @@ switch (process.platform) {
 }
 
 function logError(e) {
-  console.error((typeof e === 'string') ? e : e.message);
+  console.error(chalk.bold.red((typeof e === 'string') ? e : e.message));
   process.exit(1);
 }
 
