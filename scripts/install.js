@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var Download = require('download');
+var request = require('request');
 var rimraf = require('rimraf');
 var semver = require('semver');
 var createBar = require('multimeter')(process);
@@ -11,6 +11,7 @@ var urlModule = require('url');
 var Decompress = require('decompress');
 var fileExists = require('file-exists');
 var chalk = require('chalk');
+var os = require('os');
 
 var v = semver.parse(require('../package.json').version);
 var version = [v.major, v.minor, v.patch].join('.');
@@ -22,20 +23,24 @@ if (v.prerelease && typeof v.prerelease[0] === 'string') {
   version += '-' + prerelease.join('-');
 }
 var url = false;
+var filename = false;
 var urlBase = process.env.npm_config_nwjs_urlbase || process.env.NWJS_URLBASE ||  'http://dl.nwjs.io/v';
 
-// Determine download url
+// Determine download filename
 switch (process.platform) {
   case 'win32':
-    url = urlBase + version + '/nwjs-v' + version + '-win-' + process.arch +'.zip';
+    filename = 'nwjs-v' + version + '-win-' + process.arch +'.zip';
     break;
   case 'darwin':
-    url = urlBase + version + '/nwjs-v' + version + '-osx-' + process.arch + '.zip';
+    filename = 'nwjs-v' + version + '-osx-' + process.arch + '.zip';
     break;
   case 'linux':
-    url = urlBase + version + '/nwjs-v' + version + '-linux-' + process.arch + '.tar.gz';
+    filename = 'nwjs-v' + version + '-linux-' + process.arch + '.tar.gz';
     break;
 }
+
+// Create download url
+url = urlBase + version + '/' + filename;
 
 function logError(e) {
   console.error(chalk.bold.red((typeof e === 'string') ? e : e.message));
@@ -52,30 +57,43 @@ function cb(error) {
   });
 }
 
-if (!url) logError('Could not find a compatible version of nw.js to download for your platform.');
+function dc(filepath, cb) {
+  var dest = path.resolve(__dirname, '..', 'nwjs');
+  rimraf.sync(dest);
 
-var dest = path.resolve(__dirname, '..', 'nwjs');
-rimraf.sync(dest);
+  var decompressOptions = { strip: 1, mode: '755' };
 
-var bar = createBar({ before: url + ' [' });
-
-var total = 0;
-var progress = 0;
-
-var parsedUrl = urlModule.parse(url);
-var decompressOptions = { strip: 1, mode: '755' };
-if( parsedUrl.protocol == 'file:' ) {
-  if ( !fileExists(parsedUrl.path) ) {
-    logError('Could not find ' + parsedUrl.path);
-  }
   new Decompress()
-    .src( parsedUrl.path )
+    .src( filepath )
     .dest( dest )
     .use( Decompress.zip(decompressOptions) )
     .use( Decompress.targz(decompressOptions) )
     .run( cb );
+}
+
+if (!url) logError('Could not find a compatible version of nw.js to download for your platform.');
+
+var parsedUrl = urlModule.parse(url);
+
+if( parsedUrl.protocol == 'file:' ) {
+  if ( !fileExists(parsedUrl.path) ) {
+    logError('Could not find ' + parsedUrl.path);
+  }
+  dc(parsedUrl.path, cb);
 } else {
-  new Download(merge({ extract: true }, decompressOptions))
-    .get( url, dest )
-    .run( cb );
+  var tmpfile = path.resolve(os.tmpdir(), filename);
+
+  request.get(url)
+    .on('error', function(err) {
+      logError(err);
+    })
+    .pipe(
+      fs.createWriteStream(tmpfile)
+        .on('finish', function() {
+            dc(tmpfile, function(error) {
+              fs.unlink(tmpfile);
+              cb(error);
+            })
+        })
+    );
 }

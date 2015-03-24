@@ -24,14 +24,14 @@
   "license": "MIT",
   "dependencies": {
     "decompress": "^2.2.1",
-    "download": "^4.0.0",
     "file-exists": "^0.1.1",
     "merge": "^1.2.0",
     "multimeter": "^0.1.1",
     "rimraf": "^2.2.8",
     "semver": "^4.3.0",
     "yargs": "^3.2.1",
-    "chalk": "~1.0.0"
+    "chalk": "~1.0.0",
+    "request": "~2.53.0"
   },
   "devDependencies": {
     "request": "^2.53.0",
