@@ -76,6 +76,7 @@ if( parsedUrl.protocol == 'file:' ) {
     .run( cb );
 } else {
   new Download(merge({ extract: true }, decompressOptions))
-    .get( url, dest )
+    .get( url )
+    .dest( dest )
     .run( cb );
 }
