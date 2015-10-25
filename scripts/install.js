@@ -12,6 +12,7 @@ var Decompress = require('decompress');
 var fileExists = require('file-exists');
 var chalk = require('chalk');
 
+var buildSDK = false;
 var v = semver.parse(require('../package.json').version);
 var version = [v.major, v.minor, v.patch].join('.');
 if (v.prerelease && typeof v.prerelease[0] === 'string') {
@@ -21,19 +22,23 @@ if (v.prerelease && typeof v.prerelease[0] === 'string') {
   }
   version += '-' + prerelease.join('-');
 }
+if ( version.slice(-3) === 'sdk' ){
+   version = version.slice(0, -3);
+   buildSDK = true;
+}
 var url = false;
 var urlBase = process.env.npm_config_nwjs_urlbase || process.env.NWJS_URLBASE ||  'http://dl.nwjs.io/v';
 
 // Determine download url
 switch (process.platform) {
   case 'win32':
-    url = urlBase + version + '/nwjs-v' + version + '-win-' + process.arch +'.zip';
+    url = urlBase + version + '/nwjs-' + (buildSDK ? 'sdk-' : '') + 'v' + version + '-win-' + process.arch +'.zip';
     break;
   case 'darwin':
-    url = urlBase + version + '/nwjs-v' + version + '-osx-' + process.arch + '.zip';
+    url = urlBase + version + '/nwjs-' + (buildSDK ? 'sdk-' : '') + 'v' + version + '-osx-' + process.arch + '.zip';
     break;
   case 'linux':
-    url = urlBase + version + '/nwjs-v' + version + '-linux-' + process.arch + '.tar.gz';
+    url = urlBase + version + '/nwjs-' + (buildSDK ? 'sdk-' : '') + 'v' + version + '-linux-' + process.arch + '.tar.gz';
     break;
 }
 
