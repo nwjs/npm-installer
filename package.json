@@ -1,6 +1,6 @@
 {
   "name": "nw",
-  "version": "0.13.0-alpha5sdk",
+  "version": "0.13.0-alpha6sdk",
   "description": "A installer for nw.js",
   "repository": {
     "type": "git",
