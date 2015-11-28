@@ -112,4 +112,4 @@ export http_proxy="http://myproxy.com:8080"
 ```
 
 ## license
-[nw.js](https://github.com/rogerwang/nw.js)'s code and this installer use the MIT license.
+[nw.js](https://github.com/nwjs/nw.js)'s code and this installer use the MIT license.
