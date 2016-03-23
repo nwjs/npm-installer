@@ -22,7 +22,10 @@ if (v.prerelease && typeof v.prerelease[0] === 'string') {
   }
   version += '-' + prerelease.join('-');
 }
-if ( version.slice(-3) === 'sdk' ){
+if ( version.slice(-4) === '-sdk' ){
+   version = version.slice(0, -4);
+   buildSDK = true;
+} else if ( version.slice(-3) === 'sdk' ){
    version = version.slice(0, -3);
    buildSDK = true;
 }
