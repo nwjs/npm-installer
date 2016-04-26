@@ -61,6 +61,32 @@ To install a specific version of nw.js use npm with the specific version: `npm i
 
 You may use `npm view nw versions` to view the list of available versions.
 
+## install a specific build type of nw.js
+
+nw.js has three build types: `normal`, `sdk` and `nacl`. To install a specific build type you may set npm config property `nwjs_build_type`, environment variable `NWJS_BUILD_TYPE` or pass command line option `--nwjs_build_type`:
+
+``` shell
+npm install nwjs --nwjs_build_type=sdk
+```
+
+Setting option in `.npmrc` file (https://www.npmjs.org/doc/files/npmrc.html):
+
+```
+nwjs_build_type=sdk
+```
+
+Setting environment variable `NWJS_BUILD_TYPE`:
+
+``` shell
+export NWJS_BUILD_TYPE=sdk
+```
+
+You can alternatively install `sdk` build by specifying `-sdk` suffix in version:
+
+``` shell
+npm install nwjs@0.13.3-sdk
+```
+
 ## finding the path to the nw.js binary
 
 If you would like to programmatically retrieve the path to the nw.js binary use:
