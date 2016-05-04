@@ -25,7 +25,7 @@
   "dependencies": {
     "decompress": "^3.0.0",
     "download": "^4.4.3",
-    "file-exists": "^0.1.1",
+    "file-exists": "^1.0.0",
     "merge": "^1.2.0",
     "multimeter": "^0.1.1",
     "rimraf": "^2.2.8",
