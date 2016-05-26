@@ -1,6 +1,6 @@
 {
   "name": "nw",
-  "version": "0.15.0-rc2sdk",
+  "version": "0.15.0-sdk",
   "description": "A installer for nw.js",
   "repository": {
     "type": "git",
