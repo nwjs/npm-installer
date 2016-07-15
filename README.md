@@ -49,7 +49,7 @@ customize your nw.js application:
 
 **NOTE**: These options will keep the copied files in the app bundle for as long as the bundle is
 on the filesystem (they're not deleted between app invocations). As a result, they're not
-recommended if you installed nwjs globally using `-g`.  Also note that
+recommended if you installed nw globally using `-g`.  Also note that
 [OS X caches these files](http://proteo.me.uk/2011/08/mac-application-bundle-caching/),
 so you may need to manually clear these cached files during development.
 
@@ -66,7 +66,7 @@ You may use `npm view nw versions` to view the list of available versions.
 nw.js has three build types: `normal`, `sdk` and `nacl`. To install a specific build type you may set npm config property `nwjs_build_type`, environment variable `NWJS_BUILD_TYPE` or pass command line option `--nwjs_build_type`:
 
 ``` shell
-npm install nwjs --nwjs_build_type=sdk
+npm install nw --nwjs_build_type=sdk
 ```
 
 Setting option in `.npmrc` file (https://www.npmjs.org/doc/files/npmrc.html):
@@ -84,7 +84,7 @@ export NWJS_BUILD_TYPE=sdk
 You can alternatively install `sdk` build by specifying `-sdk` suffix in version:
 
 ``` shell
-npm install nwjs@0.13.3-sdk
+npm install nw@0.13.3-sdk
 ```
 
 ## finding the path to the nw.js binary
@@ -102,7 +102,7 @@ var nwpath = findpath();
 The installer attempts to download binaries from the default location of `http://dl.nwjs.io/v`. You can override this by setting the npm config property `nwjs_urlbase` on the command line by passing the `--nwjs_urlbase` option:
 
 ``` shell
-npm install nwjs --nwjs_urlbase=http://my.own.location/somewhere
+npm install nw --nwjs_urlbase=http://my.own.location/somewhere
 ```
 
 or adding it to your `.npmrc` file (https://www.npmjs.org/doc/files/npmrc.html):
