@@ -64,6 +64,14 @@ function cb(error) {
   });
 }
 
+function fileExistsAndAvailable(filepath) {
+  try {
+    return fileExists(parsedUrl.path);
+  } catch(err) {
+    return false;
+  }
+}
+
 if (!url) logError('Could not find a compatible version of nw.js to download for your platform.');
 
 var dest = path.resolve(__dirname, '..', 'nwjs');
@@ -77,7 +85,7 @@ var progress = 0;
 var parsedUrl = urlModule.parse(url);
 var decompressOptions = { strip: 1, mode: '755' };
 if( parsedUrl.protocol == 'file:' ) {
-  if ( !fileExists(parsedUrl.path) ) {
+  if ( !fileExistsAndAvailable(parsedUrl.path) ) {
     logError('Could not find ' + parsedUrl.path);
   }
   new Decompress()
