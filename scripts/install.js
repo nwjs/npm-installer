@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var Download = require('download');
+var download = require('download');
 var rimraf = require('rimraf');
 var semver = require('semver');
 var createBar = require('multimeter')(process);
@@ -101,8 +101,7 @@ if( parsedUrl.protocol == 'file:' ) {
     .use( Decompress.targz(decompressOptions) )
     .run( cb );
 } else {
-  new Download(merge({ extract: true }, decompressOptions))
-    .get( url )
-    .dest( dest )
-    .run( cb );
+  download(url, dest, merge({ extract: true }, decompressOptions))
+    .then(function() {cb();})
+    .catch(function(e) {cb(e);});
 }
