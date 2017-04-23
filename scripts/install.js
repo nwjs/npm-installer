@@ -66,7 +66,7 @@ function cb(error) {
 
 function fileExistsAndAvailable(filepath) {
   try {
-    return fileExists(parsedUrl.path);
+    return fileExists(filepath);
   } catch(err) {
     return false;
   }
