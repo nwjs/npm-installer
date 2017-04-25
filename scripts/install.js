@@ -84,12 +84,18 @@ var progress = 0;
 
 var parsedUrl = urlModule.parse(url);
 var decompressOptions = { strip: 1, mode: '755' };
+var filePath;
 if( parsedUrl.protocol == 'file:' ) {
-  if ( !fileExistsAndAvailable(parsedUrl.path) ) {
+  filePath = path.resolve(
+    decodeURIComponent(
+      url.slice( 'file://'.length )
+    )
+  );
+  if ( !fileExistsAndAvailable(filePath) ) {
     logError('Could not find ' + parsedUrl.path);
   }
   new Decompress()
-    .src( parsedUrl.path )
+    .src( filePath )
     .dest( dest )
     .use( Decompress.zip(decompressOptions) )
     .use( Decompress.targz(decompressOptions) )
