@@ -91,9 +91,9 @@ if( parsedUrl.protocol == 'file:' ) {
       url.slice( 'file://'.length )
     )
   );
-  if ( !fileExistsAndAvailable(filePath) ) {
-    logError('Could not find ' + parsedUrl.path);
-  }
+  if ( !fileExistsAndAvailable(filePath) ) logError(
+    'Could not find ' + filePath
+  );
   new Decompress()
     .src( filePath )
     .dest( dest )
