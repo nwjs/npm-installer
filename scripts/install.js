@@ -33,7 +33,7 @@ if ( version.slice(-4) === '-sdk' ){
 }
 
 var url = false;
-var urlBase = process.env.npm_config_nwjs_urlbase || process.env.NWJS_URLBASE ||  'http://dl.nwjs.io/v';
+var urlBase = process.env.npm_config_nwjs_urlbase || process.env.NWJS_URLBASE ||  'https://dl.nwjs.io/v';
 var buildTypeSuffix = buildType === 'normal' ? '' : ('-' + buildType);
 
 // Determine download url
