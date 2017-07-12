@@ -125,7 +125,7 @@ export NWJS_URLBASE=file:///home/bilbo/my/own/mirror
 
 ## using a proxy with or without authentication
 
-If you are behind a proxy server you have to set an environment variable ```http_proxy``` with proxy servers url:
+If you are behind a proxy server you have to set an environment variable `http_proxy` with proxy servers url:
 
 ```
 export http_proxy="http://username:password@myproxy.com:8080"
@@ -136,6 +136,8 @@ or
 ```
 export http_proxy="http://myproxy.com:8080"
 ```
+
+(However, if the environment variable `https_proxy` is set, then it will be preferred, as [programmed](https://github.com/kevva/get-proxy/blob/master/index.js) in the `get-proxy` package.)
 
 ## license
 [nw.js](https://github.com/nwjs/nw.js)'s code and this installer use the MIT license.
