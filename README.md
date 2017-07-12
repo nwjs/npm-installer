@@ -21,7 +21,7 @@ Now it will run your local project when you type `npm start`.
 
 If your project is in another folder, add the path to the project `"start": "nw path/to/app"`.
 
-You could also call the binary directly with `node_modules/.bin/nw` instead of adding to your `package.json`.
+You could also call `nw` directly from `node_modules/.bin/nw` instead of adding to your `package.json`.
 
 ### global
 You can also install globally with `npm install nw -g` and then in any project type `nw` to run the project. Installing locally is recommended though as each project can have its own dependent version of nw.js.
@@ -95,6 +95,20 @@ If you would like to programmatically retrieve the path to the nw.js binary use:
 var findpath = require('nw').findpath;
 var nwpath = findpath();
 // nwpath will equal the path to the binary depending on your environment
+```
+
+Then you can use that path to run NW.js programmatically. For example, to run in the current script's directory:
+
+```js
+require('child_process').spawn(
+   require('nw').findpath(),
+   ['.'].concat( process.argv.slice(2) ),
+   {
+      cwd: __dirname,
+      detached: true,
+      stdio: 'ignore'
+   }
+).unref();
 ```
 
 ## retrieve binaries from custom download location or file path
