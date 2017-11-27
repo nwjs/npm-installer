@@ -33,19 +33,20 @@ if ( version.slice(-4) === '-sdk' ){
 }
 
 var url = false;
+var arch = process.env.npm_config_nwjs_process_arch || process.arch;
 var urlBase = process.env.npm_config_nwjs_urlbase || process.env.NWJS_URLBASE ||  'https://dl.nwjs.io/v';
 var buildTypeSuffix = buildType === 'normal' ? '' : ('-' + buildType);
 
 // Determine download url
 switch (process.platform) {
   case 'win32':
-    url = urlBase + version + '/nwjs' + buildTypeSuffix + '-v' + version + '-win-' + process.arch +'.zip';
+    url = urlBase + version + '/nwjs' + buildTypeSuffix + '-v' + version + '-win-' + arch +'.zip';
     break;
   case 'darwin':
-    url = urlBase + version + '/nwjs' + buildTypeSuffix + '-v' + version + '-osx-' + process.arch + '.zip';
+    url = urlBase + version + '/nwjs' + buildTypeSuffix + '-v' + version + '-osx-' + arch + '.zip';
     break;
   case 'linux':
-    url = urlBase + version + '/nwjs' + buildTypeSuffix + '-v' + version + '-linux-' + process.arch + '.tar.gz';
+    url = urlBase + version + '/nwjs' + buildTypeSuffix + '-v' + version + '-linux-' + arch + '.tar.gz';
     break;
 }
 
