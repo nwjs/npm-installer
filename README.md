@@ -87,6 +87,8 @@ You can alternatively install `sdk` build by specifying `-sdk` suffix in version
 npm install nw@0.13.3-sdk
 ```
 
+You can also run `npm install nw@sdk` to get the latest of published SDK versions. (Note: that may be a beta version.)
+
 ## install a specific architecture
 
 You may use the environment variable `npm_config_nwjs_process_arch` to override the default architecture (`process.arch`) and to download NW.js built for some other architecture.
