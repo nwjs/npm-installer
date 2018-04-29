@@ -119,7 +119,7 @@ require('child_process').spawn(
 
 ## retrieve binaries from custom download location or file path
 
-The installer attempts to download binaries from the default location of `http://dl.nwjs.io/v`. You can override this by setting the npm config property `nwjs_urlbase` on the command line by passing the `--nwjs_urlbase` option:
+The installer attempts to download binaries from the default location of `https://dl.nwjs.io/v`. You can override this by setting the npm config property `nwjs_urlbase` on the command line by passing the `--nwjs_urlbase` option:
 
 ``` shell
 npm install nw --nwjs_urlbase=http://my.own.location/somewhere
