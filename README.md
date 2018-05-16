@@ -2,7 +2,7 @@
 
 An installer for [nw.js](https://github.com/nwjs/nw.js).
 
-> nw.js is an app runtime based on Chromium and io.js. For building desktop applications that will run on OSX, Windows and Linux.
+> nw.js is an app runtime based on Chromium and node.js. For building desktop applications that will run on OSX, Windows and Linux.
 
 [![NPM](https://nodei.co/npm/nw.png?downloads=true)](https://nodei.co/npm/nw/)
 
