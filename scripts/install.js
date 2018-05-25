@@ -102,7 +102,15 @@ if( parsedUrl.protocol == 'file:' ) {
     .use( Decompress.targz(decompressOptions) )
     .run( cb );
 } else {
+  var progress = { total: null, downloaded: 0,
+    start: function(resp) { this.total = parseInt(resp.headers['content-length']); },
+    recvd: function(chunk) { 
+      this.downloaded += chunk.length; if (this.total) bar.ratio(this.downloaded, this.total);
+    }
+  };
   download(url, dest, merge({ extract: true }, decompressOptions))
+    .on('response', function(resp)  { progress.start(resp); })
+    .on('data',     function(chunk) { progress.recvd(chunk); })
     .then(function() {cb();})
     .catch(function(e) {cb(e);});
 }
