@@ -36,9 +36,10 @@ var url = false;
 var arch = process.env.npm_config_nwjs_process_arch || process.arch;
 var urlBase = process.env.npm_config_nwjs_urlbase || process.env.NWJS_URLBASE ||  'https://dl.nwjs.io/v';
 var buildTypeSuffix = buildType === 'normal' ? '' : ('-' + buildType);
+var platform = process.env.npm_config_nwjs_platform || process.env.NWJS_PLATFORM || process.platform;
 
 // Determine download url
-switch (process.platform) {
+switch (platform) {
   case 'win32':
     url = urlBase + version + '/nwjs' + buildTypeSuffix + '-v' + version + '-win-' + arch +'.zip';
     break;
