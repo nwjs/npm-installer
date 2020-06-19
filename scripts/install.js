@@ -3,7 +3,7 @@
 var download = require('download');
 var rimraf = require('rimraf');
 var semver = require('semver');
-var createBar = require('multimeter')(process);
+var ProgressBar = require('progress')
 var path = require('path');
 var fs = require('fs');
 var merge = require('merge');
@@ -79,7 +79,7 @@ if (!url) logError('Could not find a compatible version of nw.js to download for
 var dest = path.resolve(__dirname, '..', 'nwjs');
 rimraf.sync(dest);
 
-var bar = createBar({ before: url + ' [' });
+var bar = new ProgressBar(url + ' [:bar] :current/:totalM', {total: 100, clear: true});
 
 var total = 0;
 var progress = 0;
@@ -103,7 +103,20 @@ if( parsedUrl.protocol == 'file:' ) {
     .use( Decompress.targz(decompressOptions) )
     .run( cb );
 } else {
-  download(url, dest, merge({ extract: true }, decompressOptions))
+  var progress = { total: null, downloaded: 0,
+     start: function(resp) {
+         this.total = parseInt(resp.headers['content-length']);
+         bar.total = Math.max(1, this.total / 1e6).toFixed(2);
+     },
+     recvd: function(chunk) {
+       this.downloaded += chunk.length;
+       if (this.total) { bar.update(this.downloaded / this.total); }
+     }
+   };
+   download(url, dest, merge({ extract: true }, decompressOptions))
+    .on('response', function(resp)  { progress.start(resp); })
+    .on('data',     function(chunk) { progress.recvd(chunk); })
+    .on('end',      function()      { bar.terminate(); })
     .then(function() {cb();})
     .catch(function(e) {cb(e);});
 }
