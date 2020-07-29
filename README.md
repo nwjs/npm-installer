@@ -1,10 +1,10 @@
 # nw [![Build Status](http://img.shields.io/travis/nwjs/npm-installer.svg)](https://travis-ci.org/nwjs/npm-installer)
 
-An installer for [nw.js](https://github.com/nwjs/nw.js).
+An installer for [NW.js](https://nwjs.io).
 
-> nw.js is an app runtime based on Chromium and node.js. For building desktop applications that will run on OSX, Windows and Linux.
+> NW.js is a runtime-environment based on Chromium and Node.js. It is used to build desktop applications that run on Windows, OSX, and Linux.
 
-[![NPM](https://nodei.co/npm/nw.png?downloads=true)](https://nodei.co/npm/nw/)
+[![npm](https://nodei.co/npm/nw.png?downloads=true)](https://nodei.co/npm/nw/)
 
 ## usage
 Install locally to your project with: `npm install nw` and then in your `package.json` add a script:
