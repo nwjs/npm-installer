@@ -103,20 +103,35 @@ if( parsedUrl.protocol == 'file:' ) {
     .use( Decompress.targz(decompressOptions) )
     .run( cb );
 } else {
-  var progress = { total: null, downloaded: 0,
-     start: function(resp) {
-         this.total = parseInt(resp.headers['content-length']);
-         bar.total = Math.max(1, this.total / 1e6).toFixed(2);
-     },
-     recvd: function(chunk) {
-       this.downloaded += chunk.length;
-       if (this.total) { bar.update(this.downloaded / this.total); }
-     }
-   };
-   download(url, dest, merge({ extract: true }, decompressOptions))
-    .on('response', function(resp)  { progress.start(resp); })
-    .on('data',     function(chunk) { progress.recvd(chunk); })
-    .on('end',      function()      { bar.terminate(); })
-    .then(function() {cb();})
-    .catch(function(e) {cb(e);});
+  var progress = {
+    total: null,
+    downloaded: 0,
+    start: function (response) {
+      this.total = parseInt(response.headers['content-length']);
+      bar.total = (this.total / 1000000).toFixed(2);
+    },
+    recieved: function (chunk) {
+      this.downloaded += chunk.length;
+      if (this.total) {
+        bar.update(this.downloaded / this.total);
+      }
+    }
+  };
+
+  download(url, dest, merge({ extract: true }, decompressOptions))
+    .on('response', function (response) {
+      progress.start(response);
+    })
+    .on('data', function (chunk) {
+      progress.recieved(chunk);
+    })
+    .on('end', function () {
+      bar.terminate();
+    })
+    .then(function () {
+      cb();
+    })
+    .catch(function (err) {
+      cb(err);
+    });
 }
