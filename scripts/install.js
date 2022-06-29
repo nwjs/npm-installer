@@ -34,6 +34,7 @@ if ( version.slice(-4) === '-sdk' ){
 
 var url = false;
 var arch = process.env.npm_config_nwjs_process_arch || process.arch;
+
 var urlBase = process.env.npm_config_nwjs_urlbase || process.env.NWJS_URLBASE ||  'https://dl.nwjs.io/v';
 var buildTypeSuffix = buildType === 'normal' ? '' : ('-' + buildType);
 var platform = process.env.npm_config_nwjs_platform || process.env.NWJS_PLATFORM || process.platform;
@@ -44,6 +45,9 @@ switch (platform) {
     url = urlBase + version + '/nwjs' + buildTypeSuffix + '-v' + version + '-win-' + arch +'.zip';
     break;
   case 'darwin':
+    if (arch === 'arm64'){
+      arch = 'x64';
+    }
     url = urlBase + version + '/nwjs' + buildTypeSuffix + '-v' + version + '-osx-' + arch + '.zip';
     break;
   case 'linux':
