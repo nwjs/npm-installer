@@ -11,7 +11,7 @@
     "nw": "bin/nw"
   },
   "scripts": {
-    "run": "node scripts/install.js",
+    "postinstall": "node scripts/install.js",
     "test": "node test/index.js"
   },
   "files": [
