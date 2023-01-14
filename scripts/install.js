@@ -9,7 +9,8 @@ var fs = require('fs');
 var merge = require('merge');
 var urlModule = require('url');
 var Decompress = require('decompress');
-var fileExists = require('file-exists');
+const { constants } = require('fs');
+const { access } = require('node:fs/promises');
 var chalk;
 
 (async () => {
@@ -77,7 +78,7 @@ function cb(error) {
 
 function fileExistsAndAvailable(filepath) {
   try {
-    return fileExists(filepath);
+    return !!access(filepath, constants.F_OK)
   } catch(err) {
     return false;
   }

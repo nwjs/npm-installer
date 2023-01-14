@@ -26,7 +26,6 @@
     "chalk": "^5.2.0",
     "decompress": "^4.2.1",
     "download": "^8.0.0",
-    "file-exists": "^2.0.0",
     "merge": "^1.2.0",
     "progress": "^2.0.3",
     "rimraf": "^2.2.8",
