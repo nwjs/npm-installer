@@ -29,7 +29,7 @@
     "file-exists": "^5.0.1",
     "merge": "^2.1.1",
     "progress": "^2.0.3",
-    "rimraf": "^2.2.8",
+    "rimraf": "^4.1.2",
     "semver": "^5.1.0",
     "yargs": "^3.2.1"
   },
