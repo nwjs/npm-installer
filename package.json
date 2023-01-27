@@ -22,6 +22,9 @@
   ],
   "author": "Kyle Robinson Young",
   "license": "MIT",
+  "engines": {
+    "node": " >= 19.3.0"
+  },
   "dependencies": {
     "chalk": "5.2.0",
     "decompress": "^4.2.1",
