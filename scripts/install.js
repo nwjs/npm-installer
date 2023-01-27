@@ -10,7 +10,14 @@ var merge = require('merge');
 var urlModule = require('url');
 var Decompress = require('decompress');
 var fileExists = require('file-exists');
-var chalk = require('chalk');
+var chalk;
+(async () => {
+  try {
+    chalk = import("chalk");
+  } catch (e) {
+    console.error(e);
+  }
+})();
 
 var buildType = process.env.npm_config_nwjs_build_type || process.env.NWJS_BUILD_TYPE || 'normal';
 
