@@ -1,4 +1,4 @@
-# nw [![Build Status](http://img.shields.io/travis/nwjs/npm-installer.svg)](https://travis-ci.org/nwjs/npm-installer)
+# nw
 
 An installer for [NW.js](https://nwjs.io).
 
