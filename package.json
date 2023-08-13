@@ -30,7 +30,7 @@
     "merge": "^2.1.1",
     "progress": "^2.0.3",
     "rimraf": "^2.2.8",
-    "semver": "^5.1.0",
+    "semver": "^7.5.4",
     "yargs": "^3.2.1"
   },
   "devDependencies": {
