@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "request": "^2.53.0",
-    "tape": "^4.10.1"
+    "tape": "^5.6.6"
   },
   "keywords": [
     "nw",
