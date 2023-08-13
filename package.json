@@ -12,7 +12,7 @@
   },
   "scripts": {
     "postinstall": "node scripts/install.js",
-    "test": "node test/index.js"
+    "test": "node --test-reporter=spec --test test/index.mjs"
   },
   "files": [
     "lib",
@@ -34,9 +34,12 @@
     "yargs": "^3.2.1"
   },
   "devDependencies": {
-    "request": "^2.53.0",
-    "tape": "^4.10.1"
+    "request": "^2.53.0"
   },
+  "engines": {
+    "node": "v20.5.0"
+  },
+  "packageManager": "npm@9.8.1",
   "keywords": [
     "nw",
     "nw.js",
