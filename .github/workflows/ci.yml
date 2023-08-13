@@ -1,0 +1,32 @@
+name: ci
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        include:
+          - { node: macos-12, shell: bash }
+          - { os: ubuntu-22.04, shell: bash }
+          - { os: windows-2022, shell: powershell }
+          # https://github.com/orgs/community/discussions/27143
+      fail-fast: false
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3.3.0
+      - name: Get Node version from Node manifest
+        run: |
+          echo "NODE_VER=$(jq -r '.engines.node' package.json | sed 's/v//' )" >> $GITHUB_ENV
+      - uses: actions/setup-node@v3.6.0
+        with:
+          node-version: ${{ NODE_VER }}
+          cache: "npm"
+      - name: Enable corepack
+        run: corepack enable
+      - name: Install dependencies
+        run: npm ci
+      - name: Run test
+        run: npm test

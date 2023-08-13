@@ -37,6 +37,10 @@
     "request": "^2.53.0",
     "tape": "^4.10.1"
   },
+  "engines": {
+    "node": "v20.5.0"
+  },
+  "packageManager": "npm@9.8.1",
   "keywords": [
     "nw",
     "nw.js",
