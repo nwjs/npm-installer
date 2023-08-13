@@ -6,14 +6,6 @@ on:
 
 jobs:
   test:
-    strategy:
-      matrix:
-        include:
-          - { node: macos-12, shell: bash }
-          - { os: ubuntu-22.04, shell: bash }
-          - { os: windows-2022, shell: powershell }
-          # https://github.com/orgs/community/discussions/27143
-      fail-fast: false
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3.3.0
