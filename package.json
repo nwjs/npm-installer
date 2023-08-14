@@ -12,7 +12,7 @@
   },
   "scripts": {
     "postinstall": "node scripts/install.js",
-    "test": "node --test-reporter=spec --test test/index.mjs"
+    "test": "node --test test/index.mjs"
   },
   "files": [
     "lib",
