@@ -12,7 +12,7 @@
   },
   "scripts": {
     "postinstall": "node scripts/install.js",
-    "format": "prettier --write .",
+    "format": "prettier --write . .github",
     "format:check": "prettier --check .",
     "lint": "eslint --config=.github/eslint.config.js --fix .",
     "lint:check": "eslint --config=.github/eslint.config.js .",
