@@ -12,6 +12,10 @@
   },
   "scripts": {
     "postinstall": "node scripts/install.js",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint --fix .",
+    "lint:check": "eslint --config=cfg/eslint.config.js .",
     "test": "node --test-reporter=spec --test test/index.mjs"
   },
   "files": [
@@ -34,6 +38,8 @@
     "yargs": "^3.2.1"
   },
   "devDependencies": {
+    "eslint": "^8.47.0",
+    "prettier": "^3.0.2",
     "request": "^2.53.0"
   },
   "engines": {
