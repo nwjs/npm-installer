@@ -14,8 +14,8 @@
     "postinstall": "node scripts/install.js",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "eslint --fix .",
-    "lint:check": "eslint --config=cfg/eslint.config.js .",
+    "lint": "eslint --config=.github/eslint.config.js --fix .",
+    "lint:check": "eslint --config=.github/eslint.config.js .",
     "test": "node --test-reporter=spec --test test/index.mjs"
   },
   "files": [
