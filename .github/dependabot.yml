@@ -1,10 +1,10 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "daily"
-  - package-ecosystem: "github-actions"
-    directory: ".github/"
+      interval: 'daily'
+  - package-ecosystem: 'github-actions'
+    directory: '.github/'
     schedule:
-      interval: "daily"
+      interval: 'daily'

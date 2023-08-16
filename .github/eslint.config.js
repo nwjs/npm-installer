@@ -5,11 +5,8 @@ module.exports = {
   env: {
     node: true,
   },
-  extends: ["eslint:recommended"],
+  extends: ['eslint:recommended'],
   rules: {
-    quotes: [
-      'error',
-      'single'
-    ]
-  }
+    quotes: ['error', 'single'],
+  },
 };
