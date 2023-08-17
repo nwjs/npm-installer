@@ -12,8 +12,8 @@
   },
   "scripts": {
     "postinstall": "node scripts/install.js",
-    "lint": "eslint --config=.github/eslint.config.js --fix ./**/*.js",
-    "lint:check": "eslint --config=.github/eslint.config.js ./**/*.js",
+    "lint": "eslint --config=.github/eslint.config.js --fix ./**/*.js ./**/*.mjs",
+    "lint:check": "eslint --config=.github/eslint.config.js ./**/*.js ./**/*.mjs",
     "test": "node --test-reporter=spec --test test/index.mjs"
   },
   "files": [
