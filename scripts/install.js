@@ -1,37 +1,37 @@
 #!/usr/bin/env node
 
-var download = require("download");
-var rimraf = require("rimraf");
-var semver = require("semver");
-var ProgressBar = require("progress");
-var path = require("path");
-var merge = require("merge");
-var urlModule = require("url");
-var Decompress = require("decompress");
-var fileExists = require("file-exists");
-var chalk = require("chalk");
+var download = require('download');
+var rimraf = require('rimraf');
+var semver = require('semver');
+var ProgressBar = require('progress');
+var path = require('path');
+var merge = require('merge');
+var urlModule = require('url');
+var Decompress = require('decompress');
+var fileExists = require('file-exists');
+var chalk = require('chalk');
 
 var buildType =
   process.env.npm_config_nwjs_build_type ||
   process.env.NWJS_BUILD_TYPE ||
-  "normal";
+  'normal';
 
-var v = semver.parse(require("../package.json").version);
-var version = [v.major, v.minor, v.patch].join(".");
-if (v.prerelease && typeof v.prerelease[0] === "string") {
-  var prerelease = v.prerelease[0].split("-");
+var v = semver.parse(require('../package.json').version);
+var version = [v.major, v.minor, v.patch].join('.');
+if (v.prerelease && typeof v.prerelease[0] === 'string') {
+  var prerelease = v.prerelease[0].split('-');
   if (prerelease.length > 1) {
     prerelease = prerelease.slice(0, -1);
   }
-  version += "-" + prerelease.join("-");
+  version += '-' + prerelease.join('-');
 }
 
-if (version.slice(-4) === "-sdk") {
+if (version.slice(-4) === '-sdk') {
   version = version.slice(0, -4);
-  buildType = "sdk";
-} else if (version.slice(-3) === "sdk") {
+  buildType = 'sdk';
+} else if (version.slice(-3) === 'sdk') {
   version = version.slice(0, -3);
-  buildType = "sdk";
+  buildType = 'sdk';
 }
 
 var url = false;
@@ -39,8 +39,8 @@ var arch = process.env.npm_config_nwjs_process_arch || process.arch;
 var urlBase =
   process.env.npm_config_nwjs_urlbase ||
   process.env.NWJS_URLBASE ||
-  "https://dl.nwjs.io/v";
-var buildTypeSuffix = buildType === "normal" ? "" : "-" + buildType;
+  'https://dl.nwjs.io/v';
+var buildTypeSuffix = buildType === 'normal' ? '' : '-' + buildType;
 var platform =
   process.env.npm_config_nwjs_platform ||
   process.env.NWJS_PLATFORM ||
@@ -48,46 +48,46 @@ var platform =
 
 // Determine download url
 switch (platform) {
-  case "win32":
+  case 'win32':
     url =
       urlBase +
       version +
-      "/nwjs" +
+      '/nwjs' +
       buildTypeSuffix +
-      "-v" +
+      '-v' +
       version +
-      "-win-" +
+      '-win-' +
       arch +
-      ".zip";
+      '.zip';
     break;
-  case "darwin":
+  case 'darwin':
     url =
       urlBase +
       version +
-      "/nwjs" +
+      '/nwjs' +
       buildTypeSuffix +
-      "-v" +
+      '-v' +
       version +
-      "-osx-" +
+      '-osx-' +
       arch +
-      ".zip";
+      '.zip';
     break;
-  case "linux":
+  case 'linux':
     url =
       urlBase +
       version +
-      "/nwjs" +
+      '/nwjs' +
       buildTypeSuffix +
-      "-v" +
+      '-v' +
       version +
-      "-linux-" +
+      '-linux-' +
       arch +
-      ".tar.gz";
+      '.tar.gz';
     break;
 }
 
 function logError(e) {
-  console.error(chalk.bold.red(typeof e === "string" ? e : e.message));
+  console.error(chalk.bold.red(typeof e === 'string' ? e : e.message));
   process.exit(1);
 }
 
@@ -111,13 +111,13 @@ function fileExistsAndAvailable(filepath) {
 
 if (!url)
   logError(
-    "Could not find a compatible version of nw.js to download for your platform.",
+    'Could not find a compatible version of nw.js to download for your platform.',
   );
 
-var dest = path.resolve(__dirname, "..", "nwjs");
+var dest = path.resolve(__dirname, '..', 'nwjs');
 rimraf.sync(dest);
 
-var bar = new ProgressBar(url + " [:bar] :current/:totalM", {
+var bar = new ProgressBar(url + ' [:bar] :current/:totalM', {
   total: 100,
   clear: true,
 });
@@ -125,11 +125,11 @@ var bar = new ProgressBar(url + " [:bar] :current/:totalM", {
 var progress = 0;
 
 var parsedUrl = urlModule.parse(url);
-var decompressOptions = { strip: 1, mode: "755" };
+var decompressOptions = { strip: 1, mode: '755' };
 var filePath;
-if (parsedUrl.protocol == "file:") {
-  filePath = path.resolve(decodeURIComponent(url.slice("file://".length)));
-  if (!fileExistsAndAvailable(filePath)) logError("Could not find " + filePath);
+if (parsedUrl.protocol == 'file:') {
+  filePath = path.resolve(decodeURIComponent(url.slice('file://'.length)));
+  if (!fileExistsAndAvailable(filePath)) logError('Could not find ' + filePath);
   new Decompress()
     .src(filePath)
     .dest(dest)
@@ -141,7 +141,7 @@ if (parsedUrl.protocol == "file:") {
     total: null,
     downloaded: 0,
     start: function (response) {
-      this.total = parseInt(response.headers["content-length"]);
+      this.total = parseInt(response.headers['content-length']);
       bar.total = (this.total / 1000000).toFixed(2);
     },
     recieved: function (chunk) {
@@ -153,13 +153,13 @@ if (parsedUrl.protocol == "file:") {
   };
 
   download(url, dest, merge({ extract: true }, decompressOptions))
-    .on("response", function (response) {
+    .on('response', function (response) {
       progress.start(response);
     })
-    .on("data", function (chunk) {
+    .on('data', function (chunk) {
       progress.recieved(chunk);
     })
-    .on("end", function () {
+    .on('end', function () {
       bar.terminate();
     })
     .then(function () {

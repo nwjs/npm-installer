@@ -12,8 +12,6 @@
   },
   "scripts": {
     "postinstall": "node scripts/install.js",
-    "format": "prettier --write . .github",
-    "format:check": "prettier --check .",
     "lint": "eslint --config=.github/eslint.config.js --fix .",
     "lint:check": "eslint --config=.github/eslint.config.js .",
     "test": "node --test-reporter=spec --test test/index.mjs"
@@ -39,7 +37,6 @@
   },
   "devDependencies": {
     "eslint": "^8.47.0",
-    "prettier": "^3.0.2",
     "request": "^2.53.0"
   },
   "engines": {
