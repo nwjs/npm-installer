@@ -11,10 +11,7 @@ var Decompress = require('decompress');
 var fileExists = require('file-exists');
 var chalk = require('chalk');
 
-var buildType =
-  process.env.npm_config_nwjs_build_type ||
-  process.env.NWJS_BUILD_TYPE ||
-  'normal';
+var buildType = process.env.npm_config_nwjs_build_type || process.env.NWJS_BUILD_TYPE || 'normal';
 
 var v = semver.parse(require('../package.json').version);
 var version = [v.major, v.minor, v.patch].join('.');
