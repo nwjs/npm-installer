@@ -8,11 +8,16 @@ jobs:
   test:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3.3.0
+      - name: Get Node version from Node manifest
+        run: |
+          echo "NODE_VER=$(jq -r '.engines.node' package.json | sed 's/v//' )" >> $GITHUB_ENV
+      - uses: actions/setup-node@v3.6.0
+      - name: Checkout repository
+        uses: actions/checkout@v3.3.0
       - name: Setup Node
         uses: actions/setup-node@v3.6.0
         with:
-          node-version: "latest"
+          node-version: ${{ env.NODE_VER }}
           cache: "npm"
       - name: Enable corepack
         run: corepack enable
