@@ -37,9 +37,9 @@
     "request": "^2.53.0"
   },
   "engines": {
-    "node": "v20.5.0"
+    "node": ">= 20.5.0 || >= 18.18.0"
   },
-  "packageManager": "npm@9.8.1",
+  "packageManager": "npm@10.1.0",
   "keywords": [
     "nw",
     "nw.js",
