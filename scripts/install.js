@@ -1,16 +1,17 @@
 #!/usr/bin/env node
 
-var download = require('download');
-var rimraf = require('rimraf');
-var semver = require('semver');
-var ProgressBar = require('progress')
-var path = require('path');
-var fs = require('fs');
-var merge = require('merge');
-var urlModule = require('url');
-var Decompress = require('decompress');
-var fileExists = require('file-exists');
-var chalk = require('chalk');
+const path = require('node:path');
+const process = require('node:process');
+const urlModule = require('node:url');
+
+const chalk = require('chalk');
+const Decompress = require('decompress');
+const download = require('download');
+const fileExists = require('file-exists');
+const merge = require('merge');
+const ProgressBar = require('progress')
+const rimraf = require('rimraf');
+const semver = require('semver');
 
 var buildType = process.env.npm_config_nwjs_build_type || process.env.NWJS_BUILD_TYPE || 'normal';
 
