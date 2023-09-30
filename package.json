@@ -11,7 +11,7 @@
     "nw": "bin/nw"
   },
   "scripts": {
-    "postinstall": "node scripts/install.js",
+    "postinstall": "node scripts/install.mjs",
     "test": "node --test-reporter=spec --test test/index.mjs"
   },
   "files": [

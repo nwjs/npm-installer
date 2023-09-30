@@ -1,14 +1,16 @@
 #!/usr/bin/env node
 
-const { createWriteStream, existsSync, rmSync, renameSync } = require('node:fs');
-const { get } = require('node:https');
-const { resolve } = require('node:path');
-const { arch, env, platform, exit } = require('node:process');
-const { URL } = require('node:url');
+import { createWriteStream, existsSync, rmSync, renameSync } from 'node:fs';
+import { get } from 'node:https';
+import { dirname, resolve } from 'node:path';
+import { arch, env, platform, exit } from 'node:process';
+import { fileURLToPath, URL } from 'node:url';
 
-const compressing = require('compressing');
-const progress = require('cli-progress');
-const semver = require('semver');
+import compressing from 'compressing';
+import progress from 'cli-progress';
+import semver from 'semver';
+
+import nodeManifest from "../package.json" assert { type: "json" };
 
 /**
  * NW.js build flavor
@@ -18,7 +20,7 @@ const semver = require('semver');
 let buildType = env.npm_config_nwjs_build_type || env.NWJS_BUILD_TYPE || 'normal';
 
 // Parse Node manifest version.
-let parsedVersion = semver.parse(require('../package.json').version);
+let parsedVersion = semver.parse(nodeManifest.version);
 let versionString = `${parsedVersion.major}.${parsedVersion.minor}.${parsedVersion.patch}`;
 
 // Check if version is a prelease.
@@ -62,6 +64,7 @@ if (url === '') {
   console.error('Could not find a compatible version of nw.js to download for your platform.');
 }
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
 let dest = resolve(__dirname, '..', 'nwjs');
 
 if (existsSync(dest) === true) {
