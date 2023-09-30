@@ -1,138 +1,131 @@
 #!/usr/bin/env node
 
-const path = require('node:path');
-const process = require('node:process');
-const urlModule = require('node:url');
+const { createWriteStream, existsSync, rmSync, renameSync } = require('node:fs');
+const { get } = require('node:https');
+const { resolve } = require('node:path');
+const { arch, env, platform, exit } = require('node:process');
+const { URL } = require('node:url');
 
-const chalk = require('chalk');
-const Decompress = require('decompress');
-const download = require('download');
-const fileExists = require('file-exists');
-const merge = require('merge');
-const ProgressBar = require('progress')
-const rimraf = require('rimraf');
+const compressing = require('compressing');
+const progress = require('cli-progress');
 const semver = require('semver');
 
-var buildType = process.env.npm_config_nwjs_build_type || process.env.NWJS_BUILD_TYPE || 'normal';
+/**
+ * NW.js build flavor
+ * 
+ * @type {'sdk' | 'normal'}
+ */
+let buildType = env.npm_config_nwjs_build_type || env.NWJS_BUILD_TYPE || 'normal';
 
-var v = semver.parse(require('../package.json').version);
-var version = [v.major, v.minor, v.patch].join('.');
-if (v.prerelease && typeof v.prerelease[0] === 'string') {
-  var prerelease = v.prerelease[0].split('-');
+// Parse Node manifest version.
+let parsedVersion = semver.parse(require('../package.json').version);
+let versionString = `${parsedVersion.major}.${parsedVersion.minor}.${parsedVersion.patch}`;
+
+// Check if version is a prelease.
+if (parsedVersion.prerelease !== undefined && typeof parsedVersion.prerelease[0] === 'string') {
+  let prerelease = parsedVersion.prerelease[0].split('-');
   if (prerelease.length > 1) {
     prerelease = prerelease.slice(0, -1);
   }
-  version += '-' + prerelease.join('-');
+  versionString = `${versionString}-${prerelease}`;
 }
 
-if ( version.slice(-4) === '-sdk' ){
-   version = version.slice(0, -4);
-   buildType = 'sdk';
-} else if ( version.slice(-3) === 'sdk' ){
-   version = version.slice(0, -3);
-   buildType = 'sdk';
+// Check build flavor
+if (versionString.slice(-4) === '-sdk') {
+  versionString = versionString.slice(0, -4);
+  buildType = 'sdk';
+} else if (versionString.slice(-3) === 'sdk') {
+  versionString = versionString.slice(0, -3);
+  buildType = 'sdk';
 }
 
-var url = false;
-var arch = process.env.npm_config_nwjs_process_arch || process.arch;
-var urlBase = process.env.npm_config_nwjs_urlbase || process.env.NWJS_URLBASE ||  'https://dl.nwjs.io/v';
-var buildTypeSuffix = buildType === 'normal' ? '' : ('-' + buildType);
-var platform = process.env.npm_config_nwjs_platform || process.env.NWJS_PLATFORM || process.platform;
+let url = '';
+let hostArch = env.npm_config_nwjs_process_arch || arch;
+let urlBase = env.npm_config_nwjs_urlbase || env.NWJS_URLBASE || 'https://dl.nwjs.io/v';
+let buildTypeSuffix = buildType === 'normal' ? '' : `-${buildType}`;
+let hostOs = env.npm_config_nwjs_platform || env.NWJS_PLATFORM || platform;
 
 // Determine download url
-switch (platform) {
+switch (hostOs) {
   case 'win32':
-    url = urlBase + version + '/nwjs' + buildTypeSuffix + '-v' + version + '-win-' + arch +'.zip';
+    url = `${urlBase}${versionString}/nwjs${buildTypeSuffix}-v${versionString}-win-${hostArch}.zip`;
     break;
   case 'darwin':
-    url = urlBase + version + '/nwjs' + buildTypeSuffix + '-v' + version + '-osx-' + arch + '.zip';
+    url = `${urlBase}${versionString}/nwjs${buildTypeSuffix}-v${versionString}-osx-${hostArch}.zip`;
     break;
   case 'linux':
-    url = urlBase + version + '/nwjs' + buildTypeSuffix + '-v' + version + '-linux-' + arch + '.tar.gz';
+    url = `${urlBase}${versionString}/nwjs${buildTypeSuffix}-v${versionString}-linux-${hostArch}.tar.gz`;
     break;
 }
 
-function logError(e) {
-  console.error(chalk.bold.red((typeof e === 'string') ? e : e.message));
-  process.exit(1);
+if (url === '') {
+  console.error('Could not find a compatible version of nw.js to download for your platform.');
 }
 
-function cb(error) {
-  if( error != null ) {
-    return logError( error )
-  }
+let dest = resolve(__dirname, '..', 'nwjs');
 
-  process.nextTick(function() {
-    process.exit();
-  });
+if (existsSync(dest) === true) {
+  console.info("[ INFO ] The NW.js binary already exists.");
+  exit(0);
 }
 
-function fileExistsAndAvailable(filepath) {
-  try {
-    return fileExists(filepath);
-  } catch(err) {
-    return false;
-  }
-}
-
-if (!url) logError('Could not find a compatible version of nw.js to download for your platform.');
-
-var dest = path.resolve(__dirname, '..', 'nwjs');
-rimraf.sync(dest);
-
-var bar = new ProgressBar(url + ' [:bar] :current/:totalM', {total: 100, clear: true});
-
-var total = 0;
-var progress = 0;
-
-var parsedUrl = urlModule.parse(url);
-var decompressOptions = { strip: 1, mode: '755' };
-var filePath;
-if( parsedUrl.protocol == 'file:' ) {
-  filePath = path.resolve(
+let parsedUrl = new URL(url);
+let filePath = '';
+if (parsedUrl.protocol === 'file:') {
+  filePath = resolve(
     decodeURIComponent(
-      url.slice( 'file://'.length )
+      url.slice('file://'.length)
     )
   );
-  if ( !fileExistsAndAvailable(filePath) ) logError(
-    'Could not find ' + filePath
-  );
-  new Decompress()
-    .src( filePath )
-    .dest( dest )
-    .use( Decompress.zip(decompressOptions) )
-    .use( Decompress.targz(decompressOptions) )
-    .run( cb );
-} else {
-  var progress = {
-    total: null,
-    downloaded: 0,
-    start: function (response) {
-      this.total = parseInt(response.headers['content-length']);
-      bar.total = (this.total / 1000000).toFixed(2);
-    },
-    recieved: function (chunk) {
-      this.downloaded += chunk.length;
-      if (this.total) {
-        bar.update(this.downloaded / this.total);
-      }
-    }
-  };
 
-  download(url, dest, merge({ extract: true }, decompressOptions))
-    .on('response', function (response) {
-      progress.start(response);
-    })
-    .on('data', function (chunk) {
-      progress.recieved(chunk);
-    })
-    .on('end', function () {
-      bar.terminate();
-    })
-    .then(function () {
-      cb();
-    })
-    .catch(function (err) {
-      cb(err);
+  if (existsSync(filePath) === false) {
+    console.error('Could not find ' + filePath);
+  }
+
+} else {
+
+  const bar = new progress.SingleBar({}, progress.Presets.rect);
+
+  const stream = createWriteStream(dest);
+
+  get(url, (response) => {
+
+    let chunks = 0;
+    bar.start(Number(response.headers["content-length"]), 0);
+    response.on("data", async (chunk) => {
+      chunks += chunk.length;
+      bar.increment();
+      bar.update(chunks);
     });
+
+    response.on("error", () => {
+      rmSync(dest, {
+        recursive: true,
+        force: true,
+      });
+    });
+
+    response.on("end", () => {
+      if (platform === "linux") {
+        compressing.tgz.uncompress(dest, ".")
+          .then(() => rmSync(dest, {
+            recursive: true,
+            force: true,
+          }))
+          .then(() => {
+            renameSync(`nwjs-v${versionString}-${platform}-${arch}`, "nwjs");
+          });
+      } else {
+        compressing.zip.uncompress(dest, ".")
+          .then(() => rmSync(dest, {
+            recursive: true,
+            force: true,
+          }))
+          .then(() => {
+            renameSync(`nwjs-v${versionString}-${platform}-${arch}`, "nwjs");
+          });
+      }
+    });
+    response.pipe(stream);
+  });
 }
