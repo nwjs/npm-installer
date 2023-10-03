@@ -40,9 +40,6 @@
   "devDependencies": {
     "request": "^2.53.0"
   },
-  "engines": {
-    "node": "^18.18.0 || >= 20.8.0"
-  },
   "packageManager": "npm@10.1.0",
   "keywords": [
     "nw",
