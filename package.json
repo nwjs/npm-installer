@@ -11,7 +11,7 @@
     "nw": "bin/nw"
   },
   "scripts": {
-    "postinstall": "node scripts/install.mjs",
+    "postinstall": "node lib/install.mjs",
     "test": "node --test-reporter=spec --test test/index.mjs"
   },
   "files": [
@@ -24,6 +24,12 @@
     "name": "Kyle Robinson Young",
     "url": "https://github.com/shama"
   },
+  "contributors": [
+    {
+      "name": "nw-builder Contributors",
+      "url": "https://github.com/nwjs/npm-installer/graphs/contributors"
+    }
+  ],
   "license": "MIT",
   "dependencies": {
     "cli-progress": "^3.12.0",
@@ -35,7 +41,7 @@
     "request": "^2.53.0"
   },
   "engines": {
-    "node": ">= 18.18.0 || >= 20.8.0"
+    "node": "^18.18.0 || >= 20.8.0"
   },
   "packageManager": "npm@10.1.0",
   "keywords": [
