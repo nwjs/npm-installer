@@ -40,7 +40,6 @@
   "devDependencies": {
     "request": "^2.53.0"
   },
-  "packageManager": "npm@10.1.0",
   "keywords": [
     "nw",
     "nw.js",
