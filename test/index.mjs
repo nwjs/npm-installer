@@ -9,5 +9,5 @@ test('nwjs has downloaded and been extracted', function() {
 });
 
 test('chromedriver does not exist in normal build', function() {
-  strictEqual(existsSync(findpath()), false);
+  strictEqual(existsSync(findpath('chromedriver')), false);
 });
