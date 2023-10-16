@@ -6,7 +6,7 @@
     "type": "git",
     "url": "git://github.com/nwjs/npm-installer.git"
   },
-  "main": "lib/findpath.mks",
+  "main": "lib/findpath.mjs",
   "bin": {
     "nw": "bin/nw"
   },
