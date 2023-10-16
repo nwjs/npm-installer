@@ -16,9 +16,7 @@
   },
   "files": [
     "lib",
-    "bin",
-    "scripts",
-    "index.js"
+    "bin"
   ],
   "author": {
     "name": "Kyle Robinson Young",
