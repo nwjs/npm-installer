@@ -103,6 +103,16 @@ var nwpath = findpath();
 // nwpath will equal the path to the binary depending on your environment
 ```
 
+## finding the path to the chromedriver binary
+
+If you would like to programmatically retrieve the path to the chromedriver use:
+
+``` js
+var findpath = require('nw').findpath;
+var chromedriver_path = findpath('chromedriver');
+// chromedriver_path will equal the path to the binary depending on your environment
+```
+
 Then you can use that path to run NW.js programmatically. For example, to run in the current script's directory:
 
 ```js

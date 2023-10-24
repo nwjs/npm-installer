@@ -6,7 +6,7 @@
     "type": "git",
     "url": "git://github.com/nwjs/npm-installer.git"
   },
-  "main": "index.js",
+  "main": "lib/findpath.mjs",
   "bin": {
     "nw": "bin/nw"
   },
@@ -16,9 +16,7 @@
   },
   "files": [
     "lib",
-    "bin",
-    "scripts",
-    "index.js"
+    "bin"
   ],
   "author": {
     "name": "Kyle Robinson Young",
