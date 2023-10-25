@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 
 jobs:
-  test:
+  e2e:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository

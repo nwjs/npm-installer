@@ -1,9 +1,6 @@
 name: cd
 
 on:
-  # TODO: remove this after testing publish workflow
-  pull_request:
-    branches: [master]
   push:
     branches: [master]
 
@@ -24,10 +21,8 @@ jobs:
         with:
           token: ${{ secrets.NPM_TOKEN }}
           tag: sdk
-          dry-run: true
       - name: Publish latest tag to npm 
         uses: JS-DevTools/npm-publish@v3.0.1
         with:
           token: ${{ secrets.NPM_TOKEN }}
           tag: latest
-          dry-run: true
