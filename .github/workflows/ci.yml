@@ -26,6 +26,8 @@ jobs:
   npm:
     runs-on: ubuntu-22.04
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.1.1
       - name: Test publish sdk tag to npm
         uses: JS-DevTools/npm-publish@v3.0.1
         with:
