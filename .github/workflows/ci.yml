@@ -5,15 +5,15 @@ on:
     branches: [ master ]
 
 jobs:
-  test:
+  e2e:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3.3.0
+        uses: actions/checkout@v4.1.1
       - name: Get Node version from Node manifest
         run: echo "NODE_VER=$(curl -s https://nwjs.io/versions | jq -r ".versions[0].components.node")" >> $GITHUB_ENV
       - name: Setup Node
-        uses: actions/setup-node@v3.6.0
+        uses: actions/setup-node@v4.0.0
         with:
           node-version: ${{ env.NODE_VER }}
           cache: "npm"
@@ -23,3 +23,18 @@ jobs:
         run: npm ci
       - name: Run test
         run: npm test
+  npm:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Test publish sdk tag to npm
+        uses: JS-DevTools/npm-publish@v3.0.1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          tag: sdk
+          dry-run: true
+      - name: Test publish latest tag to npm
+        uses: JS-DevTools/npm-publish@v3.0.1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          tag: latest
+          dry-run: true
