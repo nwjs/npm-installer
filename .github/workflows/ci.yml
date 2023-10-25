@@ -24,6 +24,8 @@ jobs:
       - name: Run test
         run: npm test
   npm:
+    runs-on: ubuntu-22.04
+    steps:
       - name: Test publish sdk tag to npm
         uses: JS-DevTools/npm-publish@v3.0.1
         with:
