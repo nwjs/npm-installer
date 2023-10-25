@@ -1,0 +1,22 @@
+name: cd
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  npm:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.1.1
+      - name: Publish sdk tag to npm 
+        uses: JS-DevTools/npm-publish@v3.0.1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          tag: sdk
+      - name: Publish latest tag to npm 
+        uses: JS-DevTools/npm-publish@v3.0.1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          tag: latest
