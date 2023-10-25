@@ -1,0 +1,31 @@
+name: cd
+
+on:
+  # TODO: remove this after testing publish workflow
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+
+jobs:
+  npm:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.1.1
+      - name: Setup Node
+        uses: actions/setup-node@v4.0.0
+        with:
+          node-version: 20
+      - name: Install Node modules
+        run: npm install
+      - name: Publish sdk tag to npm 
+      - uses: JS-DevTools/npm-publish@v3.0.0
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          tag: sdk
+      - name: Publish latest tag to npm 
+      - uses: JS-DevTools/npm-publish@v3.0.0
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          tag: latest
