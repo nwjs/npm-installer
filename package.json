@@ -35,9 +35,6 @@
     "semver": "^7.5.4",
     "yargs": "^3.2.1"
   },
-  "devDependencies": {
-    "request": "^2.53.0"
-  },
   "keywords": [
     "nw",
     "nw.js",
