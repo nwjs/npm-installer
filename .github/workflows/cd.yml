@@ -5,16 +5,27 @@ on:
     branches: [ master ]
 
 jobs:
-  npm:
+  sdk:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.1.1
+      - name: Setup Node
+        uses: actions/setup-node@v4.0.0
+        with:
+          node-version: 20
+      - name: Prepare for SDK release
+        run: node .github/sdk.mjs
       - name: Publish sdk tag to npm 
         uses: JS-DevTools/npm-publish@v3.0.1
         with:
           token: ${{ secrets.NPM_TOKEN }}
           tag: sdk
+  normal:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.1.1
       - name: Publish latest tag to npm 
         uses: JS-DevTools/npm-publish@v3.0.1
         with:
