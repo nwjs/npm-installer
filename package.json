@@ -1,6 +1,6 @@
 {
   "name": "nw",
-  "version": "0.81.0-1",
+  "version": "0.81.0-2",
   "description": "A installer for nw.js",
   "repository": {
     "type": "git",
@@ -34,9 +34,6 @@
     "compressing": "^1.10.0",
     "semver": "^7.5.4",
     "yargs": "^3.2.1"
-  },
-  "devDependencies": {
-    "request": "^2.53.0"
   },
   "keywords": [
     "nw",
