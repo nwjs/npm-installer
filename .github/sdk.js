@@ -1,7 +1,7 @@
-const { writeFile } = require('node:fs/promises');
+const fs = require('node:fs');
 
 const nodeManifest = require('../package.json');
 
 nodeManifest.version = nodeManifest.version + '-sdk';
 
-await writeFile('./package.json', JSON.stringify(nodeManifest, null, 2));
+fs.writeFileSync('./package.json', JSON.stringify(nodeManifest, null, 2));
