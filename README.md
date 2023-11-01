@@ -96,9 +96,20 @@ You may use the environment variable `npm_config_nwjs_process_arch` to override
 ## finding the path to the nw.js binary
 
 If you would like to programmatically retrieve the path to the nw.js binary use:
-
+### CJS
 ``` js
 var findpath = require('nw').findpath;
+var nwpath = findpath();
+// nwpath will equal the path to the binary depending on your environment
+```
+
+### ESM
+``` js
+// using Syntactic default import behavior
+import findpath from 'nw';
+// Without Syntatcatic
+import { default as findpath } from 'nw';
+
 var nwpath = findpath();
 // nwpath will equal the path to the binary depending on your environment
 ```
