@@ -48,8 +48,7 @@ async function run() {
 
 if (!fs.existsSync(bin)) {
   console.log('nw.js appears to have failed to download and extract. Attempting to download and extract again...');
-  var child = spawn(process.execPath, [path.resolve(__dirname, '..', 'scripts', 'install.mjs')], { stdio: 'inherit' });
-  child.on('close', run);
+  import('../lib/install').then(M=>M.install()).then(run);
 } else {
   run();
 }
