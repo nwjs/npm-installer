@@ -3,9 +3,10 @@
 var fs = require('fs');
 var path = require('path');
 var spawn = require('child_process').spawn;
-var bin = require('../lib/findpath.js')();
 
-function run() {
+
+async function run() {
+  var bin = await import('../lib/findpath.mjs').then((M)=>M.default());
   // Rename nw.js's own package.json as workaround for https://github.com/nwjs/nw.js/issues/1503
   var packagejson = path.resolve(__dirname, '..', 'package.json');
   var packagejsonBackup = path.resolve(__dirname, '..', 'package_backup.json');
@@ -47,7 +48,7 @@ function run() {
 
 if (!fs.existsSync(bin)) {
   console.log('nw.js appears to have failed to download and extract. Attempting to download and extract again...');
-  var child = spawn(process.execPath, [path.resolve(__dirname, '..', 'scripts', 'install.js')], { stdio: 'inherit' });
+  var child = spawn(process.execPath, [path.resolve(__dirname, '..', 'scripts', 'install.mjs')], { stdio: 'inherit' });
   child.on('close', run);
 } else {
   run();
