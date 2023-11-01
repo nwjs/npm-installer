@@ -8,10 +8,10 @@
   },
   "main": "lib/findpath.js",
   "bin": {
-    "nw": "bin/nw.mjs"
+    "nw": "bin/nw.js"
   },
   "scripts": {
-    "postinstall": "node lib/install.mjs",
+    "postinstall": "node lib/install.js",
     "test": "node --test-reporter=spec --test test/index.js",
     "dry-run": "nw ./test/app"
   },
