@@ -12,7 +12,7 @@
   },
   "scripts": {
     "postinstall": "node lib/install.mjs",
-    "test": "node --test-reporter=spec --test test/index.mjs",
+    "test": "node --test-reporter=spec --test test/index.js",
     "dry-run": "nw ./test/app"
   },
   "files": [
