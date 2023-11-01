@@ -8,11 +8,12 @@
   },
   "main": "lib/findpath.mjs",
   "bin": {
-    "nw": "bin/nw"
+    "nw": "bin/nw.mjs"
   },
   "scripts": {
     "postinstall": "node lib/install.mjs",
-    "test": "node --test-reporter=spec --test test/index.mjs"
+    "test": "node --test-reporter=spec --test test/index.mjs",
+    "dry-run": "nw ./test/app"
   },
   "files": [
     "lib",

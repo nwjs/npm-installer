@@ -1,12 +1,17 @@
 #!/usr/bin/env node
 
-var fs = require('fs');
-var path = require('path');
-var spawn = require('child_process').spawn;
-var bin = require('../lib/findpath.js')();
+import { spawn } from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
+import process from 'node:process';
+import url from 'node:url';
+
+import { copyAssets } from '../lib/app_assets.js';
+import findpath from '../lib/findpath.mjs';
 
 function run() {
   // Rename nw.js's own package.json as workaround for https://github.com/nwjs/nw.js/issues/1503
+  const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
   var packagejson = path.resolve(__dirname, '..', 'package.json');
   var packagejsonBackup = path.resolve(__dirname, '..', 'package_backup.json');
   if (!fs.existsSync(packagejsonBackup)) {
@@ -16,7 +21,7 @@ function run() {
   }
 
   // copy over any asset files (icons, etc) specified via CLI args:
-  require('../lib/app_assets').copyAssets(process.platform, bin);
+  copyAssets(process.platform, findpath());
 
   // Normalize cli args
   var args = process.argv.slice(2);
@@ -28,7 +33,7 @@ function run() {
   }
 
   // Spawn node-webkit
-  var nw = spawn(bin, args, { stdio: 'inherit' });
+  var nw = spawn(findpath(), args, { stdio: 'inherit' });
   nw.on('close', function() {
     process.nextTick(function() {
       process.exit(0);
@@ -45,9 +50,9 @@ function run() {
   }, 1000);
 }
 
-if (!fs.existsSync(bin)) {
+if (!fs.existsSync(findpath())) {
   console.log('nw.js appears to have failed to download and extract. Attempting to download and extract again...');
-  var child = spawn(process.execPath, [path.resolve(__dirname, '..', 'scripts', 'install.js')], { stdio: 'inherit' });
+  var child = spawn(process.execPath, [path.resolve(__dirname, '..', 'scripts', 'install.mjs')], { stdio: 'inherit' });
   child.on('close', run);
 } else {
   run();
