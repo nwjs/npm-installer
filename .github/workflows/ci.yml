@@ -10,7 +10,11 @@ concurrency:
 
 jobs:
   e2e:
-    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        os: [macos-13, ubuntu-22.04, windows-2022]
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.1.1
@@ -27,20 +31,3 @@ jobs:
         run: npm ci
       - name: Run test
         run: npm test
-  npm:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4.1.1
-      - name: Test publish sdk tag to npm
-        uses: JS-DevTools/npm-publish@v3.0.1
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
-          tag: sdk
-          dry-run: true
-      - name: Test publish latest tag to npm
-        uses: JS-DevTools/npm-publish@v3.0.1
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
-          tag: latest
-          dry-run: true

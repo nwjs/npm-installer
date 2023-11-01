@@ -1,18 +1,19 @@
 {
   "name": "nw",
-  "version": "0.81.0-3",
+  "version": "0.81.0-4",
   "description": "A installer for nw.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/nwjs/npm-installer.git"
   },
-  "main": "lib/findpath.mjs",
+  "main": "lib/findpath.js",
   "bin": {
-    "nw": "bin/nw"
+    "nw": "bin/nw.js"
   },
   "scripts": {
-    "postinstall": "node lib/install.mjs",
-    "test": "node --test-reporter=spec --test test/index.mjs"
+    "postinstall": "node lib/install.js",
+    "test": "node --test-reporter=spec --test test/index.js",
+    "dry-run": "nw ./test/app"
   },
   "files": [
     "lib",

@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 
-var fs = require('fs');
-var path = require('path');
-var spawn = require('child_process').spawn;
-var bin = require('../lib/findpath.js')();
+const { spawn } = require('node:child_process');
+const fs = require('node:fs');
+const path = require('node:path');
+const process = require('node:process');
+
+const { copyAssets } = require('../lib/app_assets.js');
+const findpath = require('../lib/findpath.js').findpath;
 
 function run() {
   // Rename nw.js's own package.json as workaround for https://github.com/nwjs/nw.js/issues/1503
@@ -16,7 +19,7 @@ function run() {
   }
 
   // copy over any asset files (icons, etc) specified via CLI args:
-  require('../lib/app_assets').copyAssets(process.platform, bin);
+  copyAssets(process.platform, findpath());
 
   // Normalize cli args
   var args = process.argv.slice(2);
@@ -28,7 +31,7 @@ function run() {
   }
 
   // Spawn node-webkit
-  var nw = spawn(bin, args, { stdio: 'inherit' });
+  var nw = spawn(findpath(), args, { stdio: 'inherit' });
   nw.on('close', function() {
     process.nextTick(function() {
       process.exit(0);
@@ -45,7 +48,7 @@ function run() {
   }, 1000);
 }
 
-if (!fs.existsSync(bin)) {
+if (!fs.existsSync(findpath())) {
   console.log('nw.js appears to have failed to download and extract. Attempting to download and extract again...');
   var child = spawn(process.execPath, [path.resolve(__dirname, '..', 'scripts', 'install.js')], { stdio: 'inherit' });
   child.on('close', run);
