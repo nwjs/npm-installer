@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: 20
       - name: Prepare for SDK release
-        run: node .github/sdk.mjs
+        run: node .github/sdk.js
       - name: Publish sdk tag to npm 
         uses: JS-DevTools/npm-publish@v3.0.1
         with:

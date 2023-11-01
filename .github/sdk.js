@@ -1,6 +1,6 @@
-import { writeFile } from 'node:fs/promises';
+const { writeFile } = require('node:fs/promises');
 
-import nodeManifest from '../package.json' assert { type: 'json' };
+const nodeManifest = require('../package.json');
 
 nodeManifest.version = nodeManifest.version + '-sdk';
 
