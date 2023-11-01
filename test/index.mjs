@@ -2,7 +2,7 @@ import { strictEqual } from 'node:assert';
 import { existsSync } from 'node:fs';
 import test from 'node:test';
 
-import findpath from '../lib/findpath.mjs';
+import findpath from '../lib/findpath.js';
 
 test('nwjs has downloaded and been extracted', function() {
   strictEqual(existsSync(findpath()), true);

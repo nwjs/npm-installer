@@ -7,7 +7,7 @@ import process from 'node:process';
 import url from 'node:url';
 
 import { copyAssets } from '../lib/app_assets.js';
-import findpath from '../lib/findpath.mjs';
+import findpath from '../lib/findpath.js';
 
 function run() {
   // Rename nw.js's own package.json as workaround for https://github.com/nwjs/nw.js/issues/1503
