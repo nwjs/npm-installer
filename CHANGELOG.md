@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+
+## Changed
+
+- Symlink `nwjs` directory to `nwjs-VERSION-PLATFORM-ARCH` directory [adc6d88](https://github.com/nwjs/npm-installer/commit/adc6d88cc3ed3fcf79d30278f99b7440f8961ead)
+
 ## [0.81.0-3]
 
 ### Changed
