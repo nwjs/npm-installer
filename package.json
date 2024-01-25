@@ -34,7 +34,7 @@
     "cli-progress": "^3.12.0",
     "compressing": "^1.10.0",
     "semver": "^7.5.4",
-    "yargs": "^3.2.1"
+    "yargs": "^17.7.2"
   },
   "keywords": [
     "nw",
