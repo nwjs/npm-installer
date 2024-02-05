@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Changed
 
+- Handle error when trying to create symlink on Windows as non-Administrator [aca09ab](https://github.com/nwjs/npm-installer/commit/aca09abbd315fc87c6c4f813748aa4a5898bbda7)
 - Symlink `nwjs` directory to `nwjs-VERSION-PLATFORM-ARCH` directory [adc6d88](https://github.com/nwjs/npm-installer/commit/adc6d88cc3ed3fcf79d30278f99b7440f8961ead)
 
 ## [0.81.0-3]
