@@ -1,13 +1,13 @@
-const { strictEqual } = require('node:assert');
-const { existsSync } = require('node:fs');
-const test = require('node:test');
+import assert from 'node:assert';
+import fs from 'node:fs';
+import test from 'node:test';
 
-const findpath = require('../lib/findpath.js').findpath;
+import { findpath } from '../lib/findpath.js';
 
 test('nwjs has downloaded and been extracted', function() {
-  strictEqual(existsSync(findpath()), true);
+  assert.strictEqual(fs.existsSync(findpath()), true);
 });
 
 test('chromedriver does not exist in normal build', function() {
-  strictEqual(existsSync(findpath('chromedriver')), false);
+  assert.strictEqual(fs.existsSync(findpath('chromedriver')), false);
 });
