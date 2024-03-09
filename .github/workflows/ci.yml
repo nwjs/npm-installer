@@ -3,6 +3,8 @@ name: ci
 on:
   pull_request:
     branches: ["*"]
+  push:
+    branches: ["*"]
 
 concurrency:
   group: ${{ github.ref }}
