@@ -8,7 +8,7 @@
   },
   "main": "lib/findpath.js",
   "bin": {
-    "nw": "bin/nw.js"
+    "nw": "lib/cli.js"
   },
   "scripts": {
     "postinstall": "node lib/install.js",
@@ -16,13 +16,18 @@
     "dry-run": "nw ./test/app"
   },
   "files": [
-    "lib",
-    "bin"
+    "lib"
   ],
   "author": {
     "name": "Kyle Robinson Young",
     "url": "https://github.com/shama"
   },
+  "maintainers": [
+    {
+      "name": "Ayushman Chhabra",
+      "url": "https://ayushmanchhabra.com/"
+    }
+  ],
   "contributors": [
     {
       "name": "nwjs/npm-installer Contributors",
