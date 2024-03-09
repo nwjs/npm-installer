@@ -3,21 +3,21 @@
   "version": "0.85.0",
   "description": "An installer for NW.js",
   "type": "module",
-  "main": "lib/findpath.js",
+  "main": "src/findpath.js",
   "bin": {
-    "nw": "lib/cli.js"
+    "nw": "src/cli.js"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/nwjs/npm-installer.git"
   },
   "scripts": {
-    "postinstall": "node lib/install.js",
+    "postinstall": "node src/install.js",
     "test": "node --test-reporter=spec --test test/index.js",
     "dry-run": "nw ./test/app"
   },
   "files": [
-    "lib"
+    "src"
   ],
   "author": {
     "name": "Kyle Robinson Young",
