@@ -1,7 +1,7 @@
 import { writeFileSync } from 'node:fs';
 
-import nodeManifest, { version } from '../package.json';
+import nodeManifest from '../package.json' assert { type: 'json' };
 
-version = version + '-sdk';
+nodeManifest.version = nodeManifest.version + '-sdk';
 
 writeFileSync('./package.json', JSON.stringify(nodeManifest, null, 2));
