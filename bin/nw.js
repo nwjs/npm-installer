@@ -2,11 +2,14 @@
 
 import { spawn } from 'node:child_process';
 import { existsSync, renameSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
 import { platform, argv, nextTick, exit, execPath } from 'node:process';
+import { fileURLToPath } from 'node:url';
 
 import { copyAssets } from '../lib/app_assets.js';
 import { findpath } from '../lib/findpath.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 function run() {
   // Rename nw.js's own package.json as workaround for https://github.com/nwjs/nw.js/issues/1503
