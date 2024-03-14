@@ -1,7 +1,7 @@
-const fs = require('node:fs');
+import { writeFileSync } from 'node:fs';
 
-const nodeManifest = require('../package.json');
+import nodeManifest, { version } from '../package.json';
 
-nodeManifest.version = nodeManifest.version + '-sdk';
+version = version + '-sdk';
 
-fs.writeFileSync('./package.json', JSON.stringify(nodeManifest, null, 2));
+writeFileSync('./package.json', JSON.stringify(nodeManifest, null, 2));
