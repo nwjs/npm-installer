@@ -1,8 +1,8 @@
-const { strictEqual } = require('node:assert');
-const { existsSync } = require('node:fs');
-const test = require('node:test');
+import { strictEqual } from 'node:assert';
+import { existsSync } from 'node:fs';
+import test from 'node:test';
 
-const findpath = require('../lib/findpath.js').findpath;
+import { findpath } from '../lib/findpath.js';
 
 test('nwjs has downloaded and been extracted', function() {
   strictEqual(existsSync(findpath()), true);
