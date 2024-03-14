@@ -1,11 +1,12 @@
 {
   "name": "nw",
   "version": "0.85.0",
-  "description": "A installer for nw.js",
+  "description": "An installer for nw.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/nwjs/npm-installer.git"
   },
+  "type": "module",
   "main": "lib/findpath.js",
   "bin": {
     "nw": "bin/nw.js"

@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [0.85.0]
+
 ## Changed
 
 - Handle error when trying to create symlink on Windows as non-Administrator [aca09ab](https://github.com/nwjs/npm-installer/commit/aca09abbd315fc87c6c4f813748aa4a5898bbda7)
