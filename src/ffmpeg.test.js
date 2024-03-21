@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import process from "node:process";
 
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, beforeAll, describe, expect, it } from "vitest";
 
 import ffmpeg from "./ffmpeg.js";
 import util from "./util.js";
@@ -12,6 +12,10 @@ describe("get/ffmpeg", function () {
 
   afterEach(function () {
     fs.promises.rm(ffmpegFile, { recursive: true, force: true });
+  });
+
+  beforeAll(async function () {
+    await fs.promises.mkdir("./test/fixture", { recursive: true });
   });
 
   it("downloades community prebuild FFmpeg for specifc platform", async function () {
