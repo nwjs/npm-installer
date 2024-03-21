@@ -13,7 +13,7 @@
   },
   "scripts": {
     "postinstall": "node lib/install.js",
-    "test": "vitest",
+    "test": "vitest run",
     "demo": "nw ./test/app"
   },
   "files": [
