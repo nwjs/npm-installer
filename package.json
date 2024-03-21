@@ -13,12 +13,13 @@
   },
   "scripts": {
     "postinstall": "node lib/install.js",
-    "test": "node --test-reporter=spec --test test/index.js",
-    "dry-run": "nw ./test/app"
+    "test": "vitest run",
+    "demo": "nw ./test/app"
   },
   "files": [
+    "bin",
     "lib",
-    "bin"
+    "src"
   ],
   "author": {
     "name": "Kyle Robinson Young",
@@ -48,5 +49,11 @@
     "installer",
     "desktop",
     "application"
-  ]
+  ],
+  "devDependencies": {
+    "axios": "^1.6.8",
+    "tar": "^6.2.0",
+    "vitest": "^1.4.0",
+    "yauzl-promise": "^4.0.0"
+  }
 }
