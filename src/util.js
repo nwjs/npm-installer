@@ -1,7 +1,9 @@
+import fs from 'node:fs';
+
 /**
  * Check if file exists at specified path.
  *
- * @param  {string}           filePath  - File path to check existence of
+ * @param  {NodeJS.fs.}           filePath  - File path to check existence of
  * @return {Promise<boolean>}           `true` if exists, otherwise `false`
  */
 async function fileExists(filePath) {
