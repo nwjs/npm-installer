@@ -51,6 +51,9 @@
     "application"
   ],
   "devDependencies": {
-    "vitest": "^1.4.0"
+    "axios": "^1.6.8",
+    "tar": "^6.2.0",
+    "vitest": "^1.4.0",
+    "yauzl-promise": "^4.0.0"
   }
 }
