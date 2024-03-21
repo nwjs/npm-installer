@@ -13,12 +13,13 @@
   },
   "scripts": {
     "postinstall": "node lib/install.js",
-    "test": "node --test-reporter=spec --test test/index.js",
-    "dry-run": "nw ./test/app"
+    "test": "vitest",
+    "demo": "nw ./test/app"
   },
   "files": [
+    "bin",
     "lib",
-    "bin"
+    "src"
   ],
   "author": {
     "name": "Kyle Robinson Young",
@@ -48,5 +49,8 @@
     "installer",
     "desktop",
     "application"
-  ]
+  ],
+  "devDependencies": {
+    "vitest": "^1.4.0"
+  }
 }
