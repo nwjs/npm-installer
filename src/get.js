@@ -6,7 +6,7 @@ import ffmpeg from "./ffmpeg.js";
 import node from "./node.js";
 import nw from "./nw.js";
 
-import util from "../util.js";
+import util from "./util.js";
 
 /**
  * @typedef {object} GetOptions
