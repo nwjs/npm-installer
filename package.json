@@ -52,7 +52,7 @@
   ],
   "devDependencies": {
     "axios": "^1.6.8",
-    "tar": "^6.2.0",
+    "tar": "^6.2.1",
     "vitest": "^1.4.0",
     "yauzl-promise": "^4.0.0"
   }
