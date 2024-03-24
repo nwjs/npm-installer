@@ -7,6 +7,41 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [0.86.0]
+
+### Added
+
+### Changed
+
+Switch from CJS to ESM.
+
+ESM import:
+
+```javascript
+import { findpath } from 'nw';
+```
+
+Previous CJS import:
+
+```javascript
+    const { findpath } = require('nw');
+```
+
+Current CJS import:
+
+```javascript
+    let nw;
+    import('nw').then(object => {
+        nw = object;
+    });
+```
+
+### Removed
+
+- CJS support.
+- `compressing` package.
+- `cli-progress` package.
+
 ## [0.85.0]
 
 ## Changed
