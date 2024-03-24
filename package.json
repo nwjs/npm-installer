@@ -12,7 +12,7 @@
     "nw": "bin/nw.js"
   },
   "scripts": {
-    "postinstall": "node lib/install.js",
+    "postinstall": "node src/postinstall.js",
     "test": "vitest run",
     "demo": "nw ./test/app"
   },

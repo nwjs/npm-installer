@@ -34,4 +34,26 @@ const EXE_NAME = {
     linux: "nw",
 };
 
-export default { ARCH_KV, EXE_NAME, PLATFORM_KV, fileExists }
+/** 
+ * Get the compressed file name.
+ * 
+ * @param {string} version
+ * @param {string} flavor
+ * @param {string} platform
+ * @param {string} arch
+ * @returns {string}
+ */
+function getCompressedFile(version, flavor, platform, arch) {
+    return [
+        'nwjs',
+        flavor === 'normal' ? '' : `-${flavor}`,
+        '-v',
+        version,
+        '-',
+        PLATFORM_KV[platform],
+        '-',
+        ARCH_KV[arch],
+    ].join('');
+}
+
+export default { ARCH_KV, EXE_NAME, PLATFORM_KV, fileExists, getCompressedFile }
