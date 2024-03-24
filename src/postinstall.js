@@ -7,7 +7,12 @@ import util from './util.js';
 
 import nodeManifest from '../package.json' assert { type: 'json' };
 
-await postinstall();
+await postinstall()
+    .catch((error) => {
+        if (error.code === 'EPERM') {
+            console.error('Unable to create symlink since user did not run as Administrator.');
+        }
+    });
 
 async function postinstall() {
     const parsedVersion = semver.parse(nodeManifest.version);
