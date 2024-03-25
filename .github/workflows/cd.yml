@@ -17,7 +17,7 @@ jobs:
       - name: Prepare for SDK release
         run: node .github/sdk.js
       - name: Publish sdk tag to npm 
-        uses: JS-DevTools/npm-publish@v3.0.1
+        uses: JS-DevTools/npm-publish@v3.1.0
         with:
           token: ${{ secrets.NPM_TOKEN }}
           tag: sdk
@@ -27,7 +27,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4.1.2
       - name: Publish latest tag to npm 
-        uses: JS-DevTools/npm-publish@v3.0.1
+        uses: JS-DevTools/npm-publish@v3.1.0
         with:
           token: ${{ secrets.NPM_TOKEN }}
           tag: latest
