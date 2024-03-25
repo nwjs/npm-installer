@@ -2,9 +2,6 @@
 node_modules
 
 # package
-
-# prevent nwjs binaries from being included in npm releases
+.env
 nwjs*
-
-# prevent test fixtures from being included in npm releases
 test/fixture
