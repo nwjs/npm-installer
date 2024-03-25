@@ -43,7 +43,7 @@ async function postinstall() {
     const platform = util.PLATFORM_KV[process.env.npm_config_nwjs_platform || process.env.NWJS_PLATFORM || process.platform];
     const arch = util.ARCH_KV[process.env.npm_config_nwjs_process_arch || process.env.NWJS_ARCH || process.arch];
     const downloadUrl = process.env.npm_config_nwjs_urlbase || process.env.NWJS_URLBASE || 'https://dl.nwjs.io';
-    const cacheDir = process.env.npm_config_nwjs_cachedir || process.env.NWJS_CACHEDIR || '.';
+    const cacheDir = process.env.npm_config_nwjs_cache_dir || process.env.NWJS_CACHE_DIR || '.';
     const cache = process.env.npm_config_nwjs_cache || process.env.NWJS_CACHE || true;
     const ffmpeg = process.env.npm_config_nwjs_ffmpeg || process.env.NWJS_FFMPEG || false;
     const nativeAddon = process.env.npm_config_nwjs_native_addon || process.env.NWJS_NATIVE_ADDON || false;

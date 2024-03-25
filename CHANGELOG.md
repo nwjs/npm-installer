@@ -7,11 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
-## [0.86.0]
+## [0.85.0-1]
 
 ### Added
 
-- Option to specify cache directory by setting `nwjs_cachedir` in `.npmrc` or `NWJS_CACHEDIR` as ENV variable. Defaults to `./node_modules/nw`.
+- Option to specify cache directory by setting `nwjs_cache_dir` in `.npmrc` or `NWJS_CACHE_DIR` as ENV variable. Defaults to `./node_modules/nw`.
 
 - Option to customise caching behaviour by enabling/disabling `nwjs_cache` in `.npmrc` or `NWJS_CACHE` as ENV variable. Defaults to `false`.
 
