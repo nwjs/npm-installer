@@ -28,6 +28,6 @@ jobs:
       - name: Enable corepack
         run: corepack enable
       - name: Install dependencies
-        run: npm ci
+        run: NWJS_BUILD_TYPE=sdk npm ci
       - name: Run test
         run: npm test

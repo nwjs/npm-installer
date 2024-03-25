@@ -1,6 +1,5 @@
 import assert from "node:assert";
 import path from "node:path";
-import process from "node:process";
 
 import { By } from "selenium-webdriver";
 import chrome from "selenium-webdriver/chrome.js";
@@ -13,7 +12,7 @@ const { Driver, ServiceBuilder, Options } = chrome;
 describe("run", async () => {
   let driver = undefined;
 
-  it("should run after build", async () => {
+  it("should run post install", async () => {
     const options = new Options();
     const args = [
       `--nwapp=${path.resolve("test", "app")}`,
