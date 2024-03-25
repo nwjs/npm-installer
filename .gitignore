@@ -1,7 +1,3 @@
-# runtime
 node_modules
-
-# package
-.env
 nwjs*
 test/fixture
