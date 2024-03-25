@@ -11,6 +11,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- Option to specify cache directory by setting `nwjs_cachedir` in `.npmrc` or `NWJS_CACHEDIR` as ENV variable. Defaults to `./node_modules/nw`.
+
+- Option to customise caching behaviour by enabling/disabling `nwjs_cache` in `.npmrc` or `NWJS_CACHE` as ENV variable. Defaults to `false`.
+
+- Option to download community ffmpeg by enabling/disabling `nwjs_ffmpeg` in `.npmrc` or `NWJS_FFMPEG` as ENV variable. Defaults to `false`.
+
+- Option to download NW.js Node headers by enabling/disabling `nwjs_native_addon` in `.npmrc` or `NWJS_NATIVE_ADDON` as ENV variable. Defaults to `false`.
+
 ### Changed
 
 Switch from CJS to ESM.

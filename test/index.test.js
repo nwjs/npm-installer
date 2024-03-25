@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import { expect, test } from 'vitest';
 
-import { findpath } from '../lib/findpath.js';
+import { findpath } from '../src/util.js';
 
 test('nwjs has downloaded and been extracted', function() {
   expect(fs.existsSync(findpath())).toBe(true);

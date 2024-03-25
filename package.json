@@ -7,7 +7,7 @@
     "url": "git://github.com/nwjs/npm-installer.git"
   },
   "type": "module",
-  "main": "lib/findpath.js",
+  "main": "src/index.js",
   "bin": {
     "nw": "bin/nw.js"
   },
