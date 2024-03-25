@@ -22,7 +22,7 @@ async function postinstall() {
         parsedVersion.patch
     ].join('.');
 
-    let flavor = 'normal';
+    let flavor = process.env.npm_config_nwjs_build_type || process.env.NWJS_BUILD_TYPE || 'normal';
     /* Check if version is a prelease. */
     if (typeof parsedVersion?.prerelease?.[0] === 'string') {
         let prerelease = parsedVersion.prerelease[0].split('-');
@@ -40,6 +40,7 @@ async function postinstall() {
         version = version.slice(0, -3);
         flavor = 'sdk';
     }
+
     const platform = util.PLATFORM_KV[process.env.npm_config_nwjs_platform || process.env.NWJS_PLATFORM || process.platform];
     const arch = util.ARCH_KV[process.env.npm_config_nwjs_process_arch || process.env.NWJS_ARCH || process.arch];
     const downloadUrl = process.env.npm_config_nwjs_urlbase || process.env.NWJS_URLBASE || 'https://dl.nwjs.io';
