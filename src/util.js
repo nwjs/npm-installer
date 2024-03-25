@@ -59,7 +59,7 @@ function findpath(executable = 'nwjs') {
       * 
       * @type {NodeJS.Platform}
       */
-    let hostOs = process.env.npm_config_nwjs_platform || process.env.NWJS_PLATFORM || process.platform;
+    let hostOs = PLATFORM_KV[process.env.npm_config_nwjs_platform || process.env.NWJS_PLATFORM || process.platform];
 
     /**
      * Get the platform dependant path of the NW.js binary.
