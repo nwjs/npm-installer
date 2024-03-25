@@ -7,7 +7,7 @@ import { platform, argv, nextTick, exit, execPath } from 'node:process';
 import { fileURLToPath } from 'node:url';
 
 import { copyAssets } from '../lib/app_assets.js';
-import { findpath } from '../lib/findpath.js';
+import util from '../src/util.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -18,11 +18,11 @@ function run() {
   if (!existsSync(packagejsonBackup)) {
     try {
       renameSync(packagejson, packagejsonBackup);
-    } catch (err) {}
+    } catch (err) { }
   }
 
   // copy over any asset files (icons, etc) specified via CLI args:
-  copyAssets(platform, findpath());
+  copyAssets(platform, util.findpath());
 
   // Normalize cli args
   var args = argv.slice(2);
@@ -34,26 +34,26 @@ function run() {
   }
 
   // Spawn node-webkit
-  var nw = spawn(findpath(), args, { stdio: 'inherit' });
-  nw.on('close', function() {
-    nextTick(function() {
+  var nw = spawn(util.findpath(), args, { stdio: 'inherit' });
+  nw.on('close', function () {
+    nextTick(function () {
       exit(0);
     });
   });
 
   // Restore package.json shortly after nw is spawned
-  setTimeout(function() {
+  setTimeout(function () {
     try {
       if (existsSync(packagejsonBackup)) {
         renameSync(packagejsonBackup, packagejson);
       }
-    } catch (err) {}
+    } catch (err) { }
   }, 1000);
 }
 
-if (!existsSync(findpath())) {
+if (!existsSync(util.findpath())) {
   console.log('nw.js appears to have failed to download and extract. Attempting to download and extract again...');
-  var child = spawn(execPath, [resolve(__dirname, '..', 'scripts', 'install.js')], { stdio: 'inherit' });
+  var child = spawn(execPath, [resolve(__dirname, '..', 'src', 'postinstall.js')], { stdio: 'inherit' });
   child.on('close', run);
 } else {
   run();

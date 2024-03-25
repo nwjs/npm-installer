@@ -5,6 +5,8 @@ import stream from "node:stream";
 import tar from "tar";
 import yauzl from "yauzl-promise";
 
+import util from "./util.js";
+
 /**
  * Decompresses a file at `filePath` to `cacheDir` directory.
  *
@@ -52,31 +54,31 @@ async function unzip(zippedFile, cacheDir) {
 
   while (entry !== null) {
     let entryPathAbs = path.join(cacheDir, entry.filename);
-    // Check if entry is a symbolic link
+    /* Check if entry is a symbolic link */
     const isSymlink = ((modeFromEntry(entry) & 0o170000) === 0o120000);
 
     if (isSymlink) {
-      // Store symlink entries to process later
+      /* Store symlink entries to process later */
       symlinks.push(entry);
     } else {
-      // Handle regular files and directories
+      /* Handle regular files and directories */
       await fs.promises.mkdir(path.dirname(entryPathAbs), {recursive: true});
       if (!entry.filename.endsWith('/')) { // Skip directories
         const readStream = await entry.openReadStream();
         const writeStream = fs.createWriteStream(entryPathAbs);
         await stream.promises.pipeline(readStream, writeStream);
 
-        // Set file permissions after the file has been written
+        /* Set file permissions after the file has been written */
         const mode = modeFromEntry(entry);
         await fs.promises.chmod(entryPathAbs, mode);
       }
     }
 
-    // Read next entry
+    /* Read next entry */
     entry = await zip.readEntry();
   }
 
-  // Process symbolic links after all other files have been extracted
+  /* Process symbolic links after all other files have been extracted */
   for (const symlinkEntry of symlinks) {
     let entryPathAbs = path.join(cacheDir, symlinkEntry.filename);
     const readStream = await symlinkEntry.openReadStream();
@@ -85,11 +87,8 @@ async function unzip(zippedFile, cacheDir) {
     await new Promise(resolve => readStream.on("end", resolve));
     const linkTarget = Buffer.concat(chunks).toString('utf8').trim();
 
-    // Check if the symlink or a file/directory already exists at the destination
-    if (fs.existsSync(entryPathAbs)) {
-      //skip
-    } else {
-      // Create symbolic link
+    const fileExists = await util.fileExists(entryPathAbs);
+    if (!fileExists) {
       await fs.promises.symlink(linkTarget, entryPathAbs);
     }
   }
