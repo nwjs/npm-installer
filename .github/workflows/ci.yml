@@ -27,7 +27,9 @@ jobs:
           cache: "npm"
       - name: Enable corepack
         run: corepack enable
+      - name: Set SDK build flavor
+        run: export NWJS_BUILD_TYPE=sdk
       - name: Install dependencies
-        run: NWJS_BUILD_TYPE=sdk npm ci
+        run: npm ci
       - name: Run test
         run: npm test
