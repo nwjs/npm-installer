@@ -6,6 +6,14 @@ An npm installer for [NW.js](https://nwjs.io).
 
 ## Install
 
+### Latest version globally
+
+```shell
+npm install -g nw
+```
+
+You might run into issues installing globally. [Learn how to fix this](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
+
 ### Latest version of normal build flavor:
 
 ```shell
