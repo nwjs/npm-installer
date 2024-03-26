@@ -103,6 +103,30 @@ import { findpath } from 'nw';
 var path = findpath('chromedriver');
 ```
 
+## Download specific versions independant of installer version
+
+```js
+import { get } from 'nw';
+
+await get({
+  // options
+});
+```
+
+Options:
+
+| Name | Type    | Default   | Description |
+| ---- | ------- | --------- | ----------- |
+| version | `string \| "latest" \| "stable"` | `"latest"` | Runtime version |
+| flavor | `"normal" \| "sdk"` | `"normal"` | Runtime flavor |
+| platform | `"linux" \| "osx" \| "win"` | | Host platform |
+| arch | `"ia32" \| "x64" \| "arm64"` | | Host architecture |
+| downloadUrl | `"https://dl.nwjs.io" \| "https://npm.taobao.org/mirrors/nwjs" \| https://npmmirror.com/mirrors/nwjs \| "https://github.com/corwin-of-amber/nw.js/releases/"` | `"https://dl.nwjs.io"` | Download server |
+| cacheDir | `string` | `"./cache"` | Directory to cache NW binaries |
+| cache | `boolean` | `true`| If true the existing cache is used. Otherwise it removes and redownloads it. |
+| ffmpeg | `boolean` | `false`| If true the chromium ffmpeg is replaced by community version with proprietary codecs. |
+| nodeAddon | `false \| "gyp"` | `false` | Download Node headers |
+
 ## License
 
 [NW.js](https://github.com/nwjs/nw.js)'s code and this installer use the MIT license.
