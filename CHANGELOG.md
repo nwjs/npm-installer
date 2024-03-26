@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [0.85.0-2]
+
+### Added
+
+- Re-add support for `file://` which had been accidently removed in the previous release.
+
 ## [0.85.0-1]
 
 ### Added
