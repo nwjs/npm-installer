@@ -54,7 +54,7 @@ Set `nwjs_native_addon` in `.npmrc` or `NWJS_NATIVE_ADDON` environment variable 
 
 ### Specify download URL:
 
-Set `nwjs_urlbase` in `.npmrc` or `NWJS_URLBASE` environment variable. Defaults to `https://dl.nwjs.io`. The file system (`file://`) is also supported.
+Set `nwjs_urlbase` in `.npmrc`or `NWJS_URLBASE` environment variable. Defaults to `https://dl.nwjs.io`. The file system (`file://`) is also supported (for example, `file:///home/localghost/local_mirror`).
 
 ## Usage
 
