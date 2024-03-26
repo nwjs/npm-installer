@@ -12,6 +12,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - Re-add support for `file://` which had been accidently removed in the previous release.
+- Expose `get` function as public API
+
+```js
+import { get } from 'nw';
+
+await get({
+  // options
+});
+```
 
 ## [0.85.0-1]
 
