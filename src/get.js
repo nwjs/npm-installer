@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import url from 'node:url';
 
 import decompress from "./decompress.js";
 import ffmpeg from "./ffmpeg.js";
@@ -14,7 +15,7 @@ import util from "./util.js";
  * @property {"normal" | "sdk"}                     [flavor = "normal"]                   Build flavor
  * @property {"linux" | "osx" | "win"}              [platform]                            Target platform
  * @property {"ia32" | "x64" | "arm64"}             [arch]                                Target arch
- * @property {string}                               [downloadUrl = "https://dl.nwjs.io"]  Download server
+ * @property {string}                               [downloadUrl = "https://dl.nwjs.io"]  Download server.
  * @property {string}                               [cacheDir = "./cache"]                Cache directory
  * @property {boolean}                              [cache = true]                        If false, remove cache and redownload.
  * @property {boolean}                              [ffmpeg = false]                      If true, ffmpeg is not downloaded.
@@ -30,6 +31,13 @@ import util from "./util.js";
  * @return {Promise<void>}
  */
 async function get(options) {
+
+  const uri = new url.URL(options.downloadUrl);
+  
+  /* Download server is the cached directory. */
+  if (uri.protocol === 'file:') {
+    options.cacheDir = path.resolve(decodeURIComponent(options.downloadUrl.slice('file://'.length)));
+  }
 
   /**
    * If `options.cacheDir` exists, then `true`. Otherwise, it is `false`.

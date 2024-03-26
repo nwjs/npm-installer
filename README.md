@@ -54,7 +54,7 @@ Set `nwjs_native_addon` in `.npmrc` or `NWJS_NATIVE_ADDON` environment variable 
 
 ### Specify download URL:
 
-Set `nwjs_urlbase` in `.npmrc` or `NWJS_URLBASE` environment variable. Defaults to `https://dl.nwjs.io`. The file system (`file://`) is also supported.
+Set `nwjs_urlbase` in `.npmrc`or `NWJS_URLBASE` environment variable. Defaults to `https://dl.nwjs.io`. The file system (`file://`) is also supported (for example, `file:///home/localghost/local_mirror`).
 
 ## Usage
 
@@ -102,6 +102,30 @@ var path = findpath();
 import { findpath } from 'nw';
 var path = findpath('chromedriver');
 ```
+
+## Download specific versions independant of installer version
+
+```js
+import { get } from 'nw';
+
+await get({
+  // options
+});
+```
+
+Options:
+
+| Name | Type    | Default   | Description |
+| ---- | ------- | --------- | ----------- |
+| version | `string \| "latest" \| "stable"` | `"latest"` | Runtime version |
+| flavor | `"normal" \| "sdk"` | `"normal"` | Runtime flavor |
+| platform | `"linux" \| "osx" \| "win"` | | Host platform |
+| arch | `"ia32" \| "x64" \| "arm64"` | | Host architecture |
+| downloadUrl | `"https://dl.nwjs.io" \| "https://npm.taobao.org/mirrors/nwjs" \| https://npmmirror.com/mirrors/nwjs \| "https://github.com/corwin-of-amber/nw.js/releases/"` | `"https://dl.nwjs.io"` | Download server |
+| cacheDir | `string` | `"./cache"` | Directory to cache NW binaries |
+| cache | `boolean` | `true`| If true the existing cache is used. Otherwise it removes and redownloads it. |
+| ffmpeg | `boolean` | `false`| If true the chromium ffmpeg is replaced by community version with proprietary codecs. |
+| nodeAddon | `false \| "gyp"` | `false` | Download Node headers |
 
 ## License
 

@@ -5,4 +5,5 @@ const { findpath } = util;
 
 export {
     findpath,
+    get,
 }
