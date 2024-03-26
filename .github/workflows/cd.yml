@@ -22,6 +22,7 @@ jobs:
           token: ${{ secrets.NPM_TOKEN }}
           tag: sdk
   normal:
+    needs: [ sdk ]
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
