@@ -13,8 +13,6 @@ import util from "./util.js";
  * @property {"ia32" | "x64" | "arm64"}             [arch]                  Target arch
  * @property {string}                               [srcDir = "./src"]      Source directory
  * @property {string}                               [cacheDir = "./cache"]  Cache directory
- * @property {boolean}                              [glob = false]          If true, throw error
- * @property {string[]}                             [argv = []]             CLI arguments
  */
 
 /**
@@ -31,17 +29,13 @@ async function run({
   flavor = "normal",
   platform = util.PLATFORM_KV[process.platform],
   arch = util.ARCH_KV[process.arch],
-  srcDir = "./src",
+  srcDir = ".",
   cacheDir = "./cache",
-  glob = false,
-  argv = [],
 }) {
+
   try {
     if (util.EXE_NAME[platform] === undefined) {
       throw new Error("Unsupported platform.");
-    }
-    if (glob === true) {
-      throw new Error("Globbing is not supported with run mode.");
     }
 
     const nwDir = path.resolve(
@@ -50,14 +44,9 @@ async function run({
     );
 
     return new Promise((res, rej) => {
-      // It is assumed that the package.json is located at srcDir/package.json
       const nwProcess = child_process.spawn(
         path.resolve(nwDir, util.EXE_NAME[platform]),
-        [...[srcDir], ...argv],
-        {
-          detached: true,
-          windowsHide: true,
-        },
+        [srcDir]
       );
 
       nwProcess.on("close", () => {

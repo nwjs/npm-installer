@@ -78,23 +78,6 @@ Add a script in your `package.json`:
 
 Executing `npm start` runs the NW.js app. Omitting the file path makes NW.js check for valid project in current working directory. You can also call `nw` directly from `node_modules/.bin/nw`.
 
-## Command Line Options
-
-There are a few (platform-specific) arguments you can pass to the `nw` executable to customize your nw.js application:
-
-* `--mac_plist <path-to-plist-file>`: (OS X only) Copies the given file to Info.plist in the app
-  bundle. This lets you do things like change your app's name and point to a different icon.
-
-* `--mac_icon <path-to-icns-file>`: (OS X only) Copies the given .icns file to the Resources/ dir
-  in the app bundle. You will need to point to the file with a custom plist file as well (see
-  `--mac_list`)
-
-**NOTE**: These options will keep the copied files in the app bundle for as long as the bundle is
-on the filesystem (they're not deleted between app invocations). As a result, they're not
-recommended if you installed nw globally using `-g`.  Also note that
-[OS X caches these files](http://proteo.me.uk/2011/08/mac-application-bundle-caching/),
-so you may need to manually clear these cached files during development.
-
 ## APIs
 
 ### Find path to the NW.js binary:

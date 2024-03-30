@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [0.85.0-4]
+
+### Added
+
+- Allow user to run specific binaries by specifing version, flavor, platform, arch and cacheDir options via CLI.
+
+### Changed
+
+- Fix run mode and remove workaround for disappearing Node manifest.
+
+### Removed
+
+- mac_plist and mac_icon CLI options.
+
+## [0.85.0-3]
+
+### Changed
+
+- Publish `sdk` version first.
+
 ## [0.85.0-2]
 
 ### Added
