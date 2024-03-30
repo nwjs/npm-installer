@@ -9,7 +9,7 @@
   "type": "module",
   "main": "src/index.js",
   "bin": {
-    "nw": "bin/nw.js"
+    "nw": "src/cli.js"
   },
   "scripts": {
     "postinstall": "node src/postinstall.js",
@@ -34,6 +34,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^1.6.8",
+    "commander": "^12.0.0",
     "semver": "^7.5.4",
     "tar": "^6.2.1",
     "yargs": "^17.7.2",

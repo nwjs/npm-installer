@@ -8,7 +8,7 @@ const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 /**
  * Check if file exists at specified path.
  *
- * @param  {NodeJS.fs.}           filePath  - File path to check existence of
+ * @param  {fs.PathLike}           filePath  - File path to check existence of
  * @return {Promise<boolean>}           `true` if exists, otherwise `false`
  */
 async function fileExists(filePath) {
