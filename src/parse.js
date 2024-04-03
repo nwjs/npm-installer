@@ -41,7 +41,7 @@ export default async function parse(options) {
         if (prerelease.length > 1) {
             prerelease = prerelease.slice(0, -1);
         }
-        options.version = [version, ...prerelease].join('-');
+        options.version = [options.version, ...prerelease].join('-');
     }
 
     /* Check build flavor and slice that off the `version`. */

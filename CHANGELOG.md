@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [0.86.0]
+
+### Changed
+
+- Fix undefined `version` in parsing logic.
+
 ## [0.85.0-4]
 
 ### Added
