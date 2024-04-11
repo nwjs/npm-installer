@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [0.86.0-2]
+
+### Changed
+
+- Correct default path to NW.js binary
+
 ## [0.86.0-1]
 
 ### Changed

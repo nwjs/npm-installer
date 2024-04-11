@@ -1,3 +1,4 @@
+import path from 'node:path';
 import process from 'node:process';
 
 import semver from 'semver';
@@ -56,7 +57,7 @@ export default async function parse(options) {
     options.platform = options.platform || util.PLATFORM_KV[process.env.npm_config_nwjs_platform || process.env.NWJS_PLATFORM || process.platform];
     options.arch = options.arch || util.ARCH_KV[process.env.npm_config_nwjs_process_arch || process.env.NWJS_ARCH || process.arch];
     options.downloadUrl = options.downloadUrl || process.env.npm_config_nwjs_urlbase || process.env.NWJS_URLBASE || 'https://dl.nwjs.io';
-    options.cacheDir = options.npm_config_nwjs_urlbase || process.env.npm_config_nwjs_cache_dir || process.env.NWJS_CACHE_DIR || '.';
+    options.cacheDir = options.npm_config_nwjs_urlbase || process.env.npm_config_nwjs_cache_dir || process.env.NWJS_CACHE_DIR || path.resolve('.', 'node_modules', 'nw');
     options.cache = options.cache || process.env.npm_config_nwjs_cache || process.env.NWJS_CACHE || true;
     options.ffmpeg = options.ffmpeg || process.env.npm_config_nwjs_ffmpeg || process.env.NWJS_FFMPEG || false;
     options.nativeAddon = options.nativeAddon || process.env.npm_config_nwjs_native_addon || process.env.NWJS_NATIVE_ADDON || false;
