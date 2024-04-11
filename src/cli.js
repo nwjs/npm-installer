@@ -17,7 +17,7 @@ async function cli() {
     .option('--platform <platform>')
     .option('--arch <arch>')
     .option('--cacheDir <cacheDir>')
-    .argument('<app>')
+    .argument('[app]')
     .parse(process.argv);
 
   let options = program.opts();
