@@ -6,8 +6,6 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
 import util from "../src/util.js";
 
-const { Driver, ServiceBuilder, Options } = chrome;
-
 describe("run", async function () {
   let driver = undefined;
 
@@ -21,9 +19,9 @@ describe("run", async function () {
     options.addArguments(seleniumArgs);
 
     const chromedriverPath = util.findpath("chromedriver");
-    const service = new ServiceBuilder(chromedriverPath).build();
+    const service = new chrome.ServiceBuilder(chromedriverPath).build();
 
-    driver = Driver.createSession(options, service);
+    driver = chrome.Driver.createSession(options, service);
   });
 
   it("should run post install", async function () {
