@@ -9,15 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-- `findpath` looks for actual path and not symlink. On Windows, if user does not have Administrator privileges, symlink is not created, then `findpath` fails to find the file path.
-
-- `findpath` is async with return type `Promise<string>`.
-- `findpath` has a secondary options argument. This is useful when trying to get the file path to ChromeDriver:
+- `findpath` looks for actual path and not symlink. On Windows, if user does not have Administrator privileges, symlink is not created, then `findpath` fails to find the file path. `findpath` is async with return type `Promise<string>` and has a secondary options argument. This is useful when you have multiple binaries. Here's an example of how to get the file path to ChromeDriver. [75a9fc0](https://github.com/nwjs/npm-installer/commit/75a9fc02a2aeb91fc1a7b49700fb9617ff3c020b)
 
 ```js
 const nwPath = await findpath('chromedriver', { flavor: 'sdk' });
 ```
-
 
 ## [0.86.0-2]
 
