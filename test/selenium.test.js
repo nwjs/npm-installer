@@ -9,7 +9,7 @@ import util from "../src/util.js";
 describe("run", async function () {
   let driver = undefined;
 
-  beforeAll(function () {
+  beforeAll(async function () {
     const options = new chrome.Options();
     const seleniumArgs = [
       `--nwapp=${path.resolve("test", "app")}`,
@@ -18,7 +18,7 @@ describe("run", async function () {
 
     options.addArguments(seleniumArgs);
 
-    const chromedriverPath = util.findpath("chromedriver");
+    const chromedriverPath = await util.findpath("chromedriver");
     const service = new chrome.ServiceBuilder(chromedriverPath).build();
 
     driver = chrome.Driver.createSession(options, service);
