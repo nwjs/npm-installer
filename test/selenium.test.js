@@ -18,7 +18,7 @@ describe("run", async function () {
 
     options.addArguments(seleniumArgs);
 
-    const chromedriverPath = await util.findpath("chromedriver");
+    const chromedriverPath = await util.findpath("chromedriver", { flavor: 'sdk' });
     const service = new chrome.ServiceBuilder(chromedriverPath).build();
 
     driver = chrome.Driver.createSession(options, service);
