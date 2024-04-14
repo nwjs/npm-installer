@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Changed
+
+- `findpath` is not async and now looks for the actual path and not the symlink. On Windows, if user does not have Administrator privileges, symlink is not created and `findpath` fails to find the file path.
+
 ## [0.86.0-2]
 
 ### Changed

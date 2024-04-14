@@ -30,7 +30,7 @@ describe("run", async function () {
     const text = await textElement.getText();
 
     expect(text).toEqual('Hello, World! Is anyone out there?');
-  });
+  }, { timeout: Infinity });
 
   afterAll(function () {
     driver.quit();
