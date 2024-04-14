@@ -3,6 +3,8 @@ import path from 'node:path';
 import process from 'node:process';
 import url from 'node:url';
 
+import parse from './parse.js';
+
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 /**
@@ -43,10 +45,12 @@ const EXE_NAME = {
  * Get the platform dependant path of the NW.js or ChromeDriver binary.
  * 
  * @param {'nwjs' | 'chromedriver'} executable Path to NW.js or Chromedriver executable.
- * @return {string}
+ * @return {Promise<string>}
  */
-function findpath(executable = 'nwjs') {
-    const nwDir = path.resolve(__dirname, '..', 'nwjs');
+async function findpath(executable = 'nwjs', options = {}) {
+    options = await parse(options);
+    const nwDir = path.resolve(__dirname, '..', `nwjs${options.flavor === "sdk" ? "-sdk" : ""}-v${options.version}-${options.platform}-${options.arch}`);
+    
     /**
      * File path to executable.
      * 
@@ -55,17 +59,10 @@ function findpath(executable = 'nwjs') {
     let binPath = '';
 
     /**
-      * Host operating system
-      * 
-      * @type {NodeJS.Platform}
-      */
-    let hostOs = PLATFORM_KV[process.env.npm_config_nwjs_platform || process.env.NWJS_PLATFORM || process.platform];
-
-    /**
      * Get the platform dependant path of the NW.js binary.
      */
     function findNwjs() {
-        binPath = path.resolve(nwDir, EXE_NAME[hostOs]);
+        binPath = path.resolve(nwDir, EXE_NAME[options.platform]);
     }
 
     /**

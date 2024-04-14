@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  e2e:
+  test:
     strategy:
       matrix:
         os: [macos-13, ubuntu-22.04, windows-2022]
@@ -29,5 +29,5 @@ jobs:
         run: corepack enable
       - name: Install dependencies
         run: npm ci --nwjs-build-type=sdk
-      - name: Run test
-        run: npm test
+      - name: Run tests
+        run: npm t

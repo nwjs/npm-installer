@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Changed
+
+- `findpath` looks for actual path and not symlink. On Windows, if user does not have Administrator privileges, symlink is not created, then `findpath` fails to find the file path.
+
+- `findpath` is async with return type `Promise<string>`.
+- `findpath` has a secondary options argument. This is useful when trying to get the file path to ChromeDriver:
+
+```js
+const nwPath = await findpath('chromedriver', { flavor: 'sdk' });
+```
+
+
 ## [0.86.0-2]
 
 ### Changed
