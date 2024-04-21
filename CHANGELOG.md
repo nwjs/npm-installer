@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Changed
+
+- Allow passing unknown options to `nw` via `commander` acting as parser.
+
 ## [0.86.0-3]
 
 ### Changed

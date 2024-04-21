@@ -14,7 +14,7 @@
   "scripts": {
     "postinstall": "node src/postinstall.js",
     "test": "vitest run",
-    "demo": "nw ./test/app"
+    "demo": "nw ./test/app --log-level=verbose"
   },
   "files": [
     "bin",
