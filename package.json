@@ -52,7 +52,7 @@
     "application"
   ],
   "devDependencies": {
-    "selenium-webdriver": "^4.18.1",
-    "vitest": "^1.5.0"
+    "selenium-webdriver": "^4.20.0",
+    "vitest": "^1.5.2"
   }
 }
