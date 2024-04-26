@@ -13,6 +13,7 @@ import util from "./util.js";
  * @property {"ia32" | "x64" | "arm64"}             [arch]                  Target arch
  * @property {string}                               [srcDir = "./src"]      Source directory
  * @property {string}                               [cacheDir = "./cache"]  Cache directory
+ * @property {string[]}                             [args = []]             Command line arguments
  */
 
 /**
@@ -31,6 +32,7 @@ async function run({
   arch = util.ARCH_KV[process.arch],
   srcDir = ".",
   cacheDir = "./cache",
+  args = [],
 }) {
 
   try {
@@ -46,11 +48,18 @@ async function run({
     return new Promise((res, rej) => {
       const nwProcess = child_process.spawn(
         path.resolve(nwDir, util.EXE_NAME[platform]),
-        [srcDir]
+        [srcDir, ...args],
+        { detached: true, stdio: "ignore" },
       );
+
+      nwProcess.unref();
 
       nwProcess.on("close", () => {
         res();
+      });
+
+      nwProcess.on("message", (message) => {
+        console.log(message);
       });
 
       nwProcess.on("error", (error) => {

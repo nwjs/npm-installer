@@ -22,7 +22,7 @@ async function cli() {
     .parse(process.argv);
 
   let options = program.opts();
-  options = await parse(options);
+  options = await parse({...options, 'args': program.args.slice(1)});
 
   await run({
     version: options.version,
@@ -31,6 +31,7 @@ async function cli() {
     arch: options.arch,
     cacheDir: options.cacheDir,
     srcDir: program.args[0],
+    args: program.args.slice(1),
   });
 
 }
