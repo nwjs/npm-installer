@@ -12,12 +12,12 @@ await cli();
 async function cli() {
 
   program
-    .option('--version <string>')
-    .option('--flavor <flavor>')
-    .option('--platform <platform>')
-    .option('--arch <arch>')
-    .option('--cacheDir <cacheDir>')
-    .argument('[app]')
+    .argument('[app]', 'File path to project', '.')
+    .option('--version <string>', 'NW.js version')
+    .option('--flavor <flavor>', 'NW.js flavor')
+    .option('--platform <platform>', 'Host platform')
+    .option('--arch <arch>', 'Host architecture')
+    .option('--cacheDir <cacheDir>', 'File path to cache directory')
     .allowUnknownOption()
     .parse(process.argv);
 
