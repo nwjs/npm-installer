@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import process from 'node:process';
 import path from 'node:path';
+import url from 'node:url';
 
 import semver from 'semver';
 
@@ -17,11 +18,11 @@ await postinstall()
     });
 
 async function postinstall() {
-    
+    const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
     /**
      * @type {fs.PathLike}
      */
-    const nodeManifestPath = path.resolve('package.json');
+    const nodeManifestPath = path.resolve(__dirname, '..' ,'package.json');
     /**
      * @type {object}
      */
