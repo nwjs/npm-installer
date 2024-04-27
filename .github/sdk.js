@@ -1,7 +1,7 @@
-import { writeFileSync } from 'node:fs';
+import fs from 'node:fs';
 
-import nodeManifest from '../package.json' assert { type: 'json' };
+let nodeManifest = JSON.parse(fs.readFileSync('./package.json', { encoding: 'utf-8'}));
 
 nodeManifest.version = nodeManifest.version + '-sdk';
 
-writeFileSync('./package.json', JSON.stringify(nodeManifest, null, 2));
+fs.writeFileSync('./package.json', JSON.stringify(nodeManifest, null, 2));

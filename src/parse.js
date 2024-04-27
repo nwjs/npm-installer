@@ -1,9 +1,9 @@
+import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 
 import semver from 'semver';
 
-import nodeManifest from '../package.json' assert { type: 'json' };
 import util from '../src/util.js';
 
 /**
@@ -26,6 +26,12 @@ import util from '../src/util.js';
  * @return {Promise<ParseOptions>}
  */
 export default async function parse(options) {
+
+    /**
+     * @type {object}
+     */
+    const nodeManifest = JSON.parse(await fs.promises.readFile(path.resolve('..', 'package.json'), { encoding: 'utf-8' }));
+
     options.version = options.version ?? nodeManifest.version;
     const parsedVersion = semver.parse(options.version);
     options.version = [

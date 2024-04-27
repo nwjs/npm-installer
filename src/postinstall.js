@@ -1,11 +1,10 @@
+import fs from 'node:fs';
 import process from 'node:process';
 
 import semver from 'semver';
 
 import get from './get.js';
 import util from './util.js';
-
-import nodeManifest from '../package.json' assert { type: 'json' };
 
 await postinstall()
     .catch((error) => {
@@ -15,6 +14,10 @@ await postinstall()
     });
 
 async function postinstall() {
+    /**
+     * @type {object}
+     */
+    const nodeManifest = JSON.parse(await fs.promises.readFile(path.resolve('..', 'package.json'), { encoding: 'utf-8' }));
     const parsedVersion = semver.parse(nodeManifest.version);
     let version = [
         parsedVersion.major,
