@@ -1,20 +1,32 @@
+import fs from 'node:fs';
 import process from 'node:process';
+import path from 'node:path';
+import url from 'node:url';
 
 import semver from 'semver';
 
 import get from './get.js';
 import util from './util.js';
 
-import nodeManifest from '../package.json' assert { type: 'json' };
-
 await postinstall()
     .catch((error) => {
         if (error.code === 'EPERM') {
             console.error('Unable to create symlink since user did not run as Administrator.');
+        } else {
+            console.error(error)
         }
     });
 
 async function postinstall() {
+    const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+    /**
+     * @type {fs.PathLike}
+     */
+    const nodeManifestPath = path.resolve(__dirname, '..' ,'package.json');
+    /**
+     * @type {object}
+     */
+    const nodeManifest = JSON.parse(await fs.promises.readFile(nodeManifestPath));
     const parsedVersion = semver.parse(nodeManifest.version);
     let version = [
         parsedVersion.major,

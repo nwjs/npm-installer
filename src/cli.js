@@ -12,13 +12,13 @@ await cli();
 async function cli() {
 
   program
-    .option('--version <string>')
-    .option('--flavor <flavor>')
-    .option('--platform <platform>')
-    .option('--arch <arch>')
-    .option('--cacheDir <cacheDir>')
-    .argument('[app]')
-    .allowUnknownOption()
+    .argument('[app]', 'File path to project', '.')
+    .option('--version <string>', 'NW.js version')
+    .option('--flavor <flavor>', 'NW.js flavor')
+    .option('--platform <platform>', 'Host platform')
+    .option('--arch <arch>', 'Host architecture')
+    .option('--cacheDir <cacheDir>', 'File path to cache directory')
+    .allowUnknownOption() // this allows chromium and node options to be passed through to the nwjs binary
     .parse(process.argv);
 
   let options = program.opts();
@@ -31,6 +31,7 @@ async function cli() {
     arch: options.arch,
     cacheDir: options.cacheDir,
     srcDir: program.args[0],
+    args: program.args.slice(1),
   });
 
 }

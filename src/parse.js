@@ -1,9 +1,10 @@
+import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import url from 'node:url';
 
 import semver from 'semver';
 
-import nodeManifest from '../package.json' assert { type: 'json' };
 import util from '../src/util.js';
 
 /**
@@ -26,6 +27,15 @@ import util from '../src/util.js';
  * @return {Promise<ParseOptions>}
  */
 export default async function parse(options) {
+    const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+    /**
+     * @type {fs.PathLike}
+     */
+    const nodeManifestPath = path.resolve(__dirname, '..', 'package.json');
+    /**
+     * @type {object}
+     */
+    const nodeManifest = JSON.parse(await fs.promises.readFile(nodeManifestPath, { encoding: 'utf-8' }));
     options.version = options.version ?? nodeManifest.version;
     const parsedVersion = semver.parse(options.version);
     options.version = [
