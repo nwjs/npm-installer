@@ -66,6 +66,10 @@ Set `nwjs_native_addon` in `.npmrc` or `NWJS_NATIVE_ADDON` environment variable 
 
 Set `nwjs_urlbase` in `.npmrc`or `NWJS_URLBASE` environment variable. Defaults to `https://dl.nwjs.io`. The file system (`file://`) is also supported (for example, `file:///home/localghost/local_mirror`).
 
+### Specify unref flag
+
+Set `nwjs_unref` in `.npmrc` or `NWJS_UNREF` environment variable. Default to `false`. This is useful if you're using `nw` package to call the executable and want to prevent zombie processes eating up memory.
+
 ## Usage
 
 Add a script in your `package.json`:

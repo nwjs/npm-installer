@@ -18,7 +18,8 @@ import util from '../src/util.js';
  * @property {string}                               srcDir                  Source directory
  * @property {boolean}                              cache                        If false, remove cache and redownload.
  * @property {boolean}                              ffmpeg                      If true, ffmpeg is not downloaded.
- * @property {false | "gyp"}                        nativeAddon                 Rebuild native modules
+ * @property {false | "gyp"}                        nativeAddon                   Rebuild native modules
+ * @property {boolean}                              unref                         Unref the child process and unblock the caller
  */
 
 /**
@@ -73,6 +74,7 @@ export default async function parse(options) {
     options.cache = options.cache || process.env.npm_config_nwjs_cache || process.env.NWJS_CACHE || true;
     options.ffmpeg = options.ffmpeg || process.env.npm_config_nwjs_ffmpeg || process.env.NWJS_FFMPEG || false;
     options.nativeAddon = options.nativeAddon || process.env.npm_config_nwjs_native_addon || process.env.NWJS_NATIVE_ADDON || false;
+    options.unref = options.unref || process.env.npm_config_nwjs_unref || process.env.NWJS_UNREF || false;
 
     return { ...options };
 }
