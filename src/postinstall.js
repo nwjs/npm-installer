@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import process from 'node:process';
+import path from 'node:path';
 
 import semver from 'semver';
 
@@ -10,14 +11,21 @@ await postinstall()
     .catch((error) => {
         if (error.code === 'EPERM') {
             console.error('Unable to create symlink since user did not run as Administrator.');
+        } else {
+            console.error(error)
         }
     });
 
 async function postinstall() {
+    
+    /**
+     * @type {fs.PathLike}
+     */
+    const nodeManifestPath = path.resolve('package.json');
     /**
      * @type {object}
      */
-    const nodeManifest = JSON.parse(await fs.promises.readFile(path.resolve('..', 'package.json'), { encoding: 'utf-8' }));
+    const nodeManifest = JSON.parse(await fs.promises.readFile(nodeManifestPath));
     const parsedVersion = semver.parse(nodeManifest.version);
     let version = [
         parsedVersion.major,

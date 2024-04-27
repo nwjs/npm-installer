@@ -7,6 +7,9 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import util from "../src/util.js";
 
 describe("run", async function () {
+  /**
+   * @type {chrome.Driver | undefined}
+   */
   let driver = undefined;
 
   beforeAll(async function () {
@@ -32,8 +35,8 @@ describe("run", async function () {
     expect(text).toEqual('Hello, World! Is anyone out there?');
   }, { timeout: Infinity });
 
-  afterAll(function () {
-    driver.quit();
+  afterAll(async function () {
+    await driver.quit();
   });
 
 });
