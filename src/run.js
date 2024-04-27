@@ -52,8 +52,6 @@ async function run({
         { detached: true, stdio: "ignore" },
       );
 
-      nwProcess.unref();
-
       nwProcess.on("close", () => {
         res();
       });
