@@ -22,7 +22,7 @@ async function cli() {
     .parse(process.argv);
 
   let options = program.opts();
-  options = await parse({...options, 'args': program.args.slice(1)});
+  options = await parse(options);
 
   await run({
     version: options.version,
