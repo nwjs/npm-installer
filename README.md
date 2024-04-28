@@ -6,6 +6,8 @@ An npm installer for [NW.js](https://nwjs.io).
 
 ## Install
 
+Please go through the [CHANGELOG](https://github.com/nwjs/npm-installer/blob/main/CHANGELOG.md) carefully and choose the appropriate version. Bug fixes and feature updates are pushed to the repo periodically.
+
 ### Latest version globally
 
 ```shell

@@ -7,11 +7,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [0.87.0-1]
+
+### Changed
+
+- Set default cache using __dirname [601911f](https://github.com/nwjs/npm-installer/commit/601911fbb374fd01b07fa138718b0d7d2751fc51)
+
+- Pass CLI args to NW.js process. [e5d6fb1](https://github.com/nwjs/npm-installer/commit/e5d6fb18a291f30a318dc0df5806e69a6f83ea9b)
+
 ## [0.87.0]
 
 ### Changed
 
-- Allow passing unknown options to `nw` via `commander` acting as parser.
+- Allow passing unknown options to `nw` via `commander` acting as parser. [466494a](https://github.com/nwjs/npm-installer/commit/466494adbf3894210d753cc3d59050ae3c4d8d0c)
 
 ## [0.86.0-3]
 
