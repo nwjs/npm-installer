@@ -36,7 +36,7 @@
     "axios": "^1.6.8",
     "commander": "^12.0.0",
     "semver": "^7.5.4",
-    "tar": "^7.0.1",
+    "tar": "^7.1.0",
     "yauzl-promise": "^4.0.0"
   },
   "keywords": [
@@ -53,6 +53,6 @@
   ],
   "devDependencies": {
     "selenium-webdriver": "^4.20.0",
-    "vitest": "^1.5.3"
+    "vitest": "^1.6.0"
   }
 }
