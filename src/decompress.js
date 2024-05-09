@@ -92,4 +92,5 @@ async function unzip(zippedFile, cacheDir) {
       await fs.promises.symlink(linkTarget, entryPathAbs);
     }
   }
+  await zip.close();
 }
