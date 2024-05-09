@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [0.87.0-2]
+
+### Changed
+
+- Close zip file after reading all entries [5c481a7](https://github.com/nwjs/npm-installer/commit/5c481a75e7446d6c01bd4146ad46e218edb89fb9)
+
 ## [0.87.0-1]
 
 ### Changed
