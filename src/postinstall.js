@@ -22,7 +22,7 @@ async function postinstall() {
     /**
      * @type {fs.PathLike}
      */
-    const nodeManifestPath = path.resolve(__dirname, '..' ,'package.json');
+    const nodeManifestPath = path.resolve(__dirname, '..', 'package.json');
     /**
      * @type {object}
      */
@@ -35,21 +35,17 @@ async function postinstall() {
     ].join('.');
 
     let flavor = process.env.npm_config_nwjs_build_type || process.env.NWJS_BUILD_TYPE || 'normal';
-    /* Check if version is a prelease. */
-    if (typeof parsedVersion?.prerelease?.[0] === 'string') {
-        let prerelease = parsedVersion.prerelease[0].split('-');
-        if (prerelease.length > 1) {
-            prerelease = prerelease.slice(0, -1);
-        }
-        version = [version, ...prerelease].join('-');
-    }
 
+    /**
+     * If `parsedVersion` is `null`, then prerelease is `"null"`.
+     * If `parsedVersion?.prerelease` is `[]`, then prerelease is `"undefined"`.
+     * If `parsedVersion?.prerelease[0]` is `"N-sdk"` where N represents a build number, then prerelease is `"N-sdk"`.
+     *
+     * @type {"null" | "undefined" | "N-sdk" | ""}
+     */
+    const prerelease = String(parsedVersion?.prerelease[0]);
     /* Check build flavor and slice that off the `version`. */
-    if (version.endsWith('-sdk')) {
-        version = version.slice(0, -4);
-        flavor = 'sdk';
-    } else if (version.endsWith('sdk')) {
-        version = version.slice(0, -3);
+    if (prerelease.endsWith('-sdk')) {
         flavor = 'sdk';
     }
 
