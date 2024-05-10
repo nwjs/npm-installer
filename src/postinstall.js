@@ -36,6 +36,13 @@ async function postinstall() {
 
     let flavor = process.env.npm_config_nwjs_build_type || process.env.NWJS_BUILD_TYPE || 'normal';
 
+    /**
+     * If `parsedVersion` is `null`, then prerelease is `"null"`.
+     * If `parsedVersion?.prerelease` is `[]`, then prerelease is `"undefined"`.
+     * If `parsedVersion?.prerelease[0]` is `"N-sdk"` where N represents a build number, then prerelease is `"N-sdk"`.
+     *
+     * @type {"null" | "undefined" | "N-sdk" | ""}
+     */
     const prerelease = String(parsedVersion?.prerelease[0]);
     /* Check build flavor and slice that off the `version`. */
     if (prerelease.endsWith('-sdk')) {
