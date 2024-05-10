@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [0.87.0-3]
+
+### Changed
+
+- Simplify prelease detection logic [f35e2f5](https://github.com/nwjs/npm-installer/commit/f35e2f53932d89c8fe4c569367cb04e310e25bd7)
+
 ## [0.87.0-2]
 
 ### Changed
