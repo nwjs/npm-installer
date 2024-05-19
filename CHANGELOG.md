@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Added
+
+- Add `unref` option. See the [Node docs](https://nodejs.org/api/child_process.html#subprocessunref) for more info. [f772c0e](https://github.com/nwjs/npm-installer/commit/f772c0e5516d7b6a6be502d3682a49d67f907687)
+
 ## [0.87.0-3]
 
 ### Changed
