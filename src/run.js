@@ -13,6 +13,7 @@ import util from "./util.js";
  * @property {"ia32" | "x64" | "arm64"}             [arch]                  Target arch
  * @property {string}                               [srcDir = "./src"]      Source directory
  * @property {string}                               [cacheDir = "./cache"]  Cache directory
+ * @property {boolean}                              [unref = false]         Unref the child process and unblock the caller
  * @property {string[]}                             [args = []]             Command line arguments
  */
 
@@ -32,6 +33,7 @@ async function run({
   arch = util.ARCH_KV[process.arch],
   srcDir = ".",
   cacheDir = "./cache",
+  unref = false,
   args = [],
 }) {
 
@@ -64,6 +66,10 @@ async function run({
         console.error(error);
         rej(error);
       });
+
+      if (unref) {
+        nwProcess.unref();
+      }
     });
   } catch (error) {
     console.error(error);
