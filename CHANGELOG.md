@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [0.88.0]
+
+### Changed
+
+- Upgrade Axios [b63ceaa](https://github.com/nwjs/npm-installer/commit/b63ceaa5bf24239b93f42489fa63dae4cf65a9d8)
+
 ## [0.87.0-4]
 
 ### Added
