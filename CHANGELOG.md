@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [0.88.0-1]
+
 ### Changed
 
-- Correctly parse the prerelease object.
+- Correctly parse the prerelease object. [9802fb8](https://github.com/nwjs/npm-installer/commit/9802fb88753b1943f307a6f9a33a212cf9aae73e)
 
 ## [0.88.0]
 
