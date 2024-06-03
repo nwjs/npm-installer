@@ -45,7 +45,7 @@ async function postinstall() {
      */
     const prerelease = String(parsedVersion?.prerelease[0]);
     /* Check build flavor and slice that off the `version`. */
-    if (prerelease.endsWith('-sdk')) {
+    if (prerelease.endsWith('sdk')) {
         flavor = 'sdk';
     }
 
