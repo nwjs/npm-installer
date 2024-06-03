@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Changed
+
+- Correctly parse the prerelease object.
+
 ## [0.88.0]
 
 ### Changed
