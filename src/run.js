@@ -51,7 +51,7 @@ async function run({
       const nwProcess = child_process.spawn(
         path.resolve(nwDir, util.EXE_NAME[platform]),
         [srcDir, ...args],
-        { detached: true, stdio: "ignore" },
+        { stdio: "inherit" },
       );
 
       nwProcess.on("close", () => {
