@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [0.88.0-2]
+
+### Changed
+
+- Spawned process inherits stdout and is not detached. [df9fdc3](https://github.com/nwjs/npm-installer/commit/df9fdc3e7cfc4c62550f8ee5464a70b13fd1ce76)
+
 ## [0.88.0-1]
 
 ### Changed
