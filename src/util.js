@@ -43,20 +43,27 @@ const EXE_NAME = {
 
 /**
  * Get the platform dependant path of the NW.js or ChromeDriver binary.
- * 
- * @param {'nwjs' | 'chromedriver'} executable Path to NW.js or Chromedriver executable.
+ *
+ * @param {'nwjs' | 'chromedriver' | 'all'} Path to NW.js or Chromedriver executable.
  * @return {Promise<string>}
  */
 async function findpath(executable = 'nwjs', options = {}) {
     options = await parse(options);
     const nwDir = path.resolve(__dirname, '..', `nwjs${options.flavor === "sdk" ? "-sdk" : ""}-v${options.version}-${options.platform}-${options.arch}`);
-    
+
     /**
      * File path to executable.
-     * 
+     *
      * @type {string}
      */
     let binPath = '';
+
+    /**
+     * Get the platform dependant path of the NW.js directory containing everything.
+     */
+    function findDir() {
+        binPath = nwDir;
+    }
 
     /**
      * Get the platform dependant path of the NW.js binary.
@@ -76,6 +83,8 @@ async function findpath(executable = 'nwjs', options = {}) {
         findNwjs();
     } else if (executable === 'chromedriver') {
         findChromeDriver();
+    } else if (executable === 'all') {
+        findDir();
     } else {
         console.error(`[ ERROR ] Expected nwjs or chromedriver, got ${executable}.`);
     }
