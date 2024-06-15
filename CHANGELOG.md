@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+[0.88.0-3]
+
+### Added
+
+- Get file path to NW.js directory. [5b37b6d](https://github.com/nwjs/npm-installer/commit/5b37b6dcb8b1cfd9cc4cfffa516613e6231d00dd)
+
 ## [0.88.0-2]
 
 ### Changed

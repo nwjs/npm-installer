@@ -90,14 +90,14 @@ Executing `npm start` runs the NW.js app. Omitting the file path makes NW.js che
 
 ``` js
 import { findpath } from 'nw';
-var path = findpath();
+let path = await findpath();
 ```
 
 ## Find the path to the chromedriver binary
 
 ``` js
 import { findpath } from 'nw';
-var path = findpath('chromedriver');
+let path = await findpath('chromedriver', { flavor: 'sdk' });
 ```
 
 ## Download specific versions independant of installer version
