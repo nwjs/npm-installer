@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
-[0.88.0-3]
+## [0.88.0-3]
 
 ### Added
 
