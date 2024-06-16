@@ -17,7 +17,7 @@ async function fileExists(filePath) {
     let exists = true;
     try {
         await fs.promises.stat(filePath);
-    } catch {
+    } catch (_) {
         exists = false;
     }
     return exists;
