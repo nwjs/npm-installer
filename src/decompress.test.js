@@ -7,7 +7,7 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import decompress from "./decompress.js";
 
 import * as nw from "../src/index.js";
-import util from '../util.js';
+import util from './util.js';
 
 describe("get/decompress", async function () {
 
