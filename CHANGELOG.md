@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [0.88.0-4]
+
+### Changed
+
+- Detect build flavor during run mode. [b4dbb64](https://github.com/nwjs/npm-installer/commit/b4dbb64c324d4f5daacdf06044b775fcbdbe08e3)
+
 ## [0.88.0-3]
 
 ### Added
