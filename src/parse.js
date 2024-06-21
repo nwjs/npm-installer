@@ -24,8 +24,8 @@ import util from '../src/util.js';
 
 /**
  * Parse options.
- * 
- * @param {ParseOptions} options 
+ *
+ * @param {ParseOptions} options
  * @return {Promise<ParseOptions>}
  */
 export default async function parse(options) {
@@ -45,27 +45,10 @@ export default async function parse(options) {
         parsedVersion.minor,
         parsedVersion.patch
     ].join('.');
-
     options.flavor = options.flavor || process.env.npm_config_nwjs_build_type || process.env.NWJS_BUILD_TYPE || 'normal';
-
-    /* Check if version is a prelease. */
-    if (typeof parsedVersion?.prerelease?.[0] === 'string') {
-        let prerelease = parsedVersion.prerelease[0].split('-');
-        if (prerelease.length > 1) {
-            prerelease = prerelease.slice(0, -1);
-        }
-        options.version = [options.version, ...prerelease].join('-');
-    }
-
-    /* Check build flavor and slice that off the `version`. */
-    if (options.version.endsWith('-sdk')) {
-        options.version = options.version.slice(0, -4);
-        options.flavor = 'sdk';
-    } else if (options.version.endsWith('sdk')) {
-        options.version = version.slice(0, -3);
+    if (parsedVersion?.prerelease[0].endsWith('sdk')) {
         options.flavor = 'sdk';
     }
-
     options.platform = options.platform || util.PLATFORM_KV[process.env.npm_config_nwjs_platform || process.env.NWJS_PLATFORM || process.platform];
     options.arch = options.arch || util.ARCH_KV[process.env.npm_config_nwjs_process_arch || process.env.NWJS_ARCH || process.arch];
     options.downloadUrl = options.downloadUrl || process.env.npm_config_nwjs_urlbase || process.env.NWJS_URLBASE || 'https://dl.nwjs.io';
