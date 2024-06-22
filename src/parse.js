@@ -46,7 +46,7 @@ export default async function parse(options) {
         parsedVersion.patch
     ].join('.');
     options.flavor = options.flavor || process.env.npm_config_nwjs_build_type || process.env.NWJS_BUILD_TYPE || 'normal';
-    if (parsedVersion?.prerelease[0]?.endsWith('sdk')) {
+    if (String(parsedVersion?.prerelease[0]).endsWith('sdk')) {
         options.flavor = 'sdk';
     }
     options.platform = options.platform || util.PLATFORM_KV[process.env.npm_config_nwjs_platform || process.env.NWJS_PLATFORM || process.platform];
