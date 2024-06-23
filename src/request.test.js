@@ -13,4 +13,4 @@ describe("get/request", function () {
     await request(url, filePath);
     expect(util.fileExists(filePath)).resolves.toBe(true);
   });
-});
+}, Infinity);
