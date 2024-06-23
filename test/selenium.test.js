@@ -15,7 +15,7 @@ describe("run", async function () {
   beforeAll(async function () {
     const options = new chrome.Options();
     const seleniumArgs = [
-      `--nwapp=${path.resolve("test", "app")}`,
+      `--nwapp=${path.resolve("test", "fixture" , "app")}`,
       "--headless=new",
     ];
 
