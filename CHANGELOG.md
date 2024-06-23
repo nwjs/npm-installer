@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [0.88.0-5]
+
+### Changed
+
+- Coerce version prerelease type to string [992aa86](https://github.com/nwjs/npm-installer/commit/992aa86df058c1820753cc25bb5dc26efaeb069c)
+
+## [0.88.0-4]
+
+### Changed
+
+- Detect build flavor during run mode. [b4dbb64](https://github.com/nwjs/npm-installer/commit/b4dbb64c324d4f5daacdf06044b775fcbdbe08e3)
+
 ## [0.88.0-3]
 
 ### Added
