@@ -14,6 +14,7 @@
   "scripts": {
     "postinstall": "node src/postinstall.js",
     "test": "vitest run",
+    "test:cov": "vitest --coverage.enabled true",
     "demo": "nw ./test/app --log-level=verbose"
   },
   "files": [
