@@ -8,7 +8,7 @@ import axios from "axios";
  *
  * @async
  * @function
- * 
+ *
  * @param  {string}        url       - Download server
  * @param  {string}        filePath  - file path of downloaded content
  * @return {Promise<void>}
