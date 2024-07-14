@@ -8,6 +8,12 @@ import semver from 'semver';
 import get from './get.js';
 import util from './util.js';
 
+const patchPackagePath = path.resolve(path.join(__dirname, '..', 'node_modules', 'patch-package'));
+
+if (fs.existsSync(patchPackagePath)) {
+    child_process.execSync('node ' + patchPackagePath);
+}
+
 await postinstall()
     .catch((error) => {
         if (error.code === 'EPERM') {
