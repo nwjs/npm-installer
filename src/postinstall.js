@@ -8,6 +8,8 @@ import semver from 'semver';
 import get from './get.js';
 import util from './util.js';
 
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+
 const patchPackagePath = path.resolve(path.join(__dirname, '..', 'node_modules', 'patch-package'));
 
 if (fs.existsSync(patchPackagePath)) {
