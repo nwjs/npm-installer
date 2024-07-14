@@ -1,3 +1,4 @@
+import child_process from 'node:child_process';
 import fs from 'node:fs';
 import process from 'node:process';
 import path from 'node:path';
