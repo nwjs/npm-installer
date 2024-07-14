@@ -36,7 +36,7 @@ npm install --save-dev nw@0.85.0-1
 npm install --save-dev nw@sdk
 ```
 
-> Optionally set `nwjs_build_type=sdk` in `.npmrc` or `NWJS_BUILD_TYPE=sdk` environment variable.
+Or set `nwjs_build_type=sdk` in `.npmrc` or `NWJS_BUILD_TYPE=sdk` environment variable.
 
 ### Specify platform:
 

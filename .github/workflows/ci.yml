@@ -10,7 +10,23 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  license-check:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.1.7
+      - name: Get Node version from NW.js versions manifest
+        run: echo "NODE_VER=$(curl -s https://nwjs.io/versions | jq -r ".versions[0].components.node")" >> $GITHUB_ENV
+      - name: Setup Node
+        uses: actions/setup-node@v4.0.2
+        with:
+          node-version: ${{ env.NODE_VER }}
+          cache: "npm"
+      - name: Install dependencies
+        run: npm ci --nwjs-build-type=sdk
+      - name: License check
+        run: npm run license-check
+  tests:
     strategy:
       matrix:
         os:
@@ -33,7 +49,7 @@ jobs:
         run: npm ci --nwjs-build-type=sdk
       - name: Run tests
         run: npm t
-  cov:
+  coverage:
     runs-on: ubuntu-22.04
     permissions:
       contents: read
@@ -51,7 +67,7 @@ jobs:
       - name: Install dependencies
         run: npm ci --nwjs-build-type=sdk
       - name: Enable Coverage
-        run: npm run test:cov
+        run: npm run test:coverage
       - name: Report Coverage
         if: always()
         uses:  davelosert/vitest-coverage-report-action@v2.5.0
