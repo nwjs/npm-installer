@@ -1,7 +1,7 @@
 {
   "name": "nw",
   "version": "0.89.0",
-  "description": "An installer for nw.js",
+  "description": "An installer for NW.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/nwjs/npm-installer.git"
@@ -14,12 +14,10 @@
   "scripts": {
     "postinstall": "node src/postinstall.js",
     "test": "vitest run",
-    "test:cov": "vitest --coverage.enabled true",
+    "test:coverage": "vitest --coverage.enabled true",
     "license-check": "jsgl -l ."
   },
   "files": [
-    "bin",
-    "lib",
     "src"
   ],
   "author": {
