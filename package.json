@@ -51,10 +51,10 @@
     "application"
   ],
   "devDependencies": {
-    "@vitest/coverage-v8": "^1.6.0",
+    "@vitest/coverage-v8": "^2.0.2",
     "js-green-licenses": "^4.0.0",
     "patch-package": "^8.0.0",
     "selenium-webdriver": "^4.22.0",
-    "vitest": "^1.6.0"
+    "vitest": "^2.0.2"
   }
 }
