@@ -34,8 +34,8 @@
   "dependencies": {
     "axios": "^1.7.2",
     "commander": "^12.1.0",
-    "semver": "^7.6.2",
-    "tar": "^7.4.0",
+    "semver": "^7.6.3",
+    "tar": "^7.4.2",
     "yauzl-promise": "^4.0.0"
   },
   "keywords": [
@@ -51,10 +51,10 @@
     "application"
   ],
   "devDependencies": {
-    "@vitest/coverage-v8": "^2.0.2",
+    "@vitest/coverage-v8": "^2.0.4",
     "js-green-licenses": "^4.0.0",
     "patch-package": "^8.0.0",
-    "selenium-webdriver": "^4.22.0",
+    "selenium-webdriver": "^4.23.0",
     "vitest": "^2.0.2"
   }
 }
