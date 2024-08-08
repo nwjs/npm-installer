@@ -32,7 +32,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "axios": "^1.7.2",
+    "axios": "^1.7.3",
     "commander": "^12.1.0",
     "semver": "^7.6.3",
     "tar": "^7.4.3",
@@ -51,7 +51,7 @@
     "application"
   ],
   "devDependencies": {
-    "@vitest/coverage-v8": "^2.0.4",
+    "@vitest/coverage-v8": "^2.0.5",
     "js-green-licenses": "^4.0.0",
     "patch-package": "^8.0.0",
     "selenium-webdriver": "^4.23.0",
