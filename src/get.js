@@ -96,6 +96,12 @@ async function get(options) {
 
   await decompress(nwFilePath, options.cacheDir);
 
+  await verify(
+    `${options.downloadUrl}/v${options.version}/SHASUMS256.txt`,
+    `${options.cacheDir}/shasum/${options.version}.txt`,
+    options.cacheDir,
+  );
+
   await fs.promises.symlink(nwDirPath, './nwjs', );
 
   if (options.ffmpeg === true) {
