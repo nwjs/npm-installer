@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [0.90.0-1]
+
+### Added
+
+- Verify SHA256 checksum [1b22c2a](https://github.com/nwjs/npm-installer/commit/1b22c2a3a2c7a0397c132c75cd94f9b37d60960d)
+
 ## [0.88.0-5]
 
 ### Changed

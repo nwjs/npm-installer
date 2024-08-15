@@ -1,6 +1,6 @@
 {
   "name": "nw",
-  "version": "0.90.0",
+  "version": "0.90.0-1",
   "description": "An installer for NW.js",
   "repository": {
     "type": "git",
