@@ -3,8 +3,8 @@ import process from "node:process";
 
 import { afterEach, beforeAll, describe, expect, it } from "vitest";
 
-import ffmpeg from "./ffmpeg.js";
-import util from "./util.js";
+import ffmpeg from "../../src/ffmpeg.js";
+import util from "../../src/util.js";
 
 describe("get/ffmpeg", function () {
 
@@ -15,7 +15,7 @@ describe("get/ffmpeg", function () {
   });
 
   beforeAll(async function () {
-    await fs.promises.mkdir("./test/fixture", { recursive: true });
+    await fs.promises.mkdir("./tests/fixture", { recursive: true });
   });
 
   it("downloades community prebuild FFmpeg for specifc platform", async function () {
@@ -24,7 +24,7 @@ describe("get/ffmpeg", function () {
       "0.83.0",
       util.PLATFORM_KV[process.platform],
       util.ARCH_KV[process.arch],
-      "./test/fixture"
+      "./tests/fixtures"
     );
     expect(util.fileExists(ffmpegFile)).resolves.toBe(true);
   }, Infinity);

@@ -4,7 +4,7 @@ import selenium from "selenium-webdriver";
 import chrome from "selenium-webdriver/chrome.js";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
-import util from "../src/util.js";
+import util from "../../src/util.js";
 
 describe("run", async function () {
   /**
@@ -15,7 +15,7 @@ describe("run", async function () {
   beforeAll(async function () {
     const options = new chrome.Options();
     const seleniumArgs = [
-      `--nwapp=${path.resolve("test", "fixture" , "app")}`,
+      `--nwapp=${path.resolve("tests", "fixtures" , "app")}`,
       "--headless=new",
     ];
 
