@@ -15,7 +15,7 @@ describe("get/ffmpeg", function () {
   });
 
   beforeAll(async function () {
-    await fs.promises.mkdir("./test/fixture", { recursive: true });
+    await fs.promises.mkdir("./tests/fixture", { recursive: true });
   });
 
   it("downloades community prebuild FFmpeg for specifc platform", async function () {
@@ -24,7 +24,7 @@ describe("get/ffmpeg", function () {
       "0.83.0",
       util.PLATFORM_KV[process.platform],
       util.ARCH_KV[process.arch],
-      "./test/fixture"
+      "./tests/fixture"
     );
     expect(util.fileExists(ffmpegFile)).resolves.toBe(true);
   }, Infinity);
