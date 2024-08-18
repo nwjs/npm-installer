@@ -21,7 +21,7 @@ describe("get/nw", function () {
       "sdk",
       util.PLATFORM_KV[process.platform],
       util.ARCH_KV[process.arch],
-      "./tests/fixture"
+      "./tests/fixtures"
     );
     expect(util.fileExists(nwFile)).resolves.toBe(true);
   }, Infinity);

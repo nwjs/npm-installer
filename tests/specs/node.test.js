@@ -17,7 +17,7 @@ describe("get/node", function () {
     nodeFile = await node(
       "https://dl.nwjs.io",
       "0.83.0",
-      "./tests/fixture"
+      "./tests/fixtures"
     );
     expect(util.fileExists(nodeFile)).resolves.toBe(true);
   }, Infinity);
