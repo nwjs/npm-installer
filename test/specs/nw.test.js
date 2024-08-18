@@ -3,8 +3,8 @@ import process from "node:process";
 
 import { afterEach, describe, expect, it } from "vitest";
 
-import nw from "./nw.js";
-import util from "./util.js";
+import nw from "../../src/nw.js";
+import util from "../../src/util.js";
 
 describe("get/nw", function () {
 

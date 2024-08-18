@@ -2,8 +2,8 @@ import fs from "node:fs";
 
 import { afterEach, describe, expect, it } from "vitest";
 
-import node from "./node.js";
-import util from "./util.js";
+import node from "../../src/node.js";
+import util from "../../src/util.js";
 
 describe("get/node", function () {
 

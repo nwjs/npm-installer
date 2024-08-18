@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import request from "./request.js";
-import util from "./util.js";
+import request from "../../src/request.js";
+import util from "../../src/util.js";
 
 describe.skip("get/request", function () {
 
