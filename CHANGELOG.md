@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [0.91.0]
+
+### Changed
+
+- Move tests to seperate directory [bd3fabb](https://github.com/nwjs/npm-installer/commit/bd3fabb908b10c95f2b61bfa2a779bc066ffe368)
+
+### Removed
+
+- Uninstall `patch-package` package [5b6cc97](https://github.com/nwjs/npm-installer/commit/5b6cc97114b6bf97cf68d590b5aa268c9dfec322)
+
 ## [0.90.0-1]
 
 ### Added
