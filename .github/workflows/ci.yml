@@ -25,7 +25,7 @@ jobs:
       - name: Get Node version from NW.js versions manifest
         run: echo "NODE_VER=$(curl -s https://nwjs.io/versions | jq -r ".versions[0].components.node")" >> $GITHUB_ENV
       - name: Setup Node
-        uses: actions/setup-node@v4.0.3
+        uses: actions/setup-node@v4.0.4
         with:
           node-version: ${{ env.NODE_VER }}
           cache: "npm"
@@ -44,7 +44,7 @@ jobs:
       - name: Get Node version from NW.js versions manifest
         run: echo "NODE_VER=$(curl -s https://nwjs.io/versions | jq -r ".versions[0].components.node")" >> $GITHUB_ENV
       - name: Setup Node
-        uses: actions/setup-node@v4.0.3
+        uses: actions/setup-node@v4.0.4
         with:
           node-version: ${{ env.NODE_VER }}
           cache: "npm"
