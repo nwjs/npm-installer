@@ -21,7 +21,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4.2.0
       - name: Get Node version from NW.js versions manifest
         run: echo "NODE_VER=$(curl -s https://nwjs.io/versions | jq -r ".versions[0].components.node")" >> $GITHUB_ENV
       - name: Setup Node
@@ -40,7 +40,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4.2.0
       - name: Get Node version from NW.js versions manifest
         run: echo "NODE_VER=$(curl -s https://nwjs.io/versions | jq -r ".versions[0].components.node")" >> $GITHUB_ENV
       - name: Setup Node
@@ -54,4 +54,4 @@ jobs:
         run: npm run test:coverage
       - name: Report Coverage
         if: always()
-        uses:  davelosert/vitest-coverage-report-action@v2.5.1
+        uses:  davelosert/vitest-coverage-report-action@v2.6.0
