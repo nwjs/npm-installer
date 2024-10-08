@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4.2.1
       - name: Setup Node
         uses: actions/setup-node@v4.0.4
         with:
@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4.2.1
       - name: Publish latest tag to npm 
         uses: JS-DevTools/npm-publish@v3.1.1
         with:
