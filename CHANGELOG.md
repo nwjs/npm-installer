@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [0.94.1-1]
+
+### Added
+
+- Set `allowExcessArguments` to `true` in `commander` [6bcbfec](https://github.com/nwjs/npm-installer/commit/6bcbfec1b1b4600a73288f382c98b8ff952df900)
+
 ## [0.91.0]
 
 ### Changed
