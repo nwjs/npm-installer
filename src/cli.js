@@ -18,6 +18,7 @@ async function cli() {
     .option('--platform <platform>', 'Host platform')
     .option('--arch <arch>', 'Host architecture')
     .option('--cacheDir <cacheDir>', 'File path to cache directory')
+    .allowExcessArguments(true)
     .allowUnknownOption() // this allows chromium and node options to be passed through to the nwjs binary
     .parse(process.argv);
 
