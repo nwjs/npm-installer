@@ -20,6 +20,7 @@ import util from "./util.js";
  * @property {boolean}                              [cache = true]                        If false, remove cache and redownload.
  * @property {boolean}                              [ffmpeg = false]                      If true, ffmpeg is not downloaded.
  * @property {false | "gyp"}                        [nativeAddon = false]                 Rebuild native modules
+ * @property {boolean}                              [shaSum = true]                       Flag to enable/disable shasum checks.
  */
 
 /**
