@@ -30,14 +30,6 @@ npm install --save-dev nw@0.95.0
 
 > You may use `npm view nw versions` to view the list of available versions.
 
-### Specify build flavor:
-
-```shell
-npm install --save-dev nw@sdk
-```
-
-Or set `nwjs_build_type=sdk` in `.npmrc` or `NWJS_BUILD_TYPE=sdk` environment variable.
-
 ### Specify platform:
 
 Set `nwjs_platform` in `.npmrc` or `NWJS_PLATFORM` environment variable. Defaults to `process.platform`.
@@ -115,7 +107,7 @@ Options:
 | Name | Type    | Default   | Description | CLI Usage | .npmrc Usage | .env Usage | Module Usage |
 | ---- | ------- | --------- | ----------- | --------- | ------------ | ---------- | ------------ |
 | version | `string \| "latest" \| "stable"` | `"latest"` | Runtime version | `npm install --save-dev nw` | `` | `` | `get({ version: "latest" })` |
-| flavor | `"normal" \| "sdk"` | `"normal"` | Runtime flavor |
+| flavor | `"normal" \| "sdk"` | `"normal"` | Runtime flavor | `npm install --save-dev nw@sdk` | `nwjs_build_type=sdk` | `export NWJS_BUILD_TYPE=sdk` | `get({ flavor: "sdk" })` |
 | platform | `"linux" \| "osx" \| "win"` | | Host platform |
 | arch | `"ia32" \| "x64" \| "arm64"` | | Host architecture |
 | downloadUrl | `"https://dl.nwjs.io" \| "https://npm.taobao.org/mirrors/nwjs" \| https://npmmirror.com/mirrors/nwjs \| "https://github.com/corwin-of-amber/nw.js/releases/"` | `"https://dl.nwjs.io"` | Download server |
