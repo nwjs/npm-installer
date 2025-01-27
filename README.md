@@ -114,7 +114,7 @@ Options:
 
 | Name | Type    | Default   | Description | CLI Usage | .npmrc Usage | .env Usage | Module Usage |
 | ---- | ------- | --------- | ----------- | --------- | ------------ | ---------- | ------------ |
-| version | `string \| "latest" \| "stable"` | `"latest"` | Runtime version |
+| version | `string \| "latest" \| "stable"` | `"latest"` | Runtime version | `npm install --save-dev nw` | `` | `` | `get({ version: "latest" })` |
 | flavor | `"normal" \| "sdk"` | `"normal"` | Runtime flavor |
 | platform | `"linux" \| "osx" \| "win"` | | Host platform |
 | arch | `"ia32" \| "x64" \| "arm64"` | | Host architecture |
