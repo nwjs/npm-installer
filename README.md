@@ -25,7 +25,7 @@ npm install --save-dev nw
 ### Specific version with changes to installer:
 
 ```shell
-npm install --save-dev nw@0.85.0-1
+npm install --save-dev nw@0.95.0
 ```
 
 > You may use `npm view nw versions` to view the list of available versions.
@@ -112,8 +112,8 @@ await get({
 
 Options:
 
-| Name | Type    | Default   | Description |
-| ---- | ------- | --------- | ----------- |
+| Name | Type    | Default   | Description | CLI Usage | .npmrc Usage | .env Usage | Module Usage |
+| ---- | ------- | --------- | ----------- | --------- | ------------ | ---------- | ------------ |
 | version | `string \| "latest" \| "stable"` | `"latest"` | Runtime version |
 | flavor | `"normal" \| "sdk"` | `"normal"` | Runtime flavor |
 | platform | `"linux" \| "osx" \| "win"` | | Host platform |
