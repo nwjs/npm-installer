@@ -30,10 +30,6 @@ npm install --save-dev nw@0.95.0
 
 > You may use `npm view nw versions` to view the list of available versions.
 
-### Specify platform:
-
-Set `nwjs_platform` in `.npmrc` or `NWJS_PLATFORM` environment variable. Defaults to `process.platform`.
-
 ### Specify architecture:
 
 Set `nwjs_arch` in `.npmrc` or `NWJS_ARCH` environment variable. Defaults to `process.arch`.
@@ -108,7 +104,7 @@ Options:
 | ---- | ------- | --------- | ----------- | --------- | ------------ | ---------- | ------------ |
 | version | `string \| "latest" \| "stable"` | `"latest"` | Runtime version | `npm install --save-dev nw` | `` | `` | `get({ version: "latest" })` |
 | flavor | `"normal" \| "sdk"` | `"normal"` | Runtime flavor | `npm install --save-dev nw@sdk` | `nwjs_build_type=sdk` | `export NWJS_BUILD_TYPE=sdk` | `get({ flavor: "sdk" })` |
-| platform | `"linux" \| "osx" \| "win"` | | Host platform |
+| platform | `"linux" \| "osx" \| "win"` | | Host platform | `npm install --save-dev --nwjs-platform nw@sdk` | `nwjs_platform=linux` | `NWJS_PLATFORM=linux` | `get({ platform: "linux" })` |
 | arch | `"ia32" \| "x64" \| "arm64"` | | Host architecture |
 | downloadUrl | `"https://dl.nwjs.io" \| "https://npm.taobao.org/mirrors/nwjs" \| https://npmmirror.com/mirrors/nwjs \| "https://github.com/corwin-of-amber/nw.js/releases/"` | `"https://dl.nwjs.io"` | Download server |
 | cacheDir | `string` | `"./cache"` | Directory to cache NW binaries |
