@@ -16,7 +16,7 @@ jobs:
         os:
         - macos-15
         - ubuntu-24.04
-        - windows-2024
+        - windows-2025
       fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:
