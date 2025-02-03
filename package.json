@@ -33,7 +33,7 @@
   "dependencies": {
     "axios": "^1.7.9",
     "commander": "^13.1.0",
-    "semver": "^7.6.3",
+    "semver": "^7.7.0",
     "tar": "^7.4.3",
     "yauzl-promise": "^4.0.0"
   },
@@ -50,7 +50,7 @@
     "application"
   ],
   "devDependencies": {
-    "@vitest/coverage-v8": "^3.0.4",
+    "@vitest/coverage-v8": "^3.0.5",
     "selenium-webdriver": "^4.28.1",
     "vitest": "^3.0.4"
   }
