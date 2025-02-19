@@ -9,17 +9,17 @@ import util from '../src/util.js';
 
 /**
  * @typedef {object} ParseOptions
- * @property {string | "latest" | "stable" | "lts"} version                  Runtime version
+ * @property {string | "latest" | "stable" | "lts"} version                 Runtime version
  * @property {"normal" | "sdk"}                     flavor                  Build flavor
- * @property {"linux" | "osx" | "win"}              platform                            Target platform
- * @property {"ia32" | "x64" | "arm64"}             arch                                Target arch
- * @property {string}                               downloadUrl  Download server.
+ * @property {"linux" | "osx" | "win"}              platform                Target platform
+ * @property {"ia32" | "x64" | "arm64"}             arch                    Target arch
+ * @property {string}                               downloadUrl             Download server.
  * @property {string}                               cacheDir                Cache directory
  * @property {string}                               srcDir                  Source directory
- * @property {boolean}                              cache                        If false, remove cache and redownload.
- * @property {boolean}                              ffmpeg                      If true, ffmpeg is not downloaded.
- * @property {false | "gyp"}                        nativeAddon                   Rebuild native modules
- * @property {boolean}                              unref                         Unref the child process and unblock the caller
+ * @property {boolean}                              cache                   If false, remove cache and redownload.
+ * @property {boolean}                              ffmpeg                  If true, ffmpeg is not downloaded.
+ * @property {false | "gyp"}                        nativeAddon             Rebuild native modules
+ * @property {boolean}                              unref                   Unref the child process and unblock the caller
  */
 
 /**
