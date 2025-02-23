@@ -30,10 +30,6 @@ npm install --save-dev nw@0.95.0
 
 > You may use `npm view nw versions` to view the list of available versions.
 
-### Specify cache flag:
-
-Set `nwjs_cache` in `.npmrc` or `NWJS_ARCH` environment variable to keep or delete cached binaries. Defaults to `true`.
-
 ### Specify ffmpeg flag:
 
 Set `nwjs_ffmpeg` in `.npmrc` or `NWJS_ARCH` environment variable to toggle downloading [community FFmpeg binaries](https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt). Defaults to `false`.
