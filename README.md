@@ -30,10 +30,6 @@ npm install --save-dev nw@0.95.0
 
 > You may use `npm view nw versions` to view the list of available versions.
 
-### Specify architecture:
-
-Set `nwjs_arch` in `.npmrc` or `NWJS_ARCH` environment variable. Defaults to `process.arch`.
-
 ### Specify cache directory:
 
 Set `nwjs_cache_dir` in `.npmrc` or `NWJS_ARCH` environment variable. Defaults to `./node_modules/nw`.
