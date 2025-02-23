@@ -30,10 +30,6 @@ npm install --save-dev nw@0.95.0
 
 > You may use `npm view nw versions` to view the list of available versions.
 
-### Specify unref flag
-
-Set `nwjs_unref` in `.npmrc` or `NWJS_UNREF` environment variable. Default to `false`. This is useful if you're using `nw` package to call the executable and want to prevent zombie processes eating up memory.
-
 ## Usage
 
 Add a script in your `package.json`:
@@ -87,6 +83,7 @@ Options:
 | cache | `boolean` | `true`| If true the existing cache is used. Otherwise it removes and redownloads it. | `npm install --save-dev --nwjs-cache=true` | `nwjs_cache=true` | `NWJS_CACHE=true` | `get({ cache: true })` |
 | ffmpeg | `boolean` | `false`| If true the chromium ffmpeg is replaced by [community version](https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt) with proprietary codecs. | `npm install --save-dev --nwjs-ffmpeg=true` | `nwjs_ffmpeg=true` | `NWJS_FFMPEG=true` | `get({ ffmpeg: true })` |
 | nodeAddon | `false \| "gyp"` | `false` | Download Node headers | `npm install --save-dev --nwjs-native-addon=true` | `nwjs_native_addon=true` | `NWJS_NATIVE_ADDON=true` | `get({ nativeAddon: true })` |
+| unref | `boolean` | `false` | [Prevent the parent process from waiting for a given subprocess](https://nodejs.org/api/child_process.html#subprocessunref). This is useful if you're using `nw` package to call the executable and want to prevent zombie processes eating up memory. | `npm install --save-dev --nwjs-unref=true` | `nwjs_unref=true` | `NWJS_UNREF=true` | `get({ unref: true })` |
 
 ## License
 
