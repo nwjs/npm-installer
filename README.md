@@ -68,7 +68,8 @@ let path = await findpath('chromedriver', { flavor: 'sdk' });
 import { get } from 'nw';
 
 await get({
-  // options
+  version: '0.14.7'
+  // other options
 });
 ```
 
