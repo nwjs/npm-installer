@@ -25,7 +25,7 @@ npm install --save-dev nw
 ### Specific version with changes to installer:
 
 ```shell
-npm install --save-dev nw@0.95.0
+npm install --save-dev nw@0.96.0
 ```
 
 > You may use `npm view nw versions` to view the list of available versions.
