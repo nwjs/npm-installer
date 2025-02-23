@@ -30,14 +30,6 @@ npm install --save-dev nw@0.95.0
 
 > You may use `npm view nw versions` to view the list of available versions.
 
-### Specify ffmpeg flag:
-
-Set `nwjs_ffmpeg` in `.npmrc` or `NWJS_ARCH` environment variable to toggle downloading [community FFmpeg binaries](https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt). Defaults to `false`.
-
-### Specify Native Addon flag:
-
-Set `nwjs_native_addon` in `.npmrc` or `NWJS_NATIVE_ADDON` environment variable to toggle downloading NW.js Node headers. Defaults to `false`.
-
 ### Specify download URL:
 
 Set `nwjs_urlbase` in `.npmrc`or `NWJS_URLBASE` environment variable. Defaults to `https://dl.nwjs.io`. The file system (`file://`) is also supported (for example, `file:///home/localghost/local_mirror`).
@@ -97,8 +89,8 @@ Options:
 | downloadUrl | `"https://dl.nwjs.io" \| "https://npm.taobao.org/mirrors/nwjs" \| https://npmmirror.com/mirrors/nwjs \| "https://github.com/corwin-of-amber/nw.js/releases/"` | `"https://dl.nwjs.io"` | Download server |
 | cacheDir | `string` | `"./node_modules/nw"` | Directory to cache NW binaries | `npm install --save-dev --nwjs-cache-dir ./cache` | `nwjs_cache_dir=./cache` | `NWJS_CACHE_DIR=./cache` | `get({ cacheDir: "./cache" })` |
 | cache | `boolean` | `true`| If true the existing cache is used. Otherwise it removes and redownloads it. | `npm install --save-dev --nwjs-cache=true` | `nwjs_cache=true` | `NWJS_CACHE=true` | `get({ cache: true })` |
-| ffmpeg | `boolean` | `false`| If true the chromium ffmpeg is replaced by community version with proprietary codecs. |
-| nodeAddon | `false \| "gyp"` | `false` | Download Node headers |
+| ffmpeg | `boolean` | `false`| If true the chromium ffmpeg is replaced by [community version](https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt) with proprietary codecs. | `npm install --save-dev --nwjs-ffmpeg=true` | `nwjs_ffmpeg=true` | `NWJS_FFMPEG=true` | `get({ ffmpeg: true })` |
+| nodeAddon | `false \| "gyp"` | `false` | Download Node headers | `npm install --save-dev --nwjs-native-addon=true` | `nwjs_native_addon=true` | `NWJS_NATIVE_ADDON=true` | `get({ nativeAddon: true })` |
 
 ## License
 
