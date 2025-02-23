@@ -99,7 +99,7 @@ Options:
 | platform | `"linux" \| "osx" \| "win"` | | Host platform | `npm install --save-dev --nwjs-platform nw` | `nwjs_platform=linux` | `NWJS_PLATFORM=linux` | `get({ platform: "linux" })` |
 | arch | `"ia32" \| "x64" \| "arm64"` | | Host architecture | `npm install --save-dev --nwjs-arch nw` | `nwjs_arch=x64` | `NWJS_ARCH=x64` | `get({ arch: "x64"})` |
 | downloadUrl | `"https://dl.nwjs.io" \| "https://npm.taobao.org/mirrors/nwjs" \| https://npmmirror.com/mirrors/nwjs \| "https://github.com/corwin-of-amber/nw.js/releases/"` | `"https://dl.nwjs.io"` | Download server |
-| cacheDir | `string` | `"./node_modules/nw"` | Directory to cache NW binaries | `npm install --save-dev --nwjs-cache-dir ./cache` | `nwjs_cache_dir=./cache` | `NWJS_CACHE_DIR=./cache` |
+| cacheDir | `string` | `"./node_modules/nw"` | Directory to cache NW binaries | `npm install --save-dev --nwjs-cache-dir ./cache` | `nwjs_cache_dir=./cache` | `NWJS_CACHE_DIR=./cache` | `get({ cacheDir: "./cache" })` |
 | cache | `boolean` | `true`| If true the existing cache is used. Otherwise it removes and redownloads it. |
 | ffmpeg | `boolean` | `false`| If true the chromium ffmpeg is replaced by community version with proprietary codecs. |
 | nodeAddon | `false \| "gyp"` | `false` | Download Node headers |
