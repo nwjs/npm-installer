@@ -30,6 +30,8 @@ npm install --save-dev nw@0.96.0
 
 > You may use `npm view nw versions` to view the list of available versions.
 
+For more options, see the Options table below.
+
 ## Usage
 
 Add a script in your `package.json`:
@@ -42,7 +44,7 @@ Add a script in your `package.json`:
 }
 ```
 
-Executing `npm start` runs the NW.js app. Omitting the file path makes NW.js check for valid project in current working directory. You can also call `nw` directly from `node_modules/.bin/nw`.
+Executing `npm start` runs the NW.js app. Omitting the file path makes NW.js check for valid project in current working directory. You can also call `nw` directly from `./node_modules/.bin/nw`.
 
 ## APIs
 
@@ -70,14 +72,14 @@ await get({
 });
 ```
 
-Options:
+## Options:
 
 | Name | Type    | Default   | Description | CLI Usage | .npmrc Usage | .env Usage | Module Usage |
 | ---- | ------- | --------- | ----------- | --------- | ------------ | ---------- | ------------ |
 | version | `string \| "latest" \| "stable"` | `"latest"` | Runtime version | `npm install --save-dev nw` | `` | `` | `get({ version: "latest" })` |
 | flavor | `"normal" \| "sdk"` | `"normal"` | Runtime flavor | `npm install --save-dev nw@sdk` | `nwjs_build_type=sdk` | `export NWJS_BUILD_TYPE=sdk` | `get({ flavor: "sdk" })` |
-| platform | `"linux" \| "osx" \| "win"` | | Host platform | `npm install --save-dev --nwjs-platform nw` | `nwjs_platform=linux` | `NWJS_PLATFORM=linux` | `get({ platform: "linux" })` |
-| arch | `"ia32" \| "x64" \| "arm64"` | | Host architecture | `npm install --save-dev --nwjs-arch nw` | `nwjs_arch=x64` | `NWJS_ARCH=x64` | `get({ arch: "x64"})` |
+| platform | `"linux" \| "osx" \| "win"` | `<defaults to host platform>` | Host platform | `npm install --save-dev --nwjs-platform nw` | `nwjs_platform=linux` | `NWJS_PLATFORM=linux` | `get({ platform: "linux" })` |
+| arch | `"ia32" \| "x64" \| "arm64"` | `<defaults to architecture platform>` | Host architecture | `npm install --save-dev --nwjs-arch nw` | `nwjs_arch=x64` | `NWJS_ARCH=x64` | `get({ arch: "x64"})` |
 | downloadUrl | `"https://dl.nwjs.io" \| "https://npm.taobao.org/mirrors/nwjs" \| https://npmmirror.com/mirrors/nwjs \| "https://github.com/corwin-of-amber/nw.js/releases/"` | `"https://dl.nwjs.io"` | Download server (https and file system is supported, for eg `file:///home/user/nwjs_cache`) | `npm install --save-dev --nwjs-urlbase=https://dl.nwjs.io` | `nwjs_urlbase=https://dl.nwjs.io` | `NWJS_URLBASE=https://dl.nwjs.io` | `get({ downloadUrl: "https://dl.nwjs.io"})` |
 | cacheDir | `string` | `"./node_modules/nw"` | Directory to cache NW binaries | `npm install --save-dev --nwjs-cache-dir ./cache` | `nwjs_cache_dir=./cache` | `NWJS_CACHE_DIR=./cache` | `get({ cacheDir: "./cache" })` |
 | cache | `boolean` | `true`| If true the existing cache is used. Otherwise it removes and redownloads it. | `npm install --save-dev --nwjs-cache=true` | `nwjs_cache=true` | `NWJS_CACHE=true` | `get({ cache: true })` |
