@@ -88,6 +88,7 @@ await get({
 | ffmpeg | `boolean` | `false`| If true the chromium ffmpeg is replaced by [community version](https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt) with proprietary codecs. | `npm install --save-dev --nwjs-ffmpeg=true nw` | `nwjs_ffmpeg=true` | `NWJS_FFMPEG=true` | `get({ ffmpeg: true })` |
 | nodeAddon | `false \| "gyp"` | `false` | Download Node headers | `npm install --save-dev --nwjs-native-addon=true nw` | `nwjs_native_addon=true` | `NWJS_NATIVE_ADDON=true` | `get({ nativeAddon: true })` |
 | unref | `boolean` | `false` | [Prevent the parent process from waiting for a given subprocess](https://nodejs.org/api/child_process.html#subprocessunref). This is useful if you're using `nw` package to call the executable and want to prevent zombie processes eating up memory. | `npm install --save-dev --nwjs-unref=true nw` | `nwjs_unref=true` | `NWJS_UNREF=true` | `get({ unref: true })` |
+<!-- todo add shaSum -->
 
 > Note: While using the CLI interface, /path/to/project refers to options.srcDir in the JavaScript API or JSON object.
 
