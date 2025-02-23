@@ -5,6 +5,10 @@ on:
     branches:
     - main
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   sdk:
     runs-on: ubuntu-24.04
@@ -18,7 +22,7 @@ jobs:
           node-version: 20
       - name: Prepare for SDK release
         run: node .github/sdk.js
-      - name: Publish sdk tag to npm 
+      - name: Publish sdk tag to npm
         uses: JS-DevTools/npm-publish@v3.1.1
         with:
           token: ${{ secrets.NPM_TOKEN }}
@@ -29,7 +33,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.2.2
-      - name: Publish latest tag to npm 
+      - name: Publish latest tag to npm
         uses: JS-DevTools/npm-publish@v3.1.1
         with:
           token: ${{ secrets.NPM_TOKEN }}
