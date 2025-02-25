@@ -50,8 +50,8 @@
     "application"
   ],
   "devDependencies": {
-    "@vitest/coverage-v8": "^3.0.6",
-    "selenium-webdriver": "^4.28.1",
+    "@vitest/coverage-v8": "^3.0.7",
+    "selenium-webdriver": "^4.29.0",
     "vitest": "^3.0.4"
   }
 }
