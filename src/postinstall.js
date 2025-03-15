@@ -9,8 +9,6 @@ import semver from 'semver';
 import get from './get.js';
 import util from './util.js';
 
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
-
 await postinstall()
     .catch((error) => {
         if (error.code === 'EPERM') {
