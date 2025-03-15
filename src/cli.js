@@ -33,6 +33,7 @@ async function cli() {
     arch: options.arch,
     cacheDir: options.cacheDir,
     srcDir: program.args[0],
+    unref: options.unref,
     args: program.args.slice(1),
   });
 
