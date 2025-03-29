@@ -16,6 +16,7 @@ permissions:
 jobs:
   sdk:
     runs-on: ubuntu-24.04
+    if: secrets.NPM_TOKEN != ''
     steps:
       - name: Check if NPM_TOKEN is set
         run: |
