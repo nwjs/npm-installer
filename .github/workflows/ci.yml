@@ -9,6 +9,10 @@ concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   tests:
     strategy:
@@ -31,8 +35,8 @@ jobs:
           cache: "npm"
       - name: Install dependencies
         run: npm ci --nwjs-build-type=sdk
-      - name: Run tests
-        run: npm t
+      - name: Enable Coverage
+        run: npm run test:coverage
       - name: Report Coverage
         if: always()
         uses:  davelosert/vitest-coverage-report-action@v2.8.0

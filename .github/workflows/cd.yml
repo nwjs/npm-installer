@@ -9,19 +9,26 @@ concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   sdk:
     runs-on: ubuntu-24.04
     if: secrets.NPM_TOKEN != ''
     steps:
+      - name: Check if NPM_TOKEN is set
+        run: |
+          if [ -z "${{ secrets.NPM_TOKEN }}" ]; then
+            echo "NPM_TOKEN is not set, skipping job."
+            exit 1
+          fi
+        continue-on-error: true
       - name: Checkout repository
         uses: actions/checkout@v4.2.2
-      - name: Setup Node
-        uses: actions/setup-node@v4.1.0
-        with:
-          node-version: 20
       - name: Prepare for SDK release
-        run: node .github/sdk.js
+        run:  jq '.version += "-sdk"' "./package.json" > tmp.json && mv ./tmp.json ./package.json
       - name: Publish sdk tag to npm
         uses: JS-DevTools/npm-publish@v3.1.1
         with:
