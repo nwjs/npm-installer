@@ -26,12 +26,8 @@ jobs:
         continue-on-error: true
       - name: Checkout repository
         uses: actions/checkout@v4.2.2
-      - name: Setup Node
-        uses: actions/setup-node@v4.1.0
-        with:
-          node-version: 23
       - name: Prepare for SDK release
-        run: node .github/sdk.js
+        run:  jq '.version += "-sdk"' "./package.json" > tmp.json && mv ./tmp.json ./package.json
       - name: Publish sdk tag to npm
         uses: JS-DevTools/npm-publish@v3.1.1
         with:
