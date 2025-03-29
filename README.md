@@ -25,50 +25,12 @@ npm install --save-dev nw
 ### Specific version with changes to installer:
 
 ```shell
-npm install --save-dev nw@0.85.0-1
+npm install --save-dev nw@0.94.1-1
 ```
 
 > You may use `npm view nw versions` to view the list of available versions.
 
-### Specify build flavor:
-
-```shell
-npm install --save-dev nw@sdk
-```
-
-Or set `nwjs_build_type=sdk` in `.npmrc` or `NWJS_BUILD_TYPE=sdk` environment variable.
-
-### Specify platform:
-
-Set `nwjs_platform` in `.npmrc` or `NWJS_PLATFORM` environment variable. Defaults to `process.platform`.
-
-### Specify architecture:
-
-Set `nwjs_arch` in `.npmrc` or `NWJS_ARCH` environment variable. Defaults to `process.arch`.
-
-### Specify cache directory:
-
-Set `nwjs_cache_dir` in `.npmrc` or `NWJS_ARCH` environment variable. Defaults to `./node_modules/nw`.
-
-### Specify cache flag:
-
-Set `nwjs_cache` in `.npmrc` or `NWJS_ARCH` environment variable to keep or delete cached binaries. Defaults to `true`.
-
-### Specify ffmpeg flag:
-
-Set `nwjs_ffmpeg` in `.npmrc` or `NWJS_ARCH` environment variable to toggle downloading [community FFmpeg binaries](https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt). Defaults to `false`.
-
-### Specify Native Addon flag:
-
-Set `nwjs_native_addon` in `.npmrc` or `NWJS_NATIVE_ADDON` environment variable to toggle downloading NW.js Node headers. Defaults to `false`.
-
-### Specify download URL:
-
-Set `nwjs_urlbase` in `.npmrc`or `NWJS_URLBASE` environment variable. Defaults to `https://dl.nwjs.io`. The file system (`file://`) is also supported (for example, `file:///home/localghost/local_mirror`).
-
-### Specify unref flag
-
-Set `nwjs_unref` in `.npmrc` or `NWJS_UNREF` environment variable. Default to `false`. This is useful if you're using `nw` package to call the executable and want to prevent zombie processes eating up memory.
+For more options, see the Options table below.
 
 ## Usage
 
@@ -82,7 +44,7 @@ Add a script in your `package.json`:
 }
 ```
 
-Executing `npm start` runs the NW.js app. Omitting the file path makes NW.js check for valid project in current working directory. You can also call `nw` directly from `node_modules/.bin/nw`.
+Executing `npm start` runs the NW.js app. Omitting the file path makes NW.js check for valid project in current working directory. You can also call `nw` directly from `./node_modules/.bin/nw`.
 
 ## APIs
 
@@ -106,23 +68,29 @@ let path = await findpath('chromedriver', { flavor: 'sdk' });
 import { get } from 'nw';
 
 await get({
-  // options
+  version: '0.14.7'
+  // other options
 });
 ```
 
-Options:
+## Options:
 
-| Name | Type    | Default   | Description |
-| ---- | ------- | --------- | ----------- |
-| version | `string \| "latest" \| "stable"` | `"latest"` | Runtime version |
-| flavor | `"normal" \| "sdk"` | `"normal"` | Runtime flavor |
-| platform | `"linux" \| "osx" \| "win"` | | Host platform |
-| arch | `"ia32" \| "x64" \| "arm64"` | | Host architecture |
-| downloadUrl | `"https://dl.nwjs.io" \| "https://npm.taobao.org/mirrors/nwjs" \| https://npmmirror.com/mirrors/nwjs \| "https://github.com/corwin-of-amber/nw.js/releases/"` | `"https://dl.nwjs.io"` | Download server |
-| cacheDir | `string` | `"./cache"` | Directory to cache NW binaries |
-| cache | `boolean` | `true`| If true the existing cache is used. Otherwise it removes and redownloads it. |
-| ffmpeg | `boolean` | `false`| If true the chromium ffmpeg is replaced by community version with proprietary codecs. |
-| nodeAddon | `false \| "gyp"` | `false` | Download Node headers |
+| Name | Type    | Default   | Description | CLI Usage | .npmrc Usage | .env Usage | Module Usage |
+| ---- | ------- | --------- | ----------- | --------- | ------------ | ---------- | ------------ |
+| version | `string \| "latest" \| "stable"` | `"latest"` | Runtime version | `npm install --save-dev nw` | `` | `` | `get({ version: "latest" })` |
+| flavor | `"normal" \| "sdk"` | `"normal"` | Runtime flavor | `npm install --save-dev nw@sdk` | `nwjs_build_type=sdk` | `export NWJS_BUILD_TYPE=sdk` | `get({ flavor: "sdk" })` |
+| platform | `"linux" \| "osx" \| "win"` | `<defaults to host platform>` | Host platform | `npm install --save-dev --nwjs-platform nw` | `nwjs_platform=linux` | `NWJS_PLATFORM=linux` | `get({ platform: "linux" })` |
+| arch | `"ia32" \| "x64" \| "arm64"` | `<defaults to architecture platform>` | Host architecture | `npm install --save-dev --nwjs-arch nw` | `nwjs_arch=x64` | `NWJS_ARCH=x64` | `get({ arch: "x64"})` |
+| downloadUrl | `"https://dl.nwjs.io" \| "https://npm.taobao.org/mirrors/nwjs" \| https://npmmirror.com/mirrors/nwjs \| "https://github.com/corwin-of-amber/nw.js/releases/ nw"` | `"https://dl.nwjs.io"` | Download server (https and file system is supported, for eg `file:///home/user/nwjs_cache`) | `npm install --save-dev --nwjs-urlbase=https://dl.nwjs.io` | `nwjs_urlbase=https://dl.nwjs.io` | `NWJS_URLBASE=https://dl.nwjs.io` | `get({ downloadUrl: "https://dl.nwjs.io"})` |
+| cacheDir | `string` | `./node_modules/nw` | Directory to cache NW binaries | `npm install --save-dev --nwjs-cache-dir ./cache nw` | `nwjs_cache_dir=./cache` | `NWJS_CACHE_DIR=./cache` | `get({ cacheDir: "./cache" })` |
+| sirDir | `string` | `.` | File path to NW.js project | `nw .` | `` | `` | `get({ srcDir: "." })` |
+| cache | `boolean` | `true`| If true the existing cache is used. Otherwise it removes and redownloads it. | `npm install --save-dev --nwjs-cache=true nw` | `nwjs_cache=true` | `NWJS_CACHE=true` | `get({ cache: true })` |
+| ffmpeg | `boolean` | `false`| If true the chromium ffmpeg is replaced by [community version](https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt) with proprietary codecs. | `npm install --save-dev --nwjs-ffmpeg=true nw` | `nwjs_ffmpeg=true` | `NWJS_FFMPEG=true` | `get({ ffmpeg: true })` |
+| nodeAddon | `false \| "gyp"` | `false` | Download Node headers | `npm install --save-dev --nwjs-native-addon=true nw` | `nwjs_native_addon=true` | `NWJS_NATIVE_ADDON=true` | `get({ nativeAddon: true })` |
+| unref | `boolean` | `false` | [Prevent the parent process from waiting for a given subprocess](https://nodejs.org/api/child_process.html#subprocessunref). This is useful if you're using `nw` package to call the executable and want to prevent zombie processes eating up memory. | `npm install --save-dev --nwjs-unref=true nw` | `nwjs_unref=true` | `NWJS_UNREF=true` | `get({ unref: true })` |
+shaSum | `boolean` | `true` | If true, then shasums are verified. Otherwise, it is ignored. | `npm install --save-dev --nwjs-shasum=true nw` | `nwjs_shasum=true` | `NWJS_SHASUM=true` | `get({ shaSum: true })` |
+
+> Note: While using the CLI interface, /path/to/project refers to options.srcDir in the JavaScript API or JSON object.
 
 ## License
 
