@@ -2,32 +2,44 @@ name: cd
 
 on:
   push:
-    branches: [ main ]
+    branches:
+    - main
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   sdk:
     runs-on: ubuntu-24.04
     steps:
+      - name: Check if NPM_TOKEN is set
+        run: |
+          if [ -z "${{ secrets.NPM_TOKEN }}" ]; then
+            echo "NPM_TOKEN is not set, skipping job."
+            exit 1
+          fi
+        continue-on-error: true
       - name: Checkout repository
         uses: actions/checkout@v4.2.2
       - name: Setup Node
         uses: actions/setup-node@v4.1.0
         with:
-          node-version: 20
+          node-version: 23
       - name: Prepare for SDK release
         run: node .github/sdk.js
-      - name: Publish sdk tag to npm 
+      - name: Publish sdk tag to npm
         uses: JS-DevTools/npm-publish@v3.1.1
         with:
           token: ${{ secrets.NPM_TOKEN }}
           tag: sdk
   normal:
     needs: [ sdk ]
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.2.2
-      - name: Publish latest tag to npm 
+      - name: Publish latest tag to npm
         uses: JS-DevTools/npm-publish@v3.1.1
         with:
           token: ${{ secrets.NPM_TOKEN }}
