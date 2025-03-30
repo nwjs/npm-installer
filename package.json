@@ -13,7 +13,7 @@
   },
   "scripts": {
     "postinstall": "node src/postinstall.js",
-    "test": "vitest run --coverage.enabled true"
+    "test:coverage": "vitest run --coverage.enabled true"
   },
   "files": [
     "src"
