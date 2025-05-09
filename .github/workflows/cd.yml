@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Check if NPM_TOKEN is set
         run: |
-          if [ -z "${{ secrets.NPM_TOKEN }}" ]; then
+          if [ "${{ secrets.NPM_TOKEN }}" ]; then
             echo "NPM_TOKEN is not set, skipping job."
             exit 1
           fi
