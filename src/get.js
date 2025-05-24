@@ -6,6 +6,7 @@ import decompress from "./decompress.js";
 import ffmpeg from "./ffmpeg.js";
 import node from "./node.js";
 import nw from "./nw.js";
+import verify from "./verify.js";
 
 import util from "./util.js";
 
