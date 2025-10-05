@@ -35,11 +35,11 @@ jobs:
           fi
         continue-on-error: true
       - name: Checkout repository
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v5.0.0
       - name: Prepare for SDK release
         run:  jq '.version += "-sdk"' "./package.json" > tmp.json && mv ./tmp.json ./package.json
       - name: Publish sdk tag to npm
-        uses: JS-DevTools/npm-publish@v3.1.1
+        uses: JS-DevTools/npm-publish@v4.1.1
         with:
           token: ${{ secrets.NPM_TOKEN }}
           tag: sdk
@@ -48,9 +48,9 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v5.0.0
       - name: Publish latest tag to npm
-        uses: JS-DevTools/npm-publish@v3.1.1
+        uses: JS-DevTools/npm-publish@v4.1.1
         with:
           token: ${{ secrets.NPM_TOKEN }}
           tag: latest
