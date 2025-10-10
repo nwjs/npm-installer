@@ -29,7 +29,7 @@ export default async function verify(shaUrl, shaOut, cacheDir) {
   const shasum = await fs.promises.readFile(shaOut, { encoding: 'utf-8' });
   const shasums = shasum.trim().split('\n');
   for await (const line of shasums) {
-    const [storedSha, filePath] = line.split('  ');
+    const [storedSha, filePath] = line.split(/\s+/);
     const relativeFilePath = path.resolve(cacheDir, filePath);
     const relativefilePathExists = await util.fileExists(relativeFilePath);
     if (relativefilePathExists) {
@@ -38,7 +38,11 @@ export default async function verify(shaUrl, shaOut, cacheDir) {
       hash.update(fileBuffer);
       const generatedSha = hash.digest('hex');
       if (storedSha !== generatedSha) {
-        throw new Error('SHA256 checksums do not match.');
+        if (filePath.includes('ffmpeg') && ffmpeg) {
+          console.warn(`The generated shasum for the community ffmpeg at ${filePath} is ${generatedSha}. The integrity of this file should be manually verified.`);
+        } else {
+          throw new Error(`SHA256 checksums do not match. The file ${filePath} expected shasum is ${storedSha} but the actual shasum is ${generatedSha}.`);
+        }
       }
     }
   }
