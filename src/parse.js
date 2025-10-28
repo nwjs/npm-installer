@@ -54,10 +54,10 @@ export default async function parse(options) {
     options.downloadUrl = options.downloadUrl || process.env.npm_config_nwjs_urlbase || process.env.NWJS_URLBASE || 'https://dl.nwjs.io';
     options.cacheDir = options.npm_config_nwjs_urlbase || process.env.npm_config_nwjs_cache_dir || process.env.NWJS_CACHE_DIR || path.resolve(__dirname, '..');
     options.srcDir = options.srcDir || process.cwd();
-    options.cache = options.cache || process.env.npm_config_nwjs_cache || process.env.NWJS_CACHE || true;
-    options.ffmpeg = options.ffmpeg || process.env.npm_config_nwjs_ffmpeg || process.env.NWJS_FFMPEG || false;
-    options.nativeAddon = options.nativeAddon || process.env.npm_config_nwjs_native_addon || process.env.NWJS_NATIVE_ADDON || false;
-    options.unref = options.unref || process.env.npm_config_nwjs_unref || process.env.NWJS_UNREF || false;
+    options.cache ??= process.env.npm_config_nwjs_cache !== 'false' && process.env.NWJS_CACHE !== 'false';
+    options.ffmpeg ??= process.env.npm_config_nwjs_ffmpeg === 'true' || process.env.NWJS_FFMPEG === 'true';
+    options.nativeAddon ??= (process.env.npm_config_nwjs_native_addon === 'gyp' || process.env.NWJS_NATIVE_ADDON === 'gyp') ? 'gyp' : false;
+    options.unref ??= process.env.npm_config_nwjs_unref === 'true' || process.env.NWJS_UNREF === 'true';
 
     return { ...options };
 }
