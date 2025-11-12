@@ -7,6 +7,7 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import * as nw from "../../src/index.js";
 import decompress from "../../src/decompress.js";
 import util from '../../src/util.js';
+import { time } from "node:console";
 
 describe("get/decompress", async function () {
 
@@ -33,9 +34,9 @@ describe("get/decompress", async function () {
     }
   });
 
-  it("decompresses a NW.js binary", async function () {
+  it("decompresses a NW.js binary", { timeout: Infinity }, async function () {
     await decompress(nwFilePath, nwOutPath);
-  }, Infinity);
+  });
 
   it.runIf(process.platform === 'darwin')("preserves symlinks on macos", async function () {
     const frameworksPath = path.resolve(process.cwd(), nwOutPath, nwDirPath, "nwjs.app", "Contents", "Frameworks", "nwjs Framework.framework");

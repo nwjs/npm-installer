@@ -18,7 +18,7 @@ describe("get/ffmpeg", function () {
     await fs.promises.mkdir("./tests/fixture", { recursive: true });
   });
 
-  it("downloades community prebuild FFmpeg for specifc platform", async function () {
+  it("downloades community prebuild FFmpeg for specifc platform", { timeout: Infinity }, async function () {
     ffmpegFile = await ffmpeg(
       "https://github.com/nwjs-ffmpeg-prebuilt/nwjs-ffmpeg-prebuilt/releases/download",
       "0.83.0",
@@ -27,5 +27,5 @@ describe("get/ffmpeg", function () {
       "./tests/fixtures"
     );
     expect(util.fileExists(ffmpegFile)).resolves.toBe(true);
-  }, Infinity);
+  });
 });

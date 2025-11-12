@@ -50,7 +50,7 @@ const EXE_NAME = {
 async function findpath(executable = 'nwjs', options = {}) {
     options = await parse(options);
     const nwDir = path.resolve(__dirname, '..', `nwjs${options.flavor === "sdk" ? "-sdk" : ""}-v${options.version}-${options.platform}-${options.arch}`);
-
+    console.log(`[ INFO ] Looking for ${executable} in ${nwDir}`);
     /**
      * File path to executable.
      *
