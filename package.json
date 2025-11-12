@@ -31,9 +31,9 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "axios": "^1.12.2",
-    "commander": "^14.0.1",
-    "semver": "^7.7.2",
+    "axios": "^1.13.2",
+    "commander": "^14.0.2",
+    "semver": "^7.7.3",
     "tar": "^7.5.2",
     "yauzl-promise": "^4.0.0"
   },
@@ -50,8 +50,8 @@
     "application"
   ],
   "devDependencies": {
-    "@vitest/coverage-v8": "^3.2.4",
-    "selenium-webdriver": "^4.36.0",
-    "vitest": "^3.0.4"
+    "@vitest/coverage-v8": "^4.0.8",
+    "selenium-webdriver": "^4.38.0",
+    "vitest": "^4.0.8"
   }
 }
