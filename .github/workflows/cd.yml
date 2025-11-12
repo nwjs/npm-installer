@@ -1,56 +1,90 @@
-name: cd
+name: Publish Package
 
 on:
   push:
     branches:
-    - main
-
-concurrency:
-  group: ${{ github.ref }}
-  cancel-in-progress: true
+      - main  # run only on main branch
 
 permissions:
+  id-token: write  # Required for npm OIDC auth
   contents: read
-  pull-requests: write
 
 jobs:
-  env:
+  publish:
     runs-on: ubuntu-24.04
     steps:
-      - name: Check if NPM_TOKEN is set
-        run: |
-          if [ -z "${{ secrets.NPM_TOKEN }}" ]; then
-            echo "NPM_TOKEN is not set, skipping job."
-            exit 1
-          fi
-  sdk:
-    needs: [ env ]
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Check if NPM_TOKEN is set
-        run: |
-          if [ -z "${{ secrets.NPM_TOKEN }}" ]; then
-            echo "NPM_TOKEN is not set, skipping job."
-            exit 1
-          fi
-        continue-on-error: true
+      # -----------------------------
+      # 1️⃣ Checkout repository
+      # -----------------------------
       - name: Checkout repository
-        uses: actions/checkout@v5.0.0
-      - name: Prepare for SDK release
-        run:  jq '.version += "-sdk"' "./package.json" > tmp.json && mv ./tmp.json ./package.json
-      - name: Publish sdk tag to npm
-        uses: JS-DevTools/npm-publish@v4.1.1
+        uses: actions/checkout@v4
+
+      # -----------------------------
+      # 2️⃣ Detect version change
+      # -----------------------------
+      - name: Detect version change
+        id: version_check
+        run: |
+          # Get last commit that changed package.json (if any)
+          git fetch origin main --depth=2 || true
+
+          # Get current and previous version
+          current_version=$(jq -r .version package.json)
+          previous_version=$(git show HEAD^:package.json 2>/dev/null | jq -r .version || echo "none")
+
+          echo "Current version: $current_version"
+          echo "Previous version: $previous_version"
+
+          if [ "$current_version" = "$previous_version" ]; then
+            echo "No version change detected — skipping publish."
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "Version changed! Proceeding with publish..."
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Stop if no version change
+        if: steps.version_check.outputs.changed == 'false'
+        run: echo "Skipping — package.json version unchanged." && exit 0
+
+      # -----------------------------
+      # 3️⃣ Setup Node.js + npm OIDC
+      # -----------------------------
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          token: ${{ secrets.NPM_TOKEN }}
-          tag: sdk
-  normal:
-    needs: [ sdk ]
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v5.0.0
-      - name: Publish latest tag to npm
-        uses: JS-DevTools/npm-publish@v4.1.1
+          node-version: '25'
+          registry-url: 'https://registry.npmjs.org'
+          always-auth: true
+
+      - name: Ensure latest npm
+        run: npm install -g npm@latest
+
+      # -----------------------------
+      # 4️⃣ Publish SDK version
+      # -----------------------------
+      - name: Prepare SDK package
+        run: |
+          version=$(jq -r .version package.json)
+          sdk_version="${version}-sdk"
+          echo "Publishing SDK version ${sdk_version}"
+          jq ".version = \"${sdk_version}\"" package.json > tmp.json && mv tmp.json package.json
+
+      - name: Publish SDK to npm (tag=sdk)
+        run: npm publish --tag sdk --provenance --access public
+
+      # -----------------------------
+      # 5️⃣ Publish main package
+      # -----------------------------
+      - name: Restore original package.json
+        uses: actions/checkout@v4  # clean restore
+
+      - name: Setup Node.js again
+        uses: actions/setup-node@v4
         with:
-          token: ${{ secrets.NPM_TOKEN }}
-          tag: latest
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          always-auth: true
+
+      - name: Publish latest to npm
+        run: npm publish --tag latest --provenance --access public
