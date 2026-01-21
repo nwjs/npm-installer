@@ -34,7 +34,7 @@
     "axios": "^1.13.2",
     "commander": "^14.0.2",
     "semver": "^7.7.3",
-    "tar": "^7.5.2",
+    "tar": "^7.5.4",
     "yauzl-promise": "^4.0.0"
   },
   "keywords": [
