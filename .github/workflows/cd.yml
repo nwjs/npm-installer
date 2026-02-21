@@ -17,7 +17,7 @@ jobs:
       # 1️⃣ Checkout repository
       # -----------------------------
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       # -----------------------------
       # 2️⃣ Detect version change
@@ -51,7 +51,7 @@ jobs:
       # 3️⃣ Setup Node.js + npm OIDC
       # -----------------------------
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '25'
           registry-url: 'https://registry.npmjs.org'
@@ -77,10 +77,10 @@ jobs:
       # 5️⃣ Publish main package
       # -----------------------------
       - name: Restore original package.json
-        uses: actions/checkout@v4  # clean restore
+        uses: actions/checkout@v6  # clean restore
 
       - name: Setup Node.js again
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
