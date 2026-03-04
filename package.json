@@ -31,7 +31,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "axios": "^1.13.5",
+    "axios": "^1.13.6",
     "commander": "^14.0.3",
     "semver": "^7.7.4",
     "tar": "^7.5.9",
@@ -51,7 +51,7 @@
   ],
   "devDependencies": {
     "@vitest/coverage-v8": "^4.0.18",
-    "selenium-webdriver": "^4.40.0",
+    "selenium-webdriver": "^4.41.0",
     "vitest": "^4.0.8"
   }
 }
