@@ -1,6 +1,6 @@
 {
   "name": "nw",
-  "version": "0.110.0",
+  "version": "0.110.1",
   "description": "An installer for NW.js",
   "repository": {
     "type": "git",
@@ -53,5 +53,6 @@
     "@vitest/coverage-v8": "^4.0.18",
     "selenium-webdriver": "^4.41.0",
     "vitest": "^4.0.8"
-  }
+  },
+  "packageManager": "npm@11.12.1"
 }
