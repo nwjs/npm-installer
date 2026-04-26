@@ -1,17 +1,17 @@
-import fs from 'node:fs';
-import process from 'node:process';
-import path from 'node:path';
-import url from 'node:url';
+import fs from "node:fs";
+import process from "node:process";
+import path from "node:path";
+import url from "node:url";
 
-import get from '@nwutils/getter';
-import semver from 'semver';
+import get from "@nwutils/getter";
+import semver from "semver";
 
-import util from './util.js';
+import util from "./util.js";
 
 await postinstall()
     .catch((error) => {
-        if (error.code === 'EPERM') {
-            console.error('Unable to create symlink since user did not run as Administrator.');
+        if (error.code === "EPERM") {
+            console.error("Unable to create symlink since user did not run as Administrator.");
         } else {
             console.error(error)
         }
@@ -22,7 +22,7 @@ async function postinstall() {
     /**
      * @type {fs.PathLike}
      */
-    const nodeManifestPath = path.resolve(__dirname, '..', 'package.json');
+    const nodeManifestPath = path.resolve(__dirname, "..", "package.json");
     /**
      * @type {object}
      */
@@ -32,9 +32,9 @@ async function postinstall() {
         parsedVersion.major,
         parsedVersion.minor,
         parsedVersion.patch
-    ].join('.');
+    ].join(".");
 
-    let flavor = process.env.npm_config_nwjs_build_type || process.env.NWJS_BUILD_TYPE || 'normal';
+    let flavor = process.env.npm_config_nwjs_build_type || process.env.NWJS_BUILD_TYPE || "normal";
 
     /**
      * If `parsedVersion` is `null`, then prerelease is `"null"`.
@@ -45,19 +45,19 @@ async function postinstall() {
      */
     const prerelease = String(parsedVersion?.prerelease[0]);
     /* Check build flavor and slice that off the `version`. */
-    if (prerelease.endsWith('sdk')) {
-        flavor = 'sdk';
+    if (prerelease.endsWith("sdk")) {
+        flavor = "sdk";
     }
 
     const platform = util.PLATFORM_KV[process.env.npm_config_nwjs_platform || process.env.NWJS_PLATFORM || process.platform];
     const arch = util.ARCH_KV[process.env.npm_config_nwjs_process_arch || process.env.NWJS_ARCH || process.arch];
-    const downloadUrl = process.env.npm_config_nwjs_urlbase || process.env.NWJS_URLBASE || 'https://dl.nwjs.io';
-    const manifestUrl = process.env.npm_config_nwjs_manifest_url || process.env.NWJS_MANIFEST_URL || 'https://nwjs.io/versions.json';
-    const cacheDir = process.env.npm_config_nwjs_cache_dir || process.env.NWJS_CACHE_DIR || '.';
-    const cache = process.env.npm_config_nwjs_cache !== 'false' && process.env.NWJS_CACHE !== 'false';
-    const ffmpeg = process.env.npm_config_nwjs_ffmpeg === 'true' || process.env.NWJS_FFMPEG === 'true';
-    const nativeAddon = (process.env.npm_config_nwjs_native_addon === 'gyp' || process.env.NWJS_NATIVE_ADDON === 'gyp') ? 'gyp' : false;
-    const shaSum = process.env.npm_config_nwjs_shasum !== 'false' && process.env.NWJS_SHASUM !== 'false';
+    const downloadUrl = process.env.npm_config_nwjs_urlbase || process.env.NWJS_URLBASE || "https://dl.nwjs.io";
+    const manifestUrl = process.env.npm_config_nwjs_manifest_url || process.env.NWJS_MANIFEST_URL || "https://nwjs.io/versions.json";
+    const cacheDir = process.env.npm_config_nwjs_cache_dir || process.env.NWJS_CACHE_DIR || ".";
+    const cache = process.env.npm_config_nwjs_cache !== "false" && process.env.NWJS_CACHE !== "false";
+    const ffmpeg = process.env.npm_config_nwjs_ffmpeg === "true" || process.env.NWJS_FFMPEG === "true";
+    const nativeAddon = (process.env.npm_config_nwjs_native_addon === "gyp" || process.env.NWJS_NATIVE_ADDON === "gyp") ? "gyp" : false;
+    const shaSum = process.env.npm_config_nwjs_shasum !== "false" && process.env.NWJS_SHASUM !== "false";
 
     await get({
         version,

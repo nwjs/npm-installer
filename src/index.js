@@ -1,7 +1,7 @@
-import get from '@nwutils/getter';
-import run from '@nwutils/runner';
+import get from "@nwutils/getter";
+import run from "@nwutils/runner";
 
-import util from './util.js';
+import util from "./util.js";
 
 const { findpath } = util;
 
