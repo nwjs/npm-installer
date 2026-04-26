@@ -52,6 +52,7 @@ export default async function parse(options) {
     options.platform = options.platform || util.PLATFORM_KV[process.env.npm_config_nwjs_platform || process.env.NWJS_PLATFORM || process.platform];
     options.arch = options.arch || util.ARCH_KV[process.env.npm_config_nwjs_process_arch || process.env.NWJS_ARCH || process.arch];
     options.downloadUrl = options.downloadUrl || process.env.npm_config_nwjs_urlbase || process.env.NWJS_URLBASE || 'https://dl.nwjs.io';
+    options.manifestUrl = options.manifestUrl || process.env.npm_config_nwjs_manifest_urlbase || process.env.NWJS_MANIFEST_URLBASE || 'https://nwjs.io/versions.json';
     options.cacheDir = options.npm_config_nwjs_urlbase || process.env.npm_config_nwjs_cache_dir || process.env.NWJS_CACHE_DIR || path.resolve(__dirname, '..');
     options.srcDir = options.srcDir || process.cwd();
     options.cache ??= process.env.npm_config_nwjs_cache !== 'false' && process.env.NWJS_CACHE !== 'false';

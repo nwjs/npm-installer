@@ -2,10 +2,10 @@
 
 import process from 'node:process';
 
+import run from '@nwutils/runner';
 import { program } from 'commander';
 
 import parse from '../src/parse.js';
-import run from '../src/run.js';
 
 await cli();
 
@@ -32,7 +32,7 @@ async function cli() {
     arch: options.arch,
     cacheDir: options.cacheDir,
     srcDir: program.args[0],
-    args: program.args.slice(1),
+    argv: program.args.slice(1),
   });
 
 }

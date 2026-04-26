@@ -3,9 +3,9 @@ import process from 'node:process';
 import path from 'node:path';
 import url from 'node:url';
 
+import get from '@nwutils/getter';
 import semver from 'semver';
 
-import get from './get.js';
 import util from './util.js';
 
 await postinstall()
@@ -52,10 +52,12 @@ async function postinstall() {
     const platform = util.PLATFORM_KV[process.env.npm_config_nwjs_platform || process.env.NWJS_PLATFORM || process.platform];
     const arch = util.ARCH_KV[process.env.npm_config_nwjs_process_arch || process.env.NWJS_ARCH || process.arch];
     const downloadUrl = process.env.npm_config_nwjs_urlbase || process.env.NWJS_URLBASE || 'https://dl.nwjs.io';
+    const manifestUrl = process.env.npm_config_nwjs_manifest_url || process.env.NWJS_MANIFEST_URL || 'https://nwjs.io/versions.json';
     const cacheDir = process.env.npm_config_nwjs_cache_dir || process.env.NWJS_CACHE_DIR || '.';
     const cache = process.env.npm_config_nwjs_cache !== 'false' && process.env.NWJS_CACHE !== 'false';
     const ffmpeg = process.env.npm_config_nwjs_ffmpeg === 'true' || process.env.NWJS_FFMPEG === 'true';
     const nativeAddon = (process.env.npm_config_nwjs_native_addon === 'gyp' || process.env.NWJS_NATIVE_ADDON === 'gyp') ? 'gyp' : false;
+    const shaSum = process.env.npm_config_nwjs_shasum !== 'false' && process.env.NWJS_SHASUM !== 'false';
 
     await get({
         version,
@@ -63,9 +65,11 @@ async function postinstall() {
         platform,
         arch,
         downloadUrl,
+        manifestUrl,
         cacheDir,
         cache,
-        ffmpeg: ffmpeg,
-        nativeAddon: nativeAddon
+        ffmpeg,
+        nativeAddon,
+        shaSum,
     });
 }
