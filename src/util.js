@@ -1,9 +1,9 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import process from 'node:process';
-import url from 'node:url';
+import fs from "node:fs";
+import path from "node:path";
+import process from "node:process";
+import url from "node:url";
 
-import parse from './parse.js';
+import parse from "./parse.js";
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
@@ -44,18 +44,18 @@ const EXE_NAME = {
 /**
  * Get the platform dependant path of the NW.js or ChromeDriver binary.
  *
- * @param {'nwjs' | 'chromedriver' | 'all'} Path to NW.js or Chromedriver executable.
+ * @param {"nwjs" | "chromedriver" | "all"} Path to NW.js or Chromedriver executable.
  * @return {Promise<string>}
  */
-async function findpath(executable = 'nwjs', options = {}) {
+async function findpath(executable = "nwjs", options = {}) {
     options = await parse(options);
-    const nwDir = path.resolve(__dirname, '..', `nwjs${options.flavor === "sdk" ? "-sdk" : ""}-v${options.version}-${options.platform}-${options.arch}`);
+    const nwDir = path.resolve(__dirname, "..", `nwjs${options.flavor === "sdk" ? "-sdk" : ""}-v${options.version}-${options.platform}-${options.arch}`);
     /**
      * File path to executable.
      *
      * @type {string}
      */
-    let binPath = '';
+    let binPath = "";
 
     /**
      * Get the platform dependant path of the NW.js directory containing everything.
@@ -78,11 +78,11 @@ async function findpath(executable = 'nwjs', options = {}) {
         binPath = path.resolve(nwDir, `chromedriver${process.platform === "win32" ? ".exe" : ""}`);
     }
 
-    if (executable === 'nwjs') {
+    if (executable === "nwjs") {
         findNwjs();
-    } else if (executable === 'chromedriver') {
+    } else if (executable === "chromedriver") {
         findChromeDriver();
-    } else if (executable === 'all') {
+    } else if (executable === "all") {
         findDir();
     } else {
         console.error(`[ ERROR ] Expected nwjs or chromedriver, got ${executable}.`);

@@ -2,3 +2,4 @@ coverage
 shasum
 node_modules
 nwjs*
+manifest.json
