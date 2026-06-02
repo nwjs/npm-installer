@@ -33,8 +33,8 @@
   "dependencies": {
     "@nwutils/getter": "^0.2.4",
     "@nwutils/runner": "^0.2.3",
-    "commander": "^14.0.3",
-    "semver": "^7.8.0"
+    "commander": "^15.0.0",
+    "semver": "^7.8.1"
   },
   "keywords": [
     "nw",
@@ -49,8 +49,8 @@
     "application"
   ],
   "devDependencies": {
-    "@vitest/coverage-v8": "^4.1.5",
-    "selenium-webdriver": "^4.43.0",
+    "@vitest/coverage-v8": "^4.1.8",
+    "selenium-webdriver": "^4.44.0",
     "vitest": "^4.0.8"
   },
   "packageManager": "npm@11.14.1"
