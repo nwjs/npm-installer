@@ -17,7 +17,7 @@ jobs:
       # 1️⃣ Checkout repository
       # -----------------------------
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       # -----------------------------
       # 2️⃣ Detect version change
@@ -77,7 +77,7 @@ jobs:
       # 5️⃣ Publish main package
       # -----------------------------
       - name: Restore original package.json
-        uses: actions/checkout@v6  # clean restore
+        uses: actions/checkout@v7  # clean restore
 
       - name: Setup Node.js again
         uses: actions/setup-node@v6
