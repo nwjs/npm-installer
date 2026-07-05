@@ -3,25 +3,18 @@ name: Publish Package
 on:
   push:
     branches:
-      - main  # run only on main branch
+      - main
 
 permissions:
-  id-token: write  # Required for npm OIDC auth
+  id-token: write
   contents: read
 
 jobs:
   publish:
     runs-on: ubuntu-24.04
     steps:
-      # -----------------------------
-      # 1️⃣ Checkout repository
-      # -----------------------------
       - name: Checkout repository
-        uses: actions/checkout@v6
-
-      # -----------------------------
-      # 2️⃣ Detect version change
-      # -----------------------------
+        uses: actions/checkout@v7.0.0
       - name: Detect version change
         id: version_check
         run: |
@@ -46,23 +39,16 @@ jobs:
       - name: Stop if no version change
         if: steps.version_check.outputs.changed == 'false'
         run: echo "Skipping — package.json version unchanged." && exit 0
-
-      # -----------------------------
-      # 3️⃣ Setup Node.js + npm OIDC
-      # -----------------------------
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v6.4.0
         with:
-          node-version: '25'
+          node-version: '24'
           registry-url: 'https://registry.npmjs.org'
           always-auth: true
 
       - name: Ensure latest npm
         run: npm install -g npm@latest
-
-      # -----------------------------
-      # 4️⃣ Publish SDK version
-      # -----------------------------
+        
       - name: Prepare SDK package
         run: |
           version=$(jq -r .version package.json)
@@ -73,14 +59,11 @@ jobs:
       - name: Publish SDK to npm (tag=sdk)
         run: npm publish --tag sdk --provenance --access public
 
-      # -----------------------------
-      # 5️⃣ Publish main package
-      # -----------------------------
       - name: Restore original package.json
-        uses: actions/checkout@v6  # clean restore
+        uses: actions/checkout@v7.0.0  # clean restore
 
       - name: Setup Node.js again
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v6.4.0
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
