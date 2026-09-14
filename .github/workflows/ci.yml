@@ -111,7 +111,7 @@ jobs:
 
           git checkout -B "$branch"
           git add package.json package-lock.json
-          git commit -m "chore: bump version to ${VERSION}"
+          git commit -m "${VERSION}"
           git push --force origin "$branch"
 
           if gh pr list --head "$branch" --state open --json number --jq ".[0].number" | grep -q .; then
