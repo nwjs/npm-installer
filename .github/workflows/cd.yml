@@ -1,4 +1,4 @@
-name: Publish Package
+name: cd
 
 on:
   push:
@@ -40,6 +40,7 @@ jobs:
         if: steps.version_check.outputs.changed == 'false'
         run: echo "Skipping — package.json version unchanged." && exit 0
       - name: Setup Node.js
+        if: steps.version_check.outputs.changed == 'true'
         uses: actions/setup-node@v7.0.0
         with:
           node-version: '24'
@@ -47,9 +48,11 @@ jobs:
           always-auth: true
 
       - name: Ensure latest npm
+        if: steps.version_check.outputs.changed == 'true'
         run: npm install -g npm@latest
-        
+
       - name: Prepare SDK package
+        if: steps.version_check.outputs.changed == 'true'
         run: |
           version=$(jq -r .version package.json)
           sdk_version="${version}-sdk"
@@ -57,12 +60,15 @@ jobs:
           jq ".version = \"${sdk_version}\"" package.json > tmp.json && mv tmp.json package.json
 
       - name: Publish SDK to npm (tag=sdk)
+        if: steps.version_check.outputs.changed == 'true'
         run: npm publish --tag sdk --provenance --access public
 
       - name: Restore original package.json
+        if: steps.version_check.outputs.changed == 'true'
         uses: actions/checkout@v7.0.1  # clean restore
 
       - name: Setup Node.js again
+        if: steps.version_check.outputs.changed == 'true'
         uses: actions/setup-node@v7.0.0
         with:
           node-version: '24'
@@ -70,4 +76,5 @@ jobs:
           always-auth: true
 
       - name: Publish latest to npm
+        if: steps.version_check.outputs.changed == 'true'
         run: npm publish --tag latest --provenance --access public
