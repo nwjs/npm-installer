@@ -4,6 +4,12 @@ on:
   pull_request:
     branches:
     - main
+  push:
+    branches:
+    - main
+  schedule:
+    - cron: "0 8 * * *"
+  workflow_dispatch: {}
 
 concurrency:
   group: ${{ github.ref }}
@@ -15,6 +21,7 @@ permissions:
 
 jobs:
   tests:
+    if: github.event_name == 'pull_request'
     strategy:
       matrix:
         os:
@@ -42,3 +49,81 @@ jobs:
       - name: Report Coverage
         if: always()
         uses:  davelosert/vitest-coverage-report-action@v2.12.2
+
+  version-bump:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7.0.1
+
+      - name: Get latest NW.js version
+        id: nwjs
+        run: |
+          latest=$(curl -s https://nwjs.io/versions.json | jq -r ".latest" | sed "s/^v//")
+          echo "latest=$latest" >> $GITHUB_OUTPUT
+
+      - name: Get current package version
+        id: pkg
+        run: echo "current=$(jq -r .version package.json)" >> $GITHUB_OUTPUT
+
+      - name: Compare versions
+        id: compare
+        run: |
+          latest="${{ steps.nwjs.outputs.latest }}"
+          current="${{ steps.pkg.outputs.current }}"
+          higher=$(printf "%s\n%s\n" "$current" "$latest" | sort -V | tail -n1)
+          if [ "$latest" != "$current" ] && [ "$higher" = "$latest" ]; then
+            echo "update=true" >> $GITHUB_OUTPUT
+          else
+            echo "update=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Setup Node
+        if: steps.compare.outputs.update == 'true'
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: "24"
+          cache: "npm"
+
+      - name: Bump version in package.json
+        if: steps.compare.outputs.update == 'true'
+        run: npm version ${{ steps.nwjs.outputs.latest }} --no-git-tag-version --allow-same-version
+
+      - name: Update package-lock.json
+        if: steps.compare.outputs.update == 'true'
+        run: npm install --ignore-scripts
+
+      - name: Commit, push and open PR
+        if: steps.compare.outputs.update == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.nwjs.outputs.latest }}
+          CURRENT: ${{ steps.pkg.outputs.current }}
+        run: |
+          branch="nwjs-version-bump/${VERSION}"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git checkout -B "$branch"
+          git add package.json package-lock.json
+          git commit -m "chore: bump version to ${VERSION}"
+          git push --force origin "$branch"
+
+          if gh pr list --head "$branch" --state open --json number --jq ".[0].number" | grep -q .; then
+            echo "PR already open for $branch, skipping creation"
+          else
+            gh pr create \
+              --title "chore: bump version to ${VERSION}" \
+              --body "NW.js released [\`v${VERSION}\`](https://nwjs.io/versions.json), which is newer than the current package version (\`${CURRENT}\`).
+
+          This PR bumps \`package.json\` to \`${VERSION}\` and updates \`package-lock.json\` accordingly.
+
+          Opened automatically by the \`ci\` workflow." \
+              --base main \
+              --head "$branch"
+          fi
