@@ -118,7 +118,7 @@ jobs:
             echo "PR already open for $branch, skipping creation"
           else
             gh pr create \
-              --title "chore: bump version to ${VERSION}" \
+              --title "${VERSION}" \
               --body "NW.js released [\`v${VERSION}\`](https://nwjs.io/versions.json), which is newer than the current package version (\`${CURRENT}\`).
 
           This PR bumps \`package.json\` to \`${VERSION}\` and updates \`package-lock.json\` accordingly.
