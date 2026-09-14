@@ -49,8 +49,8 @@
     "application"
   ],
   "devDependencies": {
-    "@vitest/coverage-v8": "^4.1.10",
-    "selenium-webdriver": "^4.47.0",
+    "@vitest/coverage-v8": "^4.1.11",
+    "selenium-webdriver": "^4.48.0",
     "vitest": "^4.1.10"
   },
   "devEngines": {
