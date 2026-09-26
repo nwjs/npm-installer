@@ -95,6 +95,7 @@ jobs:
           npx npm-check-updates
           npx npm-check-updates -u
           npm i
+          npm audit fix
 
       - name: Bump version in package.json
         if: steps.compare.outputs.update == 'true'
