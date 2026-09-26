@@ -1,6 +1,6 @@
 {
   "name": "nw",
-  "version": "0.116.0",
+  "version": "0.117.0",
   "description": "An installer for NW.js",
   "repository": {
     "type": "git",
@@ -31,8 +31,8 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@nwutils/getter": "^0.2.5",
-    "@nwutils/runner": "^0.2.3",
+    "@nwutils/getter": "^0.3.1",
+    "@nwutils/runner": "^0.2.6",
     "commander": "^15.0.0",
     "semver": "^7.8.5"
   },
@@ -49,9 +49,9 @@
     "application"
   ],
   "devDependencies": {
-    "@vitest/coverage-v8": "^4.1.11",
-    "selenium-webdriver": "^4.48.0",
-    "vitest": "^4.1.10"
+    "@vitest/coverage-v8": "^5.0.2",
+    "selenium-webdriver": "^4.49.0",
+    "vitest": "^5.0.2"
   },
   "devEngines": {
     "packageManager": {
