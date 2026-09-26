@@ -89,6 +89,13 @@ jobs:
           node-version: "24"
           cache: "npm"
 
+      - name: Update npm to latest
+        if: steps.compare.outputs.update == 'true'
+        run: |
+          npx npm-check-updates
+          npx npm-check-updates -u
+          npm i
+
       - name: Bump version in package.json
         if: steps.compare.outputs.update == 'true'
         run: npm version ${{ steps.nwjs.outputs.latest }} --no-git-tag-version --allow-same-version
