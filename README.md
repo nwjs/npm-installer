@@ -7,7 +7,7 @@ An npm installer for [NW.js](https://nwjs.io).
 ## Install
 
 > [!Note]
-> Since npm v12, allow the `postinstall` script via `npm install-scripts approve --no-allow-scripts-pin nw && npm rebuild nw`.
+> Since npm v12, allow the `postinstall` script via `npm install-scripts approve --no-allow-scripts-pin nw` command.
 
 Please go through the [CHANGELOG](https://github.com/nwjs/npm-installer/blob/main/CHANGELOG.md) carefully and choose the appropriate version. Bug fixes and feature updates are pushed to the repo periodically.
 
