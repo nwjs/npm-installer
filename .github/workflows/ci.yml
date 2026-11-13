@@ -36,7 +36,7 @@ jobs:
       - name: Get Node version from NW.js versions manifest
         run: echo "NODE_VER=$(curl -s https://nwjs.io/versions.json | jq -r ".versions[0].components.node")" >> $GITHUB_ENV
       - name: Setup Node
-        uses: actions/setup-node@v7.0.0
+        uses: actions/setup-node@v7.1.0
         with:
           node-version: ${{ env.NODE_VER }}
           cache: "npm"
@@ -50,7 +50,7 @@ jobs:
         run: npm run test:coverage
       - name: Report Coverage
         if: always()
-        uses:  davelosert/vitest-coverage-report-action@v2.12.2
+        uses:  davelosert/vitest-coverage-report-action@v2.13.2
 
   version-bump:
     if: github.event_name != 'pull_request'
@@ -86,7 +86,7 @@ jobs:
 
       - name: Setup Node
         if: steps.compare.outputs.update == 'true'
-        uses: actions/setup-node@v7.0.0
+        uses: actions/setup-node@v7.1.0
         with:
           node-version: "24"
           cache: "npm"
