@@ -41,7 +41,9 @@ jobs:
           node-version: ${{ env.NODE_VER }}
           cache: "npm"
       - name: Install third party dependencies
-        run: npm ci --nwjs-build-type=sdk
+        run: npm ci
+        env:
+          NWJS_BUILD_TYPE: sdk
       - name: Check for third party vulnerabilities
         run: npm audit
       - name: Run test suite
